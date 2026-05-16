@@ -1,0 +1,27 @@
+id: EVAL-SKILL-EVOLUTION
+name: Skill Evolution Gate
+objective: Promote only skill versions that prove better through backtest and shadow-live
+  evidence.
+metrics:
+- hit_rate_by_horizon
+- excess_return_by_horizon
+- max_adverse_excursion
+- false_positive_rate
+- signal_frequency
+- market_regime_coverage
+- rollback_rate
+data_sources:
+- hypothesis_ledger
+- review_ledger
+- skill_versions
+- backtest_results
+cadence: weekly_or_after_30_new_signals
+promotion_rules:
+- Candidate skill beats active version on primary metric
+- Candidate skill does not worsen max drawdown
+- Candidate skill passes at least one out-of-sample market regime
+- High-risk changes require human approval
+rollback_rules:
+- Shadow-live performance falls below active skill
+- Market regime detector marks the skill out of scope
+- Risk agent flags a repeated failure mode

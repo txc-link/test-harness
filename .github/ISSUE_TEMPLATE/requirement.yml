@@ -1,0 +1,26 @@
+name: Requirement
+description: Capture a product or platform requirement
+title: "[REQ] "
+labels: ["requirement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risks
+

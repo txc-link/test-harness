@@ -1,0 +1,24 @@
+name: Evolution Proposal
+description: Propose a skill, prompt, workflow, or config evolution
+title: "[EVOLVE] "
+labels: ["evolution"]
+body:
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Failed cases, successful trajectories, user corrections, or metrics.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Candidate change
+    validations:
+      required: true
+  - type: textarea
+    id: gates
+    attributes:
+      label: Required gates
+      description: Backtest, shadow live, human approval, rollback.
+

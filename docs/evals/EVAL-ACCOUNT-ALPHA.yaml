@@ -1,0 +1,29 @@
+id: EVAL-ACCOUNT-ALPHA
+name: Account Profitability Attribution
+objective: Measure whether the agent improves account outcomes after separating market
+  movement and user execution.
+metrics:
+- total_return
+- benchmark_excess_return
+- max_drawdown
+- sharpe_ratio
+- calmar_ratio
+- win_rate
+- profit_factor
+- agent_contribution
+- user_execution_drag
+data_sources:
+- positions
+- orders
+- benchmarks
+- agent_recommendations
+- market_bars
+cadence: daily_close_and_weekly_review
+promotion_rules:
+- Agent-advised shadow portfolio outperforms benchmark over the evaluation window
+- Drawdown does not exceed approved risk budget
+- Confidence calibration error improves or remains stable
+rollback_rules:
+- Excess drawdown breaches limit
+- Signal false-positive rate exceeds threshold
+- User override success rate is materially higher than agent acceptance success rate

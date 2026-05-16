@@ -1,0 +1,37 @@
+id: REQ-0004
+title: UTF8 Requirement Document Smoke Test
+created_at: '2026-05-16T14:15:39.731745Z'
+problem: '# Harness Flow UTF-8 Smoke Requirement
+
+
+  从需求文档生成结构化需求、roadmap、sprint、开发交付物和测试证据，验证中文需求文档可以稳定进入 Harness 工作流。
+
+  '
+target_users:
+- individual investors
+- small investment research teams
+- quantitative strategy researchers
+outcomes:
+- Engineering work is traceable from requirement to ticket to verification
+- Investment hypotheses, trade plans, account performance, and reviews are recorded
+  structurally
+- Agent and skill improvements must pass evaluation gates before promotion
+scope:
+- structured requirement intake
+- roadmap decomposition and sprint planning
+- account profitability evaluation
+- controlled self-evolution evaluation
+- local test and CI baseline
+non_goals:
+- Do not enable live automated trading by default in the first phase
+- Do not perform online model-weight self-training in the first phase
+risks:
+- Free market data sources may be unstable
+- AI investment judgments may be hard to explain or review
+- Strategies may overfit historical regimes
+- Automated evolution may accidentally weaken high-risk trading logic
+acceptance_criteria:
+- A raw requirement can produce a structured requirement artifact
+- The harness can generate gated engineering tickets
+- Core workflow documents and evaluation specs can be validated
+- Local checks pass consistently
