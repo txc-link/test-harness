@@ -1,0 +1,52 @@
+id: REQ-0005
+title: Strongest Self-Evolving Investment Agent
+created_at: '2026-05-17T00:00:00+08:00'
+problem: >-
+  Build a reviewable, replayable, multi-market investment agent that supports
+  research, quant analysis, watchlist monitoring, alerting, portfolio
+  evaluation, account attribution, post-trade review, and controlled
+  self-evolution.
+target_users:
+  - individual investors
+  - small investment research teams
+  - quantitative strategy researchers
+  - developers building private investment agents
+outcomes:
+  - Multi-market investment workflows are unified across research, monitoring, alerts, review, and evaluation.
+  - Every recommendation becomes a replayable hypothesis with evidence, invalidation rules, benchmark, and review date.
+  - Account performance separates benchmark beta, strategy contribution, agent contribution, and user execution impact.
+  - Candidate skills and strategy changes can evolve only through evidence-based gates.
+  - The system remains human-gated for live trading and high-risk account behavior.
+scope:
+  - A-share, US, Hong Kong, Japan, and Asia-Pacific market watchlists and analysis
+  - investment hypothesis ledger
+  - trade plan ledger
+  - alert ledger
+  - execution ledger
+  - review ledger
+  - evolution ledger
+  - multi-agent research workflow
+  - quant backtest and shadow portfolio workflow
+  - account profitability attribution
+  - controlled skill and config evolution workflow
+  - local and GitHub Actions CI
+non_goals:
+  - Do not enable live automated trading by default.
+  - Do not perform online model-weight self-training in the first phase.
+  - Do not treat LLM reflection as evidence of improvement.
+  - Do not make guaranteed-return claims.
+  - Do not bypass broker, data-provider, exchange, or regulatory requirements.
+risks:
+  - Market data may be delayed, stale, incomplete, or incorrectly adjusted.
+  - Agent conclusions may hallucinate, overfit, or overstate confidence.
+  - Strategy backtests may fail out of sample or decay by market regime.
+  - Alert fatigue may cause users to ignore important risk events.
+  - Self-evolution may promote changes that improve historical metrics but weaken live behavior.
+  - Live account integration may introduce operational, privacy, and compliance risk.
+acceptance_criteria:
+  - A Chinese PRD can be captured as a structured requirement artifact.
+  - Roadmap, sprint, ticket, test plan, and review evidence can be generated from the requirement.
+  - Investment ledgers are defined for hypothesis, trade plan, alert, execution, review, and evolution records.
+  - Account evaluation includes benchmark, strategy, agent, and user-execution attribution.
+  - Skill evolution requires evaluation, backtest, shadow live, human approval, monitoring, and rollback gates.
+  - Local validation and GitHub Actions CI pass.

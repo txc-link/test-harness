@@ -1,0 +1,197 @@
+# PRD: Strongest Self-Evolving Investment Agent
+
+## Status
+
+Draft
+
+## Problem
+
+个人投资者和小型投研团队在 A 股、美股、港股、日股、亚太市场中面对的信息、数据、策略、交易纪律和复盘压力越来越高。现有工具通常只覆盖单点能力：行情盯盘、资讯聚合、量化回测、组合管理、Agent 对话、研报摘要或告警通知。真正困难的是把“发现机会、形成假设、制定计划、跟踪执行、复盘归因、沉淀经验、升级 Agent 能力”连成一个可审计、可回放、可进化的闭环。
+
+本项目要构建一个强投资 Agent 系统：它不是简单的聊天助手，也不是默认自动交易机器人，而是一个能够持续记录投资假设、解释决策依据、跟踪账户结果、评估自身贡献，并在严格门禁下自我进化的投研与投资操作系统。
+
+## Target Users
+
+- 有一定交易经验、希望系统化复盘的个人投资者。
+- 管理多市场观察池和策略池的小型投研团队。
+- 需要把主观投研与量化验证结合的策略研究者。
+- 希望构建私有投资 Agent、但需要工程治理和风险门禁的开发者。
+
+## Goals
+
+1. 支持 A 股、美股、港股、日股和主要亚太市场的统一观察、分析、告警和复盘。
+2. 将每一次投资建议记录为可追踪假设，包括标的、方向、置信度、周期、证据、失效条件和基准。
+3. 将 Agent 决策、用户执行、策略表现和市场 beta 分开归因，避免把市场上涨误认为 Agent 有 alpha。
+4. 建立量化研究闭环：数据接入、特征计算、策略回测、风险分析、模拟组合、实盘前 shadow live。
+5. 建立盯盘与告警闭环：价格、成交量、资金流、新闻、财报、技术形态、组合风险、策略信号和 Agent 关注事项。
+6. 建立复盘闭环：日内复盘、收盘复盘、周度复盘、月度归因、失败模式沉淀、技能升级候选。
+7. 建立自我进化闭环：运行轨迹、投资结果、失败模式、候选 skill/config、离线评测、回测、影子运行、人类审批、上线监控、回滚。
+8. 所有高风险能力默认人类确认，不默认启用自动交易。
+
+## Non-Goals
+
+- 第一阶段不做默认实盘自动下单。
+- 第一阶段不做在线模型权重自训练。
+- 不承诺收益，不把 Agent 输出包装成确定性投资建议。
+- 不绕过券商、交易所、数据供应商和地区监管要求。
+- 不在缺少数据质量验证时做真实账户风险决策。
+
+## User Workflows
+
+## Workflow 1: 投资假设生成与跟踪
+
+用户添加标的或主题后，Agent 收集行情、基本面、资金面、财报、公告、新闻、行业链、技术信号和历史相似案例，生成结构化投资假设。每个假设必须包含方向、周期、置信度、核心证据、反证条件、风险点、基准指数和复盘日期。
+
+## Workflow 2: 盘中盯盘与告警
+
+系统持续监听观察池、组合、策略信号和风险规则。当出现价格突破、异常成交、资金流反转、新闻冲击、财报事件、止损触发、仓位集中或 Agent 关注事项时，生成分级告警。告警必须说明触发原因、影响范围、建议动作和是否需要人工确认。
+
+## Workflow 3: 交易计划与执行记录
+
+Agent 将投资假设转化为交易计划，包括买入/卖出/观察、入场区间、仓位建议、止损、止盈、加减仓规则、失效条件和审批要求。用户执行后，系统记录订单、成交、滑点、用户偏离计划的行为和后续影响。
+
+## Workflow 4: 日度与周度复盘
+
+系统在收盘后自动生成复盘：组合收益、基准收益、超额收益、最大回撤、胜率、盈亏贡献、错误执行、错过机会、告警有效性、Agent 建议命中率、失败模式和下一步行动。
+
+## Workflow 5: Agent 自我进化
+
+系统从复盘中提取可验证的改进候选，例如“财报事件解读 skill 在小盘股上误报率高”“突破信号在高波动 regime 下需要更严格过滤”。候选进入 skill/config 版本库，经过回测、离线 eval、shadow live、人类审批后才可激活。上线后持续监控，不达标自动回滚。
+
+## Functional Requirements
+
+## F1 Market Data And Instrument Universe
+
+- 支持多市场标的模型：A 股、美股、港股、日股、ETF、指数、可转债和可扩展资产类型。
+- 统一交易日历、时区、货币、复权、分红、拆股、停牌和市场状态。
+- 支持多源行情接入，并记录数据源、更新时间、延迟和质量状态。
+- 建立观察池、组合、主题篮子、策略篮子和黑名单。
+
+## F2 Research And Analysis Agent
+
+- 支持多 Agent 协作：宏观、行业、基本面、技术、资金流、新闻事件、风险、组合、复盘和裁判 Agent。
+- 每个 Agent 输出必须带证据、引用来源、置信度和反证条件。
+- 支持中文和英文市场材料，包括公告、财报、新闻、研报摘要和公司事件。
+- 对高影响结论进行交叉审查，避免单 Agent 幻觉直接进入交易计划。
+
+## F3 Quant Research And Backtest
+
+- 支持策略定义、因子计算、信号生成、回测、交易成本、滑点、调仓频率和风险约束。
+- 每个策略必须输出收益、超额收益、回撤、波动、夏普、卡玛、胜率、盈亏比、换手率和容量风险。
+- 支持样本内、样本外、滚动窗口和市场 regime 分层评估。
+- 策略不能直接进入实盘，必须先进入 shadow portfolio。
+
+## F4 Watchlist, Alerting And Decision Inbox
+
+- 支持价格、成交量、波动率、资金流、财报、公告、新闻、技术形态、组合风险和策略信号告警。
+- 告警分为 info、watch、action、risk、critical。
+- 每条告警必须记录触发规则、触发数据、推荐动作、有效期和后续结果。
+- 支持去重、合并、静默、升级和人工确认。
+
+## F5 Portfolio And Account Evaluation
+
+- 支持实际账户、模拟账户、Agent 建议组合、策略组合和基准组合并行跟踪。
+- 将收益归因为：市场 beta、策略贡献、Agent 贡献、用户执行贡献、交易成本和滑点。
+- 支持账户级风险预算、单标的风险、行业集中度、货币风险和最大回撤限制。
+- 支持按日、周、月和自定义周期生成绩效报告。
+
+## F6 Replayable Investment Ledgers
+
+- 所有投资建议写入 hypothesis ledger。
+- 所有交易计划写入 trade plan ledger。
+- 所有告警写入 alert ledger。
+- 所有订单和用户行为写入 execution ledger。
+- 所有复盘写入 review ledger。
+- 所有 skill/config 变更写入 evolution ledger。
+
+## F7 Self-Evolution System
+
+- 支持 skill registry：candidate、backtested、shadow_live、approved、active、monitored、retired。
+- 候选变更来源包括复盘失败模式、用户反馈、回测差异、告警误报、策略退化和新市场 regime。
+- 每个候选变更必须有假设、影响范围、评测集、成功指标、回滚规则和风险等级。
+- 高风险变更必须经过人类审批。
+- 不允许仅凭 LLM 反思自我升级。
+
+## F8 Harness And Engineering Workflow
+
+- 每个能力从需求文档开始，经过 roadmap、sprint、ticket、test plan、CI 和 review。
+- 每个投资相关功能必须声明数据风险、模型风险、策略风险、账户风险和合规风险。
+- CI 必须至少覆盖 schema validation、lint、unit tests。
+- 后续扩展 eval smoke、backtest smoke、data quality smoke 和 shadow live report。
+
+## Non-Functional Requirements
+
+- Auditability: 任意建议、告警、交易计划和复盘都能回放到原始数据、Agent 输出和用户动作。
+- Reliability: 关键告警和复盘任务必须可重试、可监控、可补偿。
+- Explainability: 所有投资结论必须有证据链和反证条件。
+- Extensibility: 市场、数据源、策略、Agent skill、broker connector 都必须可插拔。
+- Privacy: 账户数据、交易记录、API key 和用户偏好必须隔离保存。
+- Latency: 盘中告警链路应区分实时、近实时和批处理，不用同一架构硬扛所有场景。
+- Cost Control: LLM 调用需要缓存、分层模型和任务优先级，避免盯盘时成本失控。
+
+## Investment Risk Impact
+
+| Risk Class | Impact | Required Control |
+| --- | --- | --- |
+| Account Risk | 仓位、止损、自动交易可能造成真实亏损 | 默认人工确认、风险预算、回滚规则 |
+| Data Risk | 行情延迟、复权错误、财报解析错误 | 多源校验、数据质量报告、异常熔断 |
+| Model Risk | Agent 幻觉或过度自信 | 证据链、反证条件、裁判 Agent、人工审批 |
+| Strategy Risk | 过拟合、市场 regime 失效 | 样本外回测、shadow live、退化监控 |
+| Operational Risk | 任务失败、告警漏发、时区错误 | 调度监控、重试、runbook |
+| Compliance Risk | 输出被误解为确定性投资建议 | 风险提示、审批、审计日志 |
+
+## Acceptance Criteria
+
+- 可以从一份中文需求文档生成结构化 requirement、roadmap、sprint、PRD/RFC/ticket/test plan。
+- 可以记录至少一种投资假设、交易计划和复盘记录，并通过 schema validation。
+- 可以定义账户盈利评估指标，并区分 benchmark、strategy、agent 和 user execution。
+- 可以定义 skill evolution 候选变更，并要求 backtest、shadow live 和 human approval gates。
+- 可以运行本地 Harness 检查和 GitHub Actions CI。
+- 不启用默认自动交易，不允许未评估 skill 自动晋升。
+
+## Milestones
+
+## M1 Harness And Domain Model
+
+- 完成需求、PRD、RFC、ADR、roadmap、sprint、test plan 的工程闭环。
+- 定义 instrument、market data、hypothesis、trade plan、alert、execution、review、evolution schemas。
+- 建立本地 CI 和 GitHub Actions。
+
+## M2 Data And Ledger MVP
+
+- 接入首批离线或低风险数据源。
+- 实现可回放 ledger。
+- 支持观察池、标的档案、假设记录和复盘记录。
+
+## M3 Analysis And Alert MVP
+
+- 实现多 Agent 分析流程。
+- 实现基础告警规则和决策 inbox。
+- 支持收盘复盘报告。
+
+## M4 Quant And Portfolio Evaluation
+
+- 实现策略回测框架和 shadow portfolio。
+- 实现账户归因和 Agent 贡献评估。
+- 建立基准、风险预算和退化监控。
+
+## M5 Controlled Self-Evolution
+
+- 实现 skill registry 和 evolution ledger。
+- 实现候选 skill/config 的 eval、backtest、shadow live 和审批流程。
+- 实现上线后监控和回滚。
+
+## M6 Production Hardening
+
+- 完善权限、密钥、审计、监控、备份和运维 runbook。
+- 接入更多市场、数据源和 broker connector。
+- 建立发布节奏和质量仪表盘。
+
+## Open Questions
+
+- 第一阶段优先市场是 A 股 + 美股，还是 A 股 + 港股 + 美股？
+- 是否需要真实券商账户连接，还是先做导入成交记录和 shadow portfolio？
+- 数据源优先选择免费源、商业源，还是兼容多源适配？
+- 用户界面优先做 CLI、Web dashboard、Obsidian/Markdown 工作流，还是多端组合？
+- 是否需要团队协作能力，例如多用户权限、评论、审批和任务分配？
+- 自我进化的第一批 skill 是投研类、告警类、复盘类，还是量化策略类？
