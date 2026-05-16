@@ -1,8 +1,8 @@
 # Investment Agent Harness
 
-This is the engineering harness for building a reviewable, testable, self-evolving investment agent.
+Engineering harness for building a reviewable, testable, self-evolving investment agent.
 
-It is intentionally separate from the four reference projects under `D:\stock-agent`. The harness owns the mature delivery workflow:
+This repository is intentionally separate from the four reference projects under `D:\stock-agent`. The harness owns the mature delivery workflow:
 
 ```text
 idea
@@ -26,8 +26,7 @@ idea
 cd D:\stock-agent\investment-agent-harness
 python -m pip install -e .[dev]
 iah init
-iah intake "建立可复盘、可自我进化的投资 Agent，先支持 A股和美股的持仓、盯盘、假设账本、复盘和 Skill 进化门禁。"
-iah plan docs\requirements\REQ-0001.yaml
+iah develop-file docs\requirements\REQ-smoke-input.md --title "UTF8 Requirement Document Smoke Test"
 iah validate
 pytest
 ```

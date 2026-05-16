@@ -1,10 +1,44 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[codz]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Test, lint, and coverage output
 .pytest_cache/
 .ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
 .venv/
-*.egg-info/
-dist/
-build/
+venv/
+env/
+ENV/
+
+# Local secrets and runtime state
 .env
+.envrc
 data/runtime/
 
+# Tool caches
+.mypy_cache/
+.pyre/
+.pytype/
+.hypothesis/
+.ipynb_checkpoints/
+
+# Editor noise
+.idea/
+.vscode/
+tempCodeRunnerFile.py
