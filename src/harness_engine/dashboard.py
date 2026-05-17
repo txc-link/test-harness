@@ -12,6 +12,102 @@ from .models import Gate, Requirement, Roadmap, SprintPlan, Ticket
 from .storage import load_model
 
 
+EXECUTION_PANEL_SCRIPT = r"""
+const executionData = JSON.parse(document.getElementById("execution-data").textContent);
+const taskButtons = Array.from(document.querySelectorAll(".execution-task"));
+const searchInput = document.getElementById("executionSearch");
+const statusSelect = document.getElementById("executionStatus");
+const byId = new Map(executionData.map((task) => [task.task_id, task]));
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[char]);
+}
+
+function renderList(items, emptyText) {
+  if (!items || items.length === 0) {
+    return `<li>${escapeHtml(emptyText)}</li>`;
+  }
+  return items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+}
+
+function renderGates(gates) {
+  if (!gates || gates.length === 0) {
+    return '<span class="execution-empty">暂无门禁</span>';
+  }
+  return gates.map((gate) => {
+    const cls = gate.passed ? "gate" : "gate fail";
+    return `<span class="${cls}" title="${escapeHtml(gate.detail)}">${escapeHtml(gate.name)}</span>`;
+  }).join("");
+}
+
+function renderCommits(commits) {
+  if (!commits || commits.length === 0) {
+    return '<div class="trace-empty">暂无匹配提交</div>';
+  }
+  return commits.map((commit) => {
+    const files = renderList(commit.changed_files.slice(0, 6), "暂无变更文件");
+    const sha = commit.url
+      ? `<a href="${escapeHtml(commit.url)}">${escapeHtml(commit.short_sha)}</a>`
+      : `<strong>${escapeHtml(commit.short_sha)}</strong>`;
+    return `<div class="trace-commit">${sha} ${escapeHtml(commit.subject)}
+      <ul class="trace-files">${files}</ul>
+    </div>`;
+  }).join("");
+}
+
+function selectTask(taskId) {
+  const task = byId.get(taskId);
+  if (!task) return;
+  taskButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.taskId === taskId);
+  });
+  document.getElementById("executionTitle").textContent = task.task_title;
+  document.getElementById("executionTaskId").textContent = task.task_id;
+  document.getElementById("executionRequirement").textContent = task.requirement_id;
+  document.getElementById("executionState").textContent = task.status;
+  document.getElementById("executionBranch").textContent = task.branch;
+  document.getElementById("executionMilestone").textContent = task.milestone || "未分配";
+  document.getElementById("executionGates").innerHTML = renderGates(task.gates);
+  document.getElementById("executionDeliverables").innerHTML =
+    renderList(task.deliverables, "暂无交付物");
+  document.getElementById("executionCi").innerHTML = task.ci_url
+    ? `<a href="${escapeHtml(task.ci_url)}">GitHub Actions</a>`
+    : "未配置";
+  document.getElementById("executionIssue").innerHTML = task.issue_url
+    ? `<a href="${escapeHtml(task.issue_url)}">GitHub Issue</a>`
+    : "待绑定";
+  document.getElementById("executionCommits").innerHTML = renderCommits(task.commits);
+}
+
+function applyExecutionFilters() {
+  const query = searchInput.value.trim().toLowerCase();
+  const status = statusSelect.value;
+  let firstVisible = null;
+  taskButtons.forEach((button) => {
+    const text = button.textContent.toLowerCase();
+    const visible = (!query || text.includes(query))
+      && (!status || button.dataset.status === status);
+    button.hidden = !visible;
+    if (visible && !firstVisible) firstVisible = button;
+  });
+  if (firstVisible) selectTask(firstVisible.dataset.taskId);
+}
+
+taskButtons.forEach((button) => {
+  button.addEventListener("click", () => selectTask(button.dataset.taskId));
+});
+searchInput.addEventListener("input", applyExecutionFilters);
+statusSelect.addEventListener("change", applyExecutionFilters);
+if (taskButtons.length > 0) selectTask(taskButtons[0].dataset.taskId);
+"""
+
+
 class GateEvidence(BaseModel):
     gate: str
     passed: bool
@@ -223,6 +319,10 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
     )
     task_tree_html = "\n".join(_render_task_tree_requirement(node) for node in dashboard.task_tree)
     code_trace_html = "\n".join(_render_code_trace(trace) for trace in dashboard.code_traces)
+    execution_task_buttons = "\n".join(
+        _render_execution_task_button(trace) for trace in dashboard.code_traces
+    )
+    execution_panel_data = _json_script_payload(_build_execution_panel_data(dashboard))
 
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -406,6 +506,93 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       padding-left: 18px;
       color: #475467;
     }}
+    .execution-shell {{
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }}
+    .execution-toolbar {{
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 180px;
+      gap: 10px;
+      margin-bottom: 14px;
+    }}
+    .execution-toolbar input, .execution-toolbar select {{
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font: inherit;
+      min-width: 0;
+    }}
+    .execution-grid {{
+      display: grid;
+      grid-template-columns: minmax(240px, 320px) minmax(280px, 1fr) minmax(260px, 380px);
+      gap: 14px;
+      align-items: start;
+    }}
+    .execution-list {{
+      display: grid;
+      gap: 8px;
+      max-height: 520px;
+      overflow: auto;
+      padding-right: 4px;
+    }}
+    .execution-task {{
+      text-align: left;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 10px;
+      cursor: pointer;
+      font: inherit;
+    }}
+    .execution-task.active {{
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+    }}
+    .execution-task strong, .execution-task span, .execution-task em {{ display: block; }}
+    .execution-task strong {{ font-size: 13px; }}
+    .execution-task span {{ color: #667085; font-size: 12px; margin-top: 4px; }}
+    .execution-task em {{
+      color: #344054;
+      font-size: 12px;
+      font-style: normal;
+      margin-top: 6px;
+      line-height: 1.35;
+    }}
+    .execution-panel {{
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 14px;
+      min-height: 260px;
+    }}
+    .execution-panel h3 {{ margin: 0 0 8px; font-size: 16px; line-height: 1.35; }}
+    .execution-kv {{
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 8px 10px;
+      font-size: 12px;
+      color: #475467;
+      margin: 12px 0;
+    }}
+    .execution-kv strong {{ color: #20242a; }}
+    .execution-section-title {{
+      margin: 12px 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }}
+    .execution-list-small {{
+      margin: 0;
+      padding-left: 18px;
+      color: #475467;
+      font-size: 12px;
+      line-height: 1.55;
+    }}
+    .execution-empty {{ color: #667085; font-size: 12px; }}
     .layout {{
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
@@ -488,6 +675,52 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         {_render_phase_step("Finish", "记录复盘结论，把有效反馈回写到规格和技能。")}
       </div>
       <div class="trellis-grid">{trellis_lanes}</div>
+    </section>
+    <section class="execution-shell" data-execution-panel>
+      <div class="section-title">
+        <h2>可交互执行面板</h2>
+        <p>选择任务后查看执行上下文、门禁、交付物、CI 和代码变更证据。</p>
+      </div>
+      <div class="execution-toolbar">
+        <input id="executionSearch" type="search" placeholder="搜索任务、需求、标题" aria-label="搜索任务" />
+        <select id="executionStatus" aria-label="按状态筛选">
+          <option value="">全部状态</option>
+          <option value="待开发">待开发</option>
+          <option value="开发中">开发中</option>
+          <option value="测试完成">测试完成</option>
+          <option value="门禁受阻">门禁受阻</option>
+        </select>
+      </div>
+      <div class="execution-grid">
+        <div class="execution-list" id="executionTaskList">{execution_task_buttons}</div>
+        <article class="execution-panel">
+          <h3 id="executionTitle">请选择任务</h3>
+          <div class="execution-kv">
+            <strong>任务</strong><span id="executionTaskId">-</span>
+            <strong>需求</strong><span id="executionRequirement">-</span>
+            <strong>状态</strong><span id="executionState">-</span>
+            <strong>分支</strong><span id="executionBranch">-</span>
+            <strong>里程碑</strong><span id="executionMilestone">-</span>
+          </div>
+          <div class="execution-section-title">门禁</div>
+          <div class="gates" id="executionGates"></div>
+          <div class="execution-section-title">交付物</div>
+          <ul class="execution-list-small" id="executionDeliverables"></ul>
+        </article>
+        <article class="execution-panel">
+          <h3>执行证据</h3>
+          <div class="execution-kv">
+            <strong>CI</strong><span id="executionCi">-</span>
+            <strong>Issue</strong><span id="executionIssue">待绑定</span>
+          </div>
+          <div class="execution-section-title">关联提交</div>
+          <div class="trace-commits" id="executionCommits"></div>
+        </article>
+      </div>
+      <script id="execution-data" type="application/json">{execution_panel_data}</script>
+      <script>
+        {EXECUTION_PANEL_SCRIPT}
+      </script>
     </section>
     <section class="task-tree-shell">
       <div class="section-title">
@@ -985,6 +1218,60 @@ def _render_code_trace(trace: CodeTraceLink) -> str:
       <div class="trace-commits">{commits}</div>
     </article>
     """
+
+
+def _build_execution_panel_data(dashboard: DashboardModel) -> list[dict[str, object]]:
+    ticket_context = {
+        ticket.id: ticket
+        for requirement in dashboard.task_tree
+        for ticket in requirement.tickets
+    }
+    data: list[dict[str, object]] = []
+    for trace in dashboard.code_traces:
+        ticket = ticket_context.get(trace.task_id)
+        data.append(
+            {
+                "task_id": trace.task_id,
+                "task_title": trace.task_title,
+                "requirement_id": trace.requirement_id,
+                "status": trace.status,
+                "branch": trace.branch,
+                "ci_url": trace.ci_url,
+                "issue_url": trace.issue_url,
+                "milestone": ticket.milestone if ticket else None,
+                "gates": [gate.model_dump(mode="json") for gate in ticket.gates]
+                if ticket
+                else [],
+                "deliverables": ticket.deliverables if ticket else [],
+                "commits": [commit.model_dump(mode="json") for commit in trace.commits],
+            }
+        )
+    return data
+
+
+def _render_execution_task_button(trace: CodeTraceLink) -> str:
+    commit_count = len(trace.commits)
+    return f"""
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="{html.escape(trace.task_id)}"
+      data-status="{html.escape(trace.status)}"
+    >
+      <strong>{html.escape(trace.task_id)}</strong>
+      <span>{html.escape(trace.status)} · {commit_count} 个提交</span>
+      <em>{html.escape(trace.task_title)}</em>
+    </button>
+    """
+
+
+def _json_script_payload(value: object) -> str:
+    return (
+        json.dumps(value, ensure_ascii=False)
+        .replace("&", "\\u0026")
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+    )
 
 
 def _render_trace_commit(commit: CommitChangeRecord) -> str:

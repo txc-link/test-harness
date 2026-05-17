@@ -47,6 +47,11 @@ def test_render_dashboard_html_contains_core_board_sections() -> None:
     assert "任务到代码追踪链" in page_html
     assert "trace-card" in page_html
     assert "GitHub Actions" in page_html
+    assert "可交互执行面板" in page_html
+    assert "execution-data" in page_html
+    assert "executionSearch" in page_html
+    assert "executionStatus" in page_html
+    assert "selectTask" in page_html
     assert "需求进度" in page_html
     assert "最近 GitHub 提交" in page_html
     assert "开发中" in page_html

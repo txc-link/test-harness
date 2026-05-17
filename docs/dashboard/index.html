@@ -180,6 +180,93 @@
       padding-left: 18px;
       color: #475467;
     }
+    .execution-shell {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .execution-toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 180px;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .execution-toolbar input, .execution-toolbar select {
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font: inherit;
+      min-width: 0;
+    }
+    .execution-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, 320px) minmax(280px, 1fr) minmax(260px, 380px);
+      gap: 14px;
+      align-items: start;
+    }
+    .execution-list {
+      display: grid;
+      gap: 8px;
+      max-height: 520px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+    .execution-task {
+      text-align: left;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 10px;
+      cursor: pointer;
+      font: inherit;
+    }
+    .execution-task.active {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+    }
+    .execution-task strong, .execution-task span, .execution-task em { display: block; }
+    .execution-task strong { font-size: 13px; }
+    .execution-task span { color: #667085; font-size: 12px; margin-top: 4px; }
+    .execution-task em {
+      color: #344054;
+      font-size: 12px;
+      font-style: normal;
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+    .execution-panel {
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 14px;
+      min-height: 260px;
+    }
+    .execution-panel h3 { margin: 0 0 8px; font-size: 16px; line-height: 1.35; }
+    .execution-kv {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 8px 10px;
+      font-size: 12px;
+      color: #475467;
+      margin: 12px 0;
+    }
+    .execution-kv strong { color: #20242a; }
+    .execution-section-title {
+      margin: 12px 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .execution-list-small {
+      margin: 0;
+      padding-left: 18px;
+      color: #475467;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .execution-empty { color: #667085; font-size: 12px; }
     .layout {
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
@@ -246,7 +333,7 @@
 <body>
   <header>
     <h1>投资 Agent Harness 面板</h1>
-    <div class="time">生成时间：2026-05-17T06:04:30.003513+00:00</div>
+    <div class="time">生成时间：2026-05-17T06:08:40.449662+00:00</div>
   </header>
   <main>
     <section class="metrics"><div class="metric"><span>需求总数</span><strong>4</strong></div>
@@ -336,6 +423,324 @@
     
     </section>
     </div>
+    </section>
+    <section class="execution-shell" data-execution-panel>
+      <div class="section-title">
+        <h2>可交互执行面板</h2>
+        <p>选择任务后查看执行上下文、门禁、交付物、CI 和代码变更证据。</p>
+      </div>
+      <div class="execution-toolbar">
+        <input id="executionSearch" type="search" placeholder="搜索任务、需求、标题" aria-label="搜索任务" />
+        <select id="executionStatus" aria-label="按状态筛选">
+          <option value="">全部状态</option>
+          <option value="待开发">待开发</option>
+          <option value="开发中">开发中</option>
+          <option value="测试完成">测试完成</option>
+          <option value="门禁受阻">门禁受阻</option>
+        </select>
+      </div>
+      <div class="execution-grid">
+        <div class="execution-list" id="executionTaskList">
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0001:T-0001"
+      data-status="测试完成"
+    >
+      <strong>REQ-0001:T-0001</strong>
+      <span>测试完成 · 5 个提交</span>
+      <em>创建工程 Harness CLI 和产物目录</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0001:T-0002"
+      data-status="测试完成"
+    >
+      <strong>REQ-0001:T-0002</strong>
+      <span>测试完成 · 0 个提交</span>
+      <em>定义假设、计划、事件、结果和复盘 ledgers</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0001:T-0003"
+      data-status="测试完成"
+    >
+      <strong>REQ-0001:T-0003</strong>
+      <span>测试完成 · 3 个提交</span>
+      <em>构建账户和 Agent 盈利归因模型</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0001:T-0004"
+      data-status="开发中"
+    >
+      <strong>REQ-0001:T-0004</strong>
+      <span>开发中 · 4 个提交</span>
+      <em>实现带晋升门禁的版本化 skill registry</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0001:T-0005"
+      data-status="门禁受阻"
+    >
+      <strong>REQ-0001:T-0005</strong>
+      <span>门禁受阻 · 0 个提交</span>
+      <em>创建 shadow portfolio 评估闭环</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0002:T-0001"
+      data-status="测试完成"
+    >
+      <strong>REQ-0002:T-0001</strong>
+      <span>测试完成 · 5 个提交</span>
+      <em>创建工程 Harness CLI 和产物目录</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0002:T-0002"
+      data-status="测试完成"
+    >
+      <strong>REQ-0002:T-0002</strong>
+      <span>测试完成 · 0 个提交</span>
+      <em>定义假设、计划、事件、结果和复盘 ledgers</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0002:T-0003"
+      data-status="测试完成"
+    >
+      <strong>REQ-0002:T-0003</strong>
+      <span>测试完成 · 3 个提交</span>
+      <em>构建账户和 Agent 盈利归因模型</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0002:T-0004"
+      data-status="开发中"
+    >
+      <strong>REQ-0002:T-0004</strong>
+      <span>开发中 · 4 个提交</span>
+      <em>实现带晋升门禁的版本化 skill registry</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0002:T-0005"
+      data-status="门禁受阻"
+    >
+      <strong>REQ-0002:T-0005</strong>
+      <span>门禁受阻 · 0 个提交</span>
+      <em>创建 shadow portfolio 评估闭环</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0004:T-0001"
+      data-status="测试完成"
+    >
+      <strong>REQ-0004:T-0001</strong>
+      <span>测试完成 · 5 个提交</span>
+      <em>创建工程 Harness CLI 和产物目录</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0004:T-0002"
+      data-status="测试完成"
+    >
+      <strong>REQ-0004:T-0002</strong>
+      <span>测试完成 · 0 个提交</span>
+      <em>定义假设、计划、事件、结果和复盘 ledgers</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0004:T-0003"
+      data-status="测试完成"
+    >
+      <strong>REQ-0004:T-0003</strong>
+      <span>测试完成 · 3 个提交</span>
+      <em>构建账户和 Agent 盈利归因模型</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0004:T-0004"
+      data-status="开发中"
+    >
+      <strong>REQ-0004:T-0004</strong>
+      <span>开发中 · 4 个提交</span>
+      <em>实现带晋升门禁的版本化 skill registry</em>
+    </button>
+    
+
+    <button
+      class="execution-task"
+      type="button"
+      data-task-id="REQ-0004:T-0005"
+      data-status="门禁受阻"
+    >
+      <strong>REQ-0004:T-0005</strong>
+      <span>门禁受阻 · 0 个提交</span>
+      <em>创建 shadow portfolio 评估闭环</em>
+    </button>
+    </div>
+        <article class="execution-panel">
+          <h3 id="executionTitle">请选择任务</h3>
+          <div class="execution-kv">
+            <strong>任务</strong><span id="executionTaskId">-</span>
+            <strong>需求</strong><span id="executionRequirement">-</span>
+            <strong>状态</strong><span id="executionState">-</span>
+            <strong>分支</strong><span id="executionBranch">-</span>
+            <strong>里程碑</strong><span id="executionMilestone">-</span>
+          </div>
+          <div class="execution-section-title">门禁</div>
+          <div class="gates" id="executionGates"></div>
+          <div class="execution-section-title">交付物</div>
+          <ul class="execution-list-small" id="executionDeliverables"></ul>
+        </article>
+        <article class="execution-panel">
+          <h3>执行证据</h3>
+          <div class="execution-kv">
+            <strong>CI</strong><span id="executionCi">-</span>
+            <strong>Issue</strong><span id="executionIssue">待绑定</span>
+          </div>
+          <div class="execution-section-title">关联提交</div>
+          <div class="trace-commits" id="executionCommits"></div>
+        </article>
+      </div>
+      <script id="execution-data" type="application/json">[{"task_id": "REQ-0001:T-0001", "task_title": "创建工程 Harness CLI 和产物目录", "requirement_id": "REQ-0001", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M1 Harness 基础", "gates": [{"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["CLI", "README", "tests"], "commits": [{"short_sha": "e4871fb", "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad", "author": "txc-link", "committed_at": "2026-05-17T14:05:08+08:00", "subject": "Add task to code trace links", "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "f580834", "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751", "author": "txc-link", "committed_at": "2026-05-17T13:59:04+08:00", "subject": "Add Trellis task tree dashboard", "url": "https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "4f0daa6", "sha": "4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b", "author": "txc-link", "committed_at": "2026-05-17T13:52:10+08:00", "subject": "Add Trellis-style dashboard view", "url": "https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "c89e9d9", "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "author": "txc-link", "committed_at": "2026-05-17T13:44:25+08:00", "subject": "Add Trellis-inspired unified harness workflow", "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "changed_files": [".trellis/journal/README.md", ".trellis/spec/README.md", ".trellis/spec/investment-agent-harness.md", ".trellis/tasks/README.md", ".trellis/workspaces/README.md", "AGENTS.md", "README.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/PROCESS.md", "docs/SKILL_STACK.md", "docs/UNIFIED_HARNESS_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "templates/trellis_journal.md", "templates/trellis_spec.md", "templates/trellis_task.md", "tests/test_harness_artifacts.py", "tests/test_unified_harness_workflow.py"]}, {"short_sha": "8ae4691", "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100", "author": "txc-link", "committed_at": "2026-05-17T09:19:33+08:00", "subject": "Add SPEC driven CI CD workflow", "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100", "changed_files": [".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md", ".github/workflows/ci.yml", ".moai/specs/SPEC-CI-0001/plan.md", ".moai/specs/SPEC-CI-0001/progress.md", ".moai/specs/SPEC-CI-0001/risks.md", ".moai/specs/SPEC-CI-0001/scenarios.md", ".moai/specs/SPEC-CI-0001/spec.md", "AGENTS.md", "README.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/SPEC_CICD_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "tests/test_cicd_workflow.py"]}]}, {"task_id": "REQ-0001:T-0002", "task_title": "定义假设、计划、事件、结果和复盘 ledgers", "requirement_id": "REQ-0001", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M2 投资 Ledger 核心", "gates": [{"name": "design_review", "passed": true, "detail": "docs/rfc 或 docs/adr"}, {"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["ledger schema", "sample records", "validation tests"], "commits": []}, {"task_id": "REQ-0001:T-0003", "task_title": "构建账户和 Agent 盈利归因模型", "requirement_id": "REQ-0001", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M3 盈利评估", "gates": [{"name": "design_review", "passed": true, "detail": "docs/rfc 或 docs/adr"}, {"name": "integration_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["evaluation spec", "metric definitions", "fixture portfolio"], "commits": [{"short_sha": "d10daa1", "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "author": "txc-link", "committed_at": "2026-05-17T08:21:17+08:00", "subject": "Localize project documentation to Chinese", "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-0005.yaml", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md"]}, {"short_sha": "5d99c06", "sha": "5d99c06da8551100ae233736fc4d4e7d52460492", "author": "txc-link", "committed_at": "2026-05-17T00:21:49+08:00", "subject": "Add strongest investment agent requirements", "url": "https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492", "changed_files": ["docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/REQ-0005.yaml"]}, {"short_sha": "d91d29f", "sha": "d91d29f652f625803279d21820116888e6d40804", "author": "txc-link", "committed_at": "2026-05-17T00:02:54+08:00", "subject": "Initialize investment agent harness workflow", "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/CODEOWNERS", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", ".github/workflows/ci.yml", ".gitignore", ".pre-commit-config.yaml", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-smoke-input.md", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "pyproject.toml", "scripts/bootstrap.ps1", "scripts/check.ps1", "src/harness_engine/__init__.py", "src/harness_engine/artifacts.py", "src/harness_engine/cli.py", "src/harness_engine/models.py", "src/harness_engine/planner.py", "src/harness_engine/status.py", "src/harness_engine/storage.py", "src/harness_engine/workflow.py", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md", "tests/test_artifacts_and_status.py", "tests/test_development_flow.py", "tests/test_harness_artifacts.py", "tests/test_planner.py"]}]}, {"task_id": "REQ-0001:T-0004", "task_title": "实现带晋升门禁的版本化 skill registry", "requirement_id": "REQ-0001", "status": "开发中", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M4 Skill 进化闭环", "gates": [{"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "backtest", "passed": true, "detail": "docs/evals/*SKILL*.yaml"}, {"name": "shadow_live", "passed": false, "detail": "docs/reviews/*shadow*.md"}, {"name": "human_approval", "passed": false, "detail": "docs/releases/*.md"}], "deliverables": ["skill schema", "promotion policy", "rollback policy"], "commits": [{"short_sha": "c89e9d9", "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "author": "txc-link", "committed_at": "2026-05-17T13:44:25+08:00", "subject": "Add Trellis-inspired unified harness workflow", "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "changed_files": [".trellis/journal/README.md", ".trellis/spec/README.md", ".trellis/spec/investment-agent-harness.md", ".trellis/tasks/README.md", ".trellis/workspaces/README.md", "AGENTS.md", "README.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/PROCESS.md", "docs/SKILL_STACK.md", "docs/UNIFIED_HARNESS_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "templates/trellis_journal.md", "templates/trellis_spec.md", "templates/trellis_task.md", "tests/test_harness_artifacts.py", "tests/test_unified_harness_workflow.py"]}, {"short_sha": "8ae4691", "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100", "author": "txc-link", "committed_at": "2026-05-17T09:19:33+08:00", "subject": "Add SPEC driven CI CD workflow", "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100", "changed_files": [".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md", ".github/workflows/ci.yml", ".moai/specs/SPEC-CI-0001/plan.md", ".moai/specs/SPEC-CI-0001/progress.md", ".moai/specs/SPEC-CI-0001/risks.md", ".moai/specs/SPEC-CI-0001/scenarios.md", ".moai/specs/SPEC-CI-0001/spec.md", "AGENTS.md", "README.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/SPEC_CICD_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "tests/test_cicd_workflow.py"]}, {"short_sha": "d10daa1", "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "author": "txc-link", "committed_at": "2026-05-17T08:21:17+08:00", "subject": "Localize project documentation to Chinese", "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-0005.yaml", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md"]}, {"short_sha": "d91d29f", "sha": "d91d29f652f625803279d21820116888e6d40804", "author": "txc-link", "committed_at": "2026-05-17T00:02:54+08:00", "subject": "Initialize investment agent harness workflow", "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/CODEOWNERS", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", ".github/workflows/ci.yml", ".gitignore", ".pre-commit-config.yaml", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-smoke-input.md", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "pyproject.toml", "scripts/bootstrap.ps1", "scripts/check.ps1", "src/harness_engine/__init__.py", "src/harness_engine/artifacts.py", "src/harness_engine/cli.py", "src/harness_engine/models.py", "src/harness_engine/planner.py", "src/harness_engine/status.py", "src/harness_engine/storage.py", "src/harness_engine/workflow.py", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md", "tests/test_artifacts_and_status.py", "tests/test_development_flow.py", "tests/test_harness_artifacts.py", "tests/test_planner.py"]}]}, {"task_id": "REQ-0001:T-0005", "task_title": "创建 shadow portfolio 评估闭环", "requirement_id": "REQ-0001", "status": "门禁受阻", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M5 Shadow 交易和晋升门禁", "gates": [{"name": "integration_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "shadow_live", "passed": false, "detail": "docs/reviews/*shadow*.md"}, {"name": "human_approval", "passed": false, "detail": "docs/releases/*.md"}], "deliverables": ["shadow portfolio spec", "daily review job", "promotion report"], "commits": []}, {"task_id": "REQ-0002:T-0001", "task_title": "创建工程 Harness CLI 和产物目录", "requirement_id": "REQ-0002", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M1 Harness 基础", "gates": [{"name": "requirement_review", "passed": true, "detail": "docs/requirements/REQ-0002.yaml"}, {"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["CLI", "README", "tests"], "commits": [{"short_sha": "e4871fb", "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad", "author": "txc-link", "committed_at": "2026-05-17T14:05:08+08:00", "subject": "Add task to code trace links", "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "f580834", "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751", "author": "txc-link", "committed_at": "2026-05-17T13:59:04+08:00", "subject": "Add Trellis task tree dashboard", "url": "https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "4f0daa6", "sha": "4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b", "author": "txc-link", "committed_at": "2026-05-17T13:52:10+08:00", "subject": "Add Trellis-style dashboard view", "url": "https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "c89e9d9", "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "author": "txc-link", "committed_at": "2026-05-17T13:44:25+08:00", "subject": "Add Trellis-inspired unified harness workflow", "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "changed_files": [".trellis/journal/README.md", ".trellis/spec/README.md", ".trellis/spec/investment-agent-harness.md", ".trellis/tasks/README.md", ".trellis/workspaces/README.md", "AGENTS.md", "README.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/PROCESS.md", "docs/SKILL_STACK.md", "docs/UNIFIED_HARNESS_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "templates/trellis_journal.md", "templates/trellis_spec.md", "templates/trellis_task.md", "tests/test_harness_artifacts.py", "tests/test_unified_harness_workflow.py"]}, {"short_sha": "8ae4691", "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100", "author": "txc-link", "committed_at": "2026-05-17T09:19:33+08:00", "subject": "Add SPEC driven CI CD workflow", "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100", "changed_files": [".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md", ".github/workflows/ci.yml", ".moai/specs/SPEC-CI-0001/plan.md", ".moai/specs/SPEC-CI-0001/progress.md", ".moai/specs/SPEC-CI-0001/risks.md", ".moai/specs/SPEC-CI-0001/scenarios.md", ".moai/specs/SPEC-CI-0001/spec.md", "AGENTS.md", "README.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/SPEC_CICD_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "tests/test_cicd_workflow.py"]}]}, {"task_id": "REQ-0002:T-0002", "task_title": "定义假设、计划、事件、结果和复盘 ledgers", "requirement_id": "REQ-0002", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M2 投资 Ledger 核心", "gates": [{"name": "requirement_review", "passed": true, "detail": "docs/requirements/REQ-0002.yaml"}, {"name": "design_review", "passed": true, "detail": "docs/rfc 或 docs/adr"}, {"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["ledger schema", "sample records", "validation tests"], "commits": []}, {"task_id": "REQ-0002:T-0003", "task_title": "构建账户和 Agent 盈利归因模型", "requirement_id": "REQ-0002", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M3 盈利评估", "gates": [{"name": "design_review", "passed": true, "detail": "docs/rfc 或 docs/adr"}, {"name": "integration_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "data_quality", "passed": true, "detail": "docs/evals/*.yaml"}], "deliverables": ["evaluation spec", "metric definitions", "fixture portfolio"], "commits": [{"short_sha": "d10daa1", "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "author": "txc-link", "committed_at": "2026-05-17T08:21:17+08:00", "subject": "Localize project documentation to Chinese", "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-0005.yaml", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md"]}, {"short_sha": "5d99c06", "sha": "5d99c06da8551100ae233736fc4d4e7d52460492", "author": "txc-link", "committed_at": "2026-05-17T00:21:49+08:00", "subject": "Add strongest investment agent requirements", "url": "https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492", "changed_files": ["docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/REQ-0005.yaml"]}, {"short_sha": "d91d29f", "sha": "d91d29f652f625803279d21820116888e6d40804", "author": "txc-link", "committed_at": "2026-05-17T00:02:54+08:00", "subject": "Initialize investment agent harness workflow", "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/CODEOWNERS", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", ".github/workflows/ci.yml", ".gitignore", ".pre-commit-config.yaml", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-smoke-input.md", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "pyproject.toml", "scripts/bootstrap.ps1", "scripts/check.ps1", "src/harness_engine/__init__.py", "src/harness_engine/artifacts.py", "src/harness_engine/cli.py", "src/harness_engine/models.py", "src/harness_engine/planner.py", "src/harness_engine/status.py", "src/harness_engine/storage.py", "src/harness_engine/workflow.py", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md", "tests/test_artifacts_and_status.py", "tests/test_development_flow.py", "tests/test_harness_artifacts.py", "tests/test_planner.py"]}]}, {"task_id": "REQ-0002:T-0004", "task_title": "实现带晋升门禁的版本化 skill registry", "requirement_id": "REQ-0002", "status": "开发中", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M4 Skill 进化闭环", "gates": [{"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "backtest", "passed": true, "detail": "docs/evals/*SKILL*.yaml"}, {"name": "shadow_live", "passed": false, "detail": "docs/reviews/*shadow*.md"}, {"name": "human_approval", "passed": false, "detail": "docs/releases/*.md"}, {"name": "rollback_plan", "passed": false, "detail": "docs/releases/*.md"}], "deliverables": ["skill schema", "promotion policy", "rollback policy"], "commits": [{"short_sha": "c89e9d9", "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "author": "txc-link", "committed_at": "2026-05-17T13:44:25+08:00", "subject": "Add Trellis-inspired unified harness workflow", "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "changed_files": [".trellis/journal/README.md", ".trellis/spec/README.md", ".trellis/spec/investment-agent-harness.md", ".trellis/tasks/README.md", ".trellis/workspaces/README.md", "AGENTS.md", "README.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/PROCESS.md", "docs/SKILL_STACK.md", "docs/UNIFIED_HARNESS_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "templates/trellis_journal.md", "templates/trellis_spec.md", "templates/trellis_task.md", "tests/test_harness_artifacts.py", "tests/test_unified_harness_workflow.py"]}, {"short_sha": "8ae4691", "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100", "author": "txc-link", "committed_at": "2026-05-17T09:19:33+08:00", "subject": "Add SPEC driven CI CD workflow", "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100", "changed_files": [".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md", ".github/workflows/ci.yml", ".moai/specs/SPEC-CI-0001/plan.md", ".moai/specs/SPEC-CI-0001/progress.md", ".moai/specs/SPEC-CI-0001/risks.md", ".moai/specs/SPEC-CI-0001/scenarios.md", ".moai/specs/SPEC-CI-0001/spec.md", "AGENTS.md", "README.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/SPEC_CICD_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "tests/test_cicd_workflow.py"]}, {"short_sha": "d10daa1", "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "author": "txc-link", "committed_at": "2026-05-17T08:21:17+08:00", "subject": "Localize project documentation to Chinese", "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-0005.yaml", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md"]}, {"short_sha": "d91d29f", "sha": "d91d29f652f625803279d21820116888e6d40804", "author": "txc-link", "committed_at": "2026-05-17T00:02:54+08:00", "subject": "Initialize investment agent harness workflow", "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/CODEOWNERS", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", ".github/workflows/ci.yml", ".gitignore", ".pre-commit-config.yaml", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-smoke-input.md", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "pyproject.toml", "scripts/bootstrap.ps1", "scripts/check.ps1", "src/harness_engine/__init__.py", "src/harness_engine/artifacts.py", "src/harness_engine/cli.py", "src/harness_engine/models.py", "src/harness_engine/planner.py", "src/harness_engine/status.py", "src/harness_engine/storage.py", "src/harness_engine/workflow.py", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md", "tests/test_artifacts_and_status.py", "tests/test_development_flow.py", "tests/test_harness_artifacts.py", "tests/test_planner.py"]}]}, {"task_id": "REQ-0002:T-0005", "task_title": "创建 shadow portfolio 评估闭环", "requirement_id": "REQ-0002", "status": "门禁受阻", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M5 Shadow 交易和晋升门禁", "gates": [{"name": "integration_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "data_quality", "passed": true, "detail": "docs/evals/*.yaml"}, {"name": "shadow_live", "passed": false, "detail": "docs/reviews/*shadow*.md"}, {"name": "human_approval", "passed": false, "detail": "docs/releases/*.md"}, {"name": "rollback_plan", "passed": false, "detail": "docs/releases/*.md"}], "deliverables": ["shadow portfolio spec", "daily review job", "promotion report"], "commits": []}, {"task_id": "REQ-0004:T-0001", "task_title": "创建工程 Harness CLI 和产物目录", "requirement_id": "REQ-0004", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M1 Harness 基础", "gates": [{"name": "requirement_review", "passed": true, "detail": "docs/requirements/REQ-0004.yaml"}, {"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["CLI", "README", "tests"], "commits": [{"short_sha": "e4871fb", "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad", "author": "txc-link", "committed_at": "2026-05-17T14:05:08+08:00", "subject": "Add task to code trace links", "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "f580834", "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751", "author": "txc-link", "committed_at": "2026-05-17T13:59:04+08:00", "subject": "Add Trellis task tree dashboard", "url": "https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "4f0daa6", "sha": "4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b", "author": "txc-link", "committed_at": "2026-05-17T13:52:10+08:00", "subject": "Add Trellis-style dashboard view", "url": "https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b", "changed_files": ["docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/dashboard.py", "tests/test_dashboard.py"]}, {"short_sha": "c89e9d9", "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "author": "txc-link", "committed_at": "2026-05-17T13:44:25+08:00", "subject": "Add Trellis-inspired unified harness workflow", "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "changed_files": [".trellis/journal/README.md", ".trellis/spec/README.md", ".trellis/spec/investment-agent-harness.md", ".trellis/tasks/README.md", ".trellis/workspaces/README.md", "AGENTS.md", "README.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/PROCESS.md", "docs/SKILL_STACK.md", "docs/UNIFIED_HARNESS_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "templates/trellis_journal.md", "templates/trellis_spec.md", "templates/trellis_task.md", "tests/test_harness_artifacts.py", "tests/test_unified_harness_workflow.py"]}, {"short_sha": "8ae4691", "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100", "author": "txc-link", "committed_at": "2026-05-17T09:19:33+08:00", "subject": "Add SPEC driven CI CD workflow", "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100", "changed_files": [".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md", ".github/workflows/ci.yml", ".moai/specs/SPEC-CI-0001/plan.md", ".moai/specs/SPEC-CI-0001/progress.md", ".moai/specs/SPEC-CI-0001/risks.md", ".moai/specs/SPEC-CI-0001/scenarios.md", ".moai/specs/SPEC-CI-0001/spec.md", "AGENTS.md", "README.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/SPEC_CICD_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "tests/test_cicd_workflow.py"]}]}, {"task_id": "REQ-0004:T-0002", "task_title": "定义假设、计划、事件、结果和复盘 ledgers", "requirement_id": "REQ-0004", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M2 投资 Ledger 核心", "gates": [{"name": "requirement_review", "passed": true, "detail": "docs/requirements/REQ-0004.yaml"}, {"name": "design_review", "passed": true, "detail": "docs/rfc 或 docs/adr"}, {"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}], "deliverables": ["ledger schema", "sample records", "validation tests"], "commits": []}, {"task_id": "REQ-0004:T-0003", "task_title": "构建账户和 Agent 盈利归因模型", "requirement_id": "REQ-0004", "status": "测试完成", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M3 盈利评估", "gates": [{"name": "design_review", "passed": true, "detail": "docs/rfc 或 docs/adr"}, {"name": "integration_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "data_quality", "passed": true, "detail": "docs/evals/*.yaml"}], "deliverables": ["evaluation spec", "metric definitions", "fixture portfolio"], "commits": [{"short_sha": "d10daa1", "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "author": "txc-link", "committed_at": "2026-05-17T08:21:17+08:00", "subject": "Localize project documentation to Chinese", "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-0005.yaml", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md"]}, {"short_sha": "5d99c06", "sha": "5d99c06da8551100ae233736fc4d4e7d52460492", "author": "txc-link", "committed_at": "2026-05-17T00:21:49+08:00", "subject": "Add strongest investment agent requirements", "url": "https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492", "changed_files": ["docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/REQ-0005.yaml"]}, {"short_sha": "d91d29f", "sha": "d91d29f652f625803279d21820116888e6d40804", "author": "txc-link", "committed_at": "2026-05-17T00:02:54+08:00", "subject": "Initialize investment agent harness workflow", "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/CODEOWNERS", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", ".github/workflows/ci.yml", ".gitignore", ".pre-commit-config.yaml", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-smoke-input.md", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "pyproject.toml", "scripts/bootstrap.ps1", "scripts/check.ps1", "src/harness_engine/__init__.py", "src/harness_engine/artifacts.py", "src/harness_engine/cli.py", "src/harness_engine/models.py", "src/harness_engine/planner.py", "src/harness_engine/status.py", "src/harness_engine/storage.py", "src/harness_engine/workflow.py", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md", "tests/test_artifacts_and_status.py", "tests/test_development_flow.py", "tests/test_harness_artifacts.py", "tests/test_planner.py"]}]}, {"task_id": "REQ-0004:T-0004", "task_title": "实现带晋升门禁的版本化 skill registry", "requirement_id": "REQ-0004", "status": "开发中", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M4 Skill 进化闭环", "gates": [{"name": "unit_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "backtest", "passed": true, "detail": "docs/evals/*SKILL*.yaml"}, {"name": "shadow_live", "passed": false, "detail": "docs/reviews/*shadow*.md"}, {"name": "human_approval", "passed": false, "detail": "docs/releases/*.md"}, {"name": "rollback_plan", "passed": false, "detail": "docs/releases/*.md"}], "deliverables": ["skill schema", "promotion policy", "rollback policy"], "commits": [{"short_sha": "c89e9d9", "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "author": "txc-link", "committed_at": "2026-05-17T13:44:25+08:00", "subject": "Add Trellis-inspired unified harness workflow", "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44", "changed_files": [".trellis/journal/README.md", ".trellis/spec/README.md", ".trellis/spec/investment-agent-harness.md", ".trellis/tasks/README.md", ".trellis/workspaces/README.md", "AGENTS.md", "README.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/PROCESS.md", "docs/SKILL_STACK.md", "docs/UNIFIED_HARNESS_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "templates/trellis_journal.md", "templates/trellis_spec.md", "templates/trellis_task.md", "tests/test_harness_artifacts.py", "tests/test_unified_harness_workflow.py"]}, {"short_sha": "8ae4691", "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100", "author": "txc-link", "committed_at": "2026-05-17T09:19:33+08:00", "subject": "Add SPEC driven CI CD workflow", "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100", "changed_files": [".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md", ".github/workflows/ci.yml", ".moai/specs/SPEC-CI-0001/plan.md", ".moai/specs/SPEC-CI-0001/progress.md", ".moai/specs/SPEC-CI-0001/risks.md", ".moai/specs/SPEC-CI-0001/scenarios.md", ".moai/specs/SPEC-CI-0001/spec.md", "AGENTS.md", "README.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/SPEC_CICD_WORKFLOW.md", "docs/dashboard/index.html", "docs/dashboard/status.json", "src/harness_engine/artifacts.py", "tests/test_cicd_workflow.py"]}, {"short_sha": "d10daa1", "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "author": "txc-link", "committed_at": "2026-05-17T08:21:17+08:00", "subject": "Localize project documentation to Chinese", "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-strongest-self-evolving-investment-agent.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-0005.yaml", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md"]}, {"short_sha": "d91d29f", "sha": "d91d29f652f625803279d21820116888e6d40804", "author": "txc-link", "committed_at": "2026-05-17T00:02:54+08:00", "subject": "Initialize investment agent harness workflow", "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804", "changed_files": [".codex/AGENTS.ECC.md", ".codex/agents/docs-researcher.toml", ".codex/agents/explorer.toml", ".codex/agents/reviewer.toml", ".codex/config.toml", ".github/CODEOWNERS", ".github/ISSUE_TEMPLATE/evolution.yml", ".github/ISSUE_TEMPLATE/requirement.yml", ".github/pull_request_template.md", ".github/workflows/ci.yml", ".gitignore", ".pre-commit-config.yaml", "AGENTS.md", "README.md", "docs/AGENT_ROLES.md", "docs/CICD.md", "docs/DELIVERY_PIPELINE.md", "docs/DEV_ENVIRONMENT.md", "docs/HARNESS_ENGINE.md", "docs/HARNESS_MATURITY_MODEL.md", "docs/HARNESS_OPERATING_MODEL.md", "docs/OBSERVABILITY_METRICS.md", "docs/PROCESS.md", "docs/QUALITY_GATES.md", "docs/RISK_CONTROL.md", "docs/SKILL_STACK.md", "docs/WORKFLOW.md", "docs/adr/ADR-0001-controlled-evolution.md", "docs/evals/EVAL-ACCOUNT-ALPHA.yaml", "docs/evals/EVAL-SKILL-EVOLUTION.yaml", "docs/ledger_schemas.md", "docs/metrics/HARNESS_STATUS.md", "docs/requirements/PRD-utf8-requirement-document-smoke-test.md", "docs/requirements/REQ-0001.yaml", "docs/requirements/REQ-0002.yaml", "docs/requirements/REQ-0004.yaml", "docs/requirements/REQ-smoke-input.md", "docs/reviews/FLOW-REQ-0004-utf8-requirement-document-smoke-test.md", "docs/rfc/RFC-utf8-requirement-document-smoke-test.md", "docs/roadmap/REQ-0001-roadmap.yaml", "docs/roadmap/REQ-0002-roadmap.yaml", "docs/roadmap/REQ-0004-roadmap.yaml", "docs/sprints/SPRINT-0001.yaml", "docs/sprints/SPRINT-0004.yaml", "docs/sprints/TICKET-utf8-requirement-document-smoke-test.md", "docs/test-plans/TEST-utf8-requirement-document-smoke-test.md", "pyproject.toml", "scripts/bootstrap.ps1", "scripts/check.ps1", "src/harness_engine/__init__.py", "src/harness_engine/artifacts.py", "src/harness_engine/cli.py", "src/harness_engine/models.py", "src/harness_engine/planner.py", "src/harness_engine/status.py", "src/harness_engine/storage.py", "src/harness_engine/workflow.py", "templates/evolution_proposal.md", "templates/postmortem.md", "templates/prd.md", "templates/release_checklist.md", "templates/requirement_prompt.md", "templates/rfc.md", "templates/risk_register.md", "templates/runbook.md", "templates/test_plan.md", "templates/ticket.md", "tests/test_artifacts_and_status.py", "tests/test_development_flow.py", "tests/test_harness_artifacts.py", "tests/test_planner.py"]}]}, {"task_id": "REQ-0004:T-0005", "task_title": "创建 shadow portfolio 评估闭环", "requirement_id": "REQ-0004", "status": "门禁受阻", "branch": "main", "ci_url": "https://github.com/txc-link/test-harness/actions", "issue_url": null, "milestone": "M5 Shadow 交易和晋升门禁", "gates": [{"name": "integration_tests", "passed": true, "detail": "tests/test_*.py"}, {"name": "data_quality", "passed": true, "detail": "docs/evals/*.yaml"}, {"name": "shadow_live", "passed": false, "detail": "docs/reviews/*shadow*.md"}, {"name": "human_approval", "passed": false, "detail": "docs/releases/*.md"}, {"name": "rollback_plan", "passed": false, "detail": "docs/releases/*.md"}], "deliverables": ["shadow portfolio spec", "daily review job", "promotion report"], "commits": []}]</script>
+      <script>
+        
+const executionData = JSON.parse(document.getElementById("execution-data").textContent);
+const taskButtons = Array.from(document.querySelectorAll(".execution-task"));
+const searchInput = document.getElementById("executionSearch");
+const statusSelect = document.getElementById("executionStatus");
+const byId = new Map(executionData.map((task) => [task.task_id, task]));
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[char]);
+}
+
+function renderList(items, emptyText) {
+  if (!items || items.length === 0) {
+    return `<li>${escapeHtml(emptyText)}</li>`;
+  }
+  return items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+}
+
+function renderGates(gates) {
+  if (!gates || gates.length === 0) {
+    return '<span class="execution-empty">暂无门禁</span>';
+  }
+  return gates.map((gate) => {
+    const cls = gate.passed ? "gate" : "gate fail";
+    return `<span class="${cls}" title="${escapeHtml(gate.detail)}">${escapeHtml(gate.name)}</span>`;
+  }).join("");
+}
+
+function renderCommits(commits) {
+  if (!commits || commits.length === 0) {
+    return '<div class="trace-empty">暂无匹配提交</div>';
+  }
+  return commits.map((commit) => {
+    const files = renderList(commit.changed_files.slice(0, 6), "暂无变更文件");
+    const sha = commit.url
+      ? `<a href="${escapeHtml(commit.url)}">${escapeHtml(commit.short_sha)}</a>`
+      : `<strong>${escapeHtml(commit.short_sha)}</strong>`;
+    return `<div class="trace-commit">${sha} ${escapeHtml(commit.subject)}
+      <ul class="trace-files">${files}</ul>
+    </div>`;
+  }).join("");
+}
+
+function selectTask(taskId) {
+  const task = byId.get(taskId);
+  if (!task) return;
+  taskButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.taskId === taskId);
+  });
+  document.getElementById("executionTitle").textContent = task.task_title;
+  document.getElementById("executionTaskId").textContent = task.task_id;
+  document.getElementById("executionRequirement").textContent = task.requirement_id;
+  document.getElementById("executionState").textContent = task.status;
+  document.getElementById("executionBranch").textContent = task.branch;
+  document.getElementById("executionMilestone").textContent = task.milestone || "未分配";
+  document.getElementById("executionGates").innerHTML = renderGates(task.gates);
+  document.getElementById("executionDeliverables").innerHTML =
+    renderList(task.deliverables, "暂无交付物");
+  document.getElementById("executionCi").innerHTML = task.ci_url
+    ? `<a href="${escapeHtml(task.ci_url)}">GitHub Actions</a>`
+    : "未配置";
+  document.getElementById("executionIssue").innerHTML = task.issue_url
+    ? `<a href="${escapeHtml(task.issue_url)}">GitHub Issue</a>`
+    : "待绑定";
+  document.getElementById("executionCommits").innerHTML = renderCommits(task.commits);
+}
+
+function applyExecutionFilters() {
+  const query = searchInput.value.trim().toLowerCase();
+  const status = statusSelect.value;
+  let firstVisible = null;
+  taskButtons.forEach((button) => {
+    const text = button.textContent.toLowerCase();
+    const visible = (!query || text.includes(query))
+      && (!status || button.dataset.status === status);
+    button.hidden = !visible;
+    if (visible && !firstVisible) firstVisible = button;
+  });
+  if (firstVisible) selectTask(firstVisible.dataset.taskId);
+}
+
+taskButtons.forEach((button) => {
+  button.addEventListener("click", () => selectTask(button.dataset.taskId));
+});
+searchInput.addEventListener("input", applyExecutionFilters);
+statusSelect.addEventListener("change", applyExecutionFilters);
+if (taskButtons.length > 0) selectTask(taskButtons[0].dataset.taskId);
+
+      </script>
     </section>
     <section class="task-tree-shell">
       <div class="section-title">
@@ -546,6 +951,11 @@
       </div>
       <div class="trace-commits">
     <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad">e4871fb</a> Add task to code trace links
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
       <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
       <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
     </div>
@@ -563,11 +973,6 @@
     <div class="trace-commit">
       <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
       <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
-    </div>
-    
-    <div class="trace-commit">
-      <a href="https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427">b914e13</a> Integrate Figma prototypes into harness flow
-      <ul class="trace-files"><li>AGENTS.md</li><li>docs/DELIVERY_PIPELINE.md</li><li>docs/FIGMA_PROTOTYPE_WORKFLOW.md</li><li>docs/HARNESS_ENGINE.md</li><li>docs/HARNESS_OPERATING_MODEL.md</li><li>还有 12 个文件</li></ul>
     </div>
     </div>
     </article>
@@ -651,6 +1056,11 @@
       </div>
       <div class="trace-commits">
     <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad">e4871fb</a> Add task to code trace links
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
       <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
       <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
     </div>
@@ -668,11 +1078,6 @@
     <div class="trace-commit">
       <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
       <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
-    </div>
-    
-    <div class="trace-commit">
-      <a href="https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427">b914e13</a> Integrate Figma prototypes into harness flow
-      <ul class="trace-files"><li>AGENTS.md</li><li>docs/DELIVERY_PIPELINE.md</li><li>docs/FIGMA_PROTOTYPE_WORKFLOW.md</li><li>docs/HARNESS_ENGINE.md</li><li>docs/HARNESS_OPERATING_MODEL.md</li><li>还有 12 个文件</li></ul>
     </div>
     </div>
     </article>
@@ -756,6 +1161,11 @@
       </div>
       <div class="trace-commits">
     <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad">e4871fb</a> Add task to code trace links
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
       <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
       <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
     </div>
@@ -773,11 +1183,6 @@
     <div class="trace-commit">
       <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
       <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
-    </div>
-    
-    <div class="trace-commit">
-      <a href="https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427">b914e13</a> Integrate Figma prototypes into harness flow
-      <ul class="trace-files"><li>AGENTS.md</li><li>docs/DELIVERY_PIPELINE.md</li><li>docs/FIGMA_PROTOTYPE_WORKFLOW.md</li><li>docs/HARNESS_ENGINE.md</li><li>docs/HARNESS_OPERATING_MODEL.md</li><li>还有 12 个文件</li></ul>
     </div>
     </div>
     </article>
@@ -868,6 +1273,12 @@
           <h2>最近 GitHub 提交</h2>
           
     <article class="commit-row">
+      <a href="https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad">e4871fb</a> Add task to code trace links
+      <div>txc-link · 2026-05-17T14:05:08+08:00</div>
+    </article>
+    
+
+    <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
       <div>txc-link · 2026-05-17T13:59:04+08:00</div>
     </article>
@@ -906,12 +1317,6 @@
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/d405f483e3965bd0cbdd395800c43d6e0f111823">d405f48</a> Add harness dashboard visualization
       <div>txc-link · 2026-05-17T08:53:35+08:00</div>
-    </article>
-    
-
-    <article class="commit-row">
-      <a href="https://github.com/txc-link/test-harness/commit/68a4627d3e63bc43dc1c851ee3376129c1a606ee">68a4627</a> Add coding guidelines
-      <div>txc-link · 2026-05-17T08:41:08+08:00</div>
     </article>
     
         </section>

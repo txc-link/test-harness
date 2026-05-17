@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T06:04:30.003513Z",
+  "generated_at": "2026-05-17T06:08:40.449662Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -583,6 +583,14 @@
   ],
   "commits": [
     {
+      "short_sha": "e4871fb",
+      "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T14:05:08+08:00",
+      "subject": "Add task to code trace links",
+      "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad"
+    },
+    {
       "short_sha": "f580834",
       "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751",
       "author": "txc-link",
@@ -637,14 +645,6 @@
       "committed_at": "2026-05-17T08:53:35+08:00",
       "subject": "Add harness dashboard visualization",
       "url": "https://github.com/txc-link/test-harness/commit/d405f483e3965bd0cbdd395800c43d6e0f111823"
-    },
-    {
-      "short_sha": "68a4627",
-      "sha": "68a4627d3e63bc43dc1c851ee3376129c1a606ee",
-      "author": "txc-link",
-      "committed_at": "2026-05-17T08:41:08+08:00",
-      "subject": "Add coding guidelines",
-      "url": "https://github.com/txc-link/test-harness/commit/68a4627d3e63bc43dc1c851ee3376129c1a606ee"
     }
   ],
   "trellis_artifacts": [
@@ -1187,6 +1187,20 @@
       "issue_url": null,
       "commits": [
         {
+          "short_sha": "e4871fb",
+          "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+          "author": "txc-link",
+          "committed_at": "2026-05-17T14:05:08+08:00",
+          "subject": "Add task to code trace links",
+          "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+          "changed_files": [
+            "docs/dashboard/index.html",
+            "docs/dashboard/status.json",
+            "src/harness_engine/dashboard.py",
+            "tests/test_dashboard.py"
+          ]
+        },
+        {
           "short_sha": "f580834",
           "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751",
           "author": "txc-link",
@@ -1268,33 +1282,6 @@
             "docs/dashboard/status.json",
             "src/harness_engine/artifacts.py",
             "tests/test_cicd_workflow.py"
-          ]
-        },
-        {
-          "short_sha": "b914e13",
-          "sha": "b914e13b8e88c271e97d91d3d26b8e956769b427",
-          "author": "txc-link",
-          "committed_at": "2026-05-17T09:09:54+08:00",
-          "subject": "Integrate Figma prototypes into harness flow",
-          "url": "https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427",
-          "changed_files": [
-            "AGENTS.md",
-            "docs/DELIVERY_PIPELINE.md",
-            "docs/FIGMA_PROTOTYPE_WORKFLOW.md",
-            "docs/HARNESS_ENGINE.md",
-            "docs/HARNESS_OPERATING_MODEL.md",
-            "docs/PROCESS.md",
-            "docs/QUALITY_GATES.md",
-            "docs/dashboard/index.html",
-            "docs/dashboard/status.json",
-            "docs/prototypes/README.md",
-            "src/harness_engine/artifacts.py",
-            "src/harness_engine/dashboard.py",
-            "src/harness_engine/models.py",
-            "src/harness_engine/planner.py",
-            "templates/prototype_review.md",
-            "tests/test_development_flow.py",
-            "tests/test_planner.py"
           ]
         }
       ]
@@ -1708,6 +1695,20 @@
       "issue_url": null,
       "commits": [
         {
+          "short_sha": "e4871fb",
+          "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+          "author": "txc-link",
+          "committed_at": "2026-05-17T14:05:08+08:00",
+          "subject": "Add task to code trace links",
+          "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+          "changed_files": [
+            "docs/dashboard/index.html",
+            "docs/dashboard/status.json",
+            "src/harness_engine/dashboard.py",
+            "tests/test_dashboard.py"
+          ]
+        },
+        {
           "short_sha": "f580834",
           "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751",
           "author": "txc-link",
@@ -1789,33 +1790,6 @@
             "docs/dashboard/status.json",
             "src/harness_engine/artifacts.py",
             "tests/test_cicd_workflow.py"
-          ]
-        },
-        {
-          "short_sha": "b914e13",
-          "sha": "b914e13b8e88c271e97d91d3d26b8e956769b427",
-          "author": "txc-link",
-          "committed_at": "2026-05-17T09:09:54+08:00",
-          "subject": "Integrate Figma prototypes into harness flow",
-          "url": "https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427",
-          "changed_files": [
-            "AGENTS.md",
-            "docs/DELIVERY_PIPELINE.md",
-            "docs/FIGMA_PROTOTYPE_WORKFLOW.md",
-            "docs/HARNESS_ENGINE.md",
-            "docs/HARNESS_OPERATING_MODEL.md",
-            "docs/PROCESS.md",
-            "docs/QUALITY_GATES.md",
-            "docs/dashboard/index.html",
-            "docs/dashboard/status.json",
-            "docs/prototypes/README.md",
-            "src/harness_engine/artifacts.py",
-            "src/harness_engine/dashboard.py",
-            "src/harness_engine/models.py",
-            "src/harness_engine/planner.py",
-            "templates/prototype_review.md",
-            "tests/test_development_flow.py",
-            "tests/test_planner.py"
           ]
         }
       ]
@@ -2229,6 +2203,20 @@
       "issue_url": null,
       "commits": [
         {
+          "short_sha": "e4871fb",
+          "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+          "author": "txc-link",
+          "committed_at": "2026-05-17T14:05:08+08:00",
+          "subject": "Add task to code trace links",
+          "url": "https://github.com/txc-link/test-harness/commit/e4871fbb458dc0f12569e94e6e742e70dbb139ad",
+          "changed_files": [
+            "docs/dashboard/index.html",
+            "docs/dashboard/status.json",
+            "src/harness_engine/dashboard.py",
+            "tests/test_dashboard.py"
+          ]
+        },
+        {
           "short_sha": "f580834",
           "sha": "f580834b3fa3be6e4345f16c5d36cf1507c7c751",
           "author": "txc-link",
@@ -2310,33 +2298,6 @@
             "docs/dashboard/status.json",
             "src/harness_engine/artifacts.py",
             "tests/test_cicd_workflow.py"
-          ]
-        },
-        {
-          "short_sha": "b914e13",
-          "sha": "b914e13b8e88c271e97d91d3d26b8e956769b427",
-          "author": "txc-link",
-          "committed_at": "2026-05-17T09:09:54+08:00",
-          "subject": "Integrate Figma prototypes into harness flow",
-          "url": "https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427",
-          "changed_files": [
-            "AGENTS.md",
-            "docs/DELIVERY_PIPELINE.md",
-            "docs/FIGMA_PROTOTYPE_WORKFLOW.md",
-            "docs/HARNESS_ENGINE.md",
-            "docs/HARNESS_OPERATING_MODEL.md",
-            "docs/PROCESS.md",
-            "docs/QUALITY_GATES.md",
-            "docs/dashboard/index.html",
-            "docs/dashboard/status.json",
-            "docs/prototypes/README.md",
-            "src/harness_engine/artifacts.py",
-            "src/harness_engine/dashboard.py",
-            "src/harness_engine/models.py",
-            "src/harness_engine/planner.py",
-            "templates/prototype_review.md",
-            "tests/test_development_flow.py",
-            "tests/test_planner.py"
           ]
         }
       ]
