@@ -21,10 +21,11 @@
 4. 涉及界面、控制台、盯盘、告警、分析、复盘、审批队列或可视化交互时，必须先生成或评审 Figma 原型，并在 `docs/prototypes/` 记录人工确认结论。
 5. 原型确认后，必须把确认结果回写到需求、PRD/RFC、路线图和 sprint 排期；不允许在原型未确认时直接进入大规模 UI 开发。
 6. 已接受的架构、安全或进化策略决策必须记录为 ADR。
-7. 将批准范围拆解为 `docs/roadmap/` 下的里程碑和带门禁的任务。
-8. 将近期工作放入 `docs/sprints/` 下的 sprint 计划。
-9. 在声明完成前，必须定义测试、评估规格或评审门禁。
-10. 完成前运行本地验证：
+7. 涉及 CI/CD、Harness 平台、工作流或跨阶段交付变化时，必须在 `.moai/specs/` 下建立 SPEC，使用 EARS 风格需求、验收标准、计划、场景、风险和进度文件。
+8. 将批准范围拆解为 `docs/roadmap/` 下的里程碑和带门禁的任务。
+9. 将近期工作放入 `docs/sprints/` 下的 sprint 计划。
+10. 在声明完成前，必须定义测试、评估规格或评审门禁。
+11. 完成前运行本地验证：
 
 ```powershell
 & "C:\Users\DELL\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m harness_engine.cli validate
@@ -38,6 +39,7 @@
 - `Requirement`：结构化问题、目标用户、范围、非目标和验收标准。
 - `PRD/RFC/ADR`：产品行为、技术提案和已接受决策。
 - `Prototype`：界面类需求的 Figma 原型、人工确认和需求回写。
+- `SPEC`：CI/CD、Harness 平台或跨阶段工作流变化的 EARS 需求、计划、场景、风险和进度。
 - `Plan`：路线图、架构决策、里程碑、风险和门禁矩阵。
 - `Sprint`：任务选择、退出标准、负责人和预期测试。
 - `Build`：带测试和文档的实现。
@@ -53,6 +55,7 @@
 - `docs/QUALITY_GATES.md`
 - `docs/DELIVERY_PIPELINE.md`
 - `docs/FIGMA_PROTOTYPE_WORKFLOW.md`
+- `docs/SPEC_CICD_WORKFLOW.md`
 - `docs/RISK_CONTROL.md`
 - `docs/CODING_GUIDELINES.md`
 

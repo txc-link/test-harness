@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T01:08:36.845984Z",
+  "generated_at": "2026-05-17T01:18:22.773143Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -583,6 +583,14 @@
   ],
   "commits": [
     {
+      "short_sha": "b914e13",
+      "sha": "b914e13b8e88c271e97d91d3d26b8e956769b427",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T09:09:54+08:00",
+      "subject": "Integrate Figma prototypes into harness flow",
+      "url": "https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427"
+    },
+    {
       "short_sha": "fec2817",
       "sha": "fec28177e7567de0a41aefeb906bd4712308af33",
       "author": "txc-link",
@@ -637,14 +645,6 @@
       "committed_at": "2026-05-17T00:02:54+08:00",
       "subject": "Initialize investment agent harness workflow",
       "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804"
-    },
-    {
-      "short_sha": "a26c187",
-      "sha": "a26c18777d9718f4c198df23add56a3102798e0f",
-      "author": "txc-link",
-      "committed_at": "2026-05-17T00:01:25+08:00",
-      "subject": "Initial commit",
-      "url": "https://github.com/txc-link/test-harness/commit/a26c18777d9718f4c198df23add56a3102798e0f"
     }
   ]
 }

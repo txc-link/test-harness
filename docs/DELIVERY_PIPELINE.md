@@ -23,12 +23,16 @@ Figma 原型 -> 人工确认 -> 需求回写 -> 排期开发 -> 浏览器验证
 ```text
 schema 和产物校验
   -> 必要时校验 prototype review 证据
+  -> 必要时校验 SPEC 计划、场景、风险和进度
   -> lint
   -> 单元测试
   -> 必要时运行集成测试
   -> 必要时运行评估 smoke test
+  -> 生成 dashboard artifact
   -> 代码评审
 ```
+
+CI/CD 平台类变更必须在 `.moai/specs/` 下保留 SPEC 证据。验收标准使用 `AC-<SPEC>-<序号>`，并在 PR 或提交说明中引用。
 
 ## 发布流水线
 

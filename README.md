@@ -60,6 +60,7 @@ pytest
 - [任务拆解与可视化调研](docs/HARNESS_DASHBOARD_RESEARCH.md)
 - [可视化实施说明](docs/HARNESS_VISUALIZATION_GUIDE.md)
 - [Figma 原型验证流程](docs/FIGMA_PROTOTYPE_WORKFLOW.md)
+- [SPEC 驱动 CI/CD 流程](docs/SPEC_CICD_WORKFLOW.md)
 - [编码规范](docs/CODING_GUIDELINES.md)
 
 ## 运行原则

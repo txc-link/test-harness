@@ -44,6 +44,7 @@ REQUIRED_DIRECTORIES = [
     "docs/incidents",
     "docs/metrics",
     "docs/dashboard",
+    ".moai/specs",
     "data/runtime",
 ]
 
@@ -66,6 +67,7 @@ REQUIRED_DOCS = [
     "docs/HARNESS_DASHBOARD_RESEARCH.md",
     "docs/HARNESS_VISUALIZATION_GUIDE.md",
     "docs/FIGMA_PROTOTYPE_WORKFLOW.md",
+    "docs/SPEC_CICD_WORKFLOW.md",
 ]
 
 
