@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T06:08:40.449662Z",
+  "generated_at": "2026-05-17T06:20:37.319561Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -583,6 +583,14 @@
   ],
   "commits": [
     {
+      "short_sha": "e42b372",
+      "sha": "e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T14:09:22+08:00",
+      "subject": "Add interactive execution dashboard",
+      "url": "https://github.com/txc-link/test-harness/commit/e42b37272121a5b5fa0db1b77c8d87e9194ea075"
+    },
+    {
       "short_sha": "e4871fb",
       "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
       "author": "txc-link",
@@ -637,14 +645,6 @@
       "committed_at": "2026-05-17T09:03:38+08:00",
       "subject": "Add GitHub commits and Figma prototype workflow",
       "url": "https://github.com/txc-link/test-harness/commit/fec28177e7567de0a41aefeb906bd4712308af33"
-    },
-    {
-      "short_sha": "d405f48",
-      "sha": "d405f483e3965bd0cbdd395800c43d6e0f111823",
-      "author": "txc-link",
-      "committed_at": "2026-05-17T08:53:35+08:00",
-      "subject": "Add harness dashboard visualization",
-      "url": "https://github.com/txc-link/test-harness/commit/d405f483e3965bd0cbdd395800c43d6e0f111823"
     }
   ],
   "trellis_artifacts": [
@@ -1187,6 +1187,20 @@
       "issue_url": null,
       "commits": [
         {
+          "short_sha": "e42b372",
+          "sha": "e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+          "author": "txc-link",
+          "committed_at": "2026-05-17T14:09:22+08:00",
+          "subject": "Add interactive execution dashboard",
+          "url": "https://github.com/txc-link/test-harness/commit/e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+          "changed_files": [
+            "docs/dashboard/index.html",
+            "docs/dashboard/status.json",
+            "src/harness_engine/dashboard.py",
+            "tests/test_dashboard.py"
+          ]
+        },
+        {
           "short_sha": "e4871fb",
           "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
           "author": "txc-link",
@@ -1256,32 +1270,6 @@
             "templates/trellis_task.md",
             "tests/test_harness_artifacts.py",
             "tests/test_unified_harness_workflow.py"
-          ]
-        },
-        {
-          "short_sha": "8ae4691",
-          "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100",
-          "author": "txc-link",
-          "committed_at": "2026-05-17T09:19:33+08:00",
-          "subject": "Add SPEC driven CI CD workflow",
-          "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100",
-          "changed_files": [
-            ".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md",
-            ".github/workflows/ci.yml",
-            ".moai/specs/SPEC-CI-0001/plan.md",
-            ".moai/specs/SPEC-CI-0001/progress.md",
-            ".moai/specs/SPEC-CI-0001/risks.md",
-            ".moai/specs/SPEC-CI-0001/scenarios.md",
-            ".moai/specs/SPEC-CI-0001/spec.md",
-            "AGENTS.md",
-            "README.md",
-            "docs/CICD.md",
-            "docs/DELIVERY_PIPELINE.md",
-            "docs/SPEC_CICD_WORKFLOW.md",
-            "docs/dashboard/index.html",
-            "docs/dashboard/status.json",
-            "src/harness_engine/artifacts.py",
-            "tests/test_cicd_workflow.py"
           ]
         }
       ]
@@ -1695,6 +1683,20 @@
       "issue_url": null,
       "commits": [
         {
+          "short_sha": "e42b372",
+          "sha": "e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+          "author": "txc-link",
+          "committed_at": "2026-05-17T14:09:22+08:00",
+          "subject": "Add interactive execution dashboard",
+          "url": "https://github.com/txc-link/test-harness/commit/e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+          "changed_files": [
+            "docs/dashboard/index.html",
+            "docs/dashboard/status.json",
+            "src/harness_engine/dashboard.py",
+            "tests/test_dashboard.py"
+          ]
+        },
+        {
           "short_sha": "e4871fb",
           "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
           "author": "txc-link",
@@ -1764,32 +1766,6 @@
             "templates/trellis_task.md",
             "tests/test_harness_artifacts.py",
             "tests/test_unified_harness_workflow.py"
-          ]
-        },
-        {
-          "short_sha": "8ae4691",
-          "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100",
-          "author": "txc-link",
-          "committed_at": "2026-05-17T09:19:33+08:00",
-          "subject": "Add SPEC driven CI CD workflow",
-          "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100",
-          "changed_files": [
-            ".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md",
-            ".github/workflows/ci.yml",
-            ".moai/specs/SPEC-CI-0001/plan.md",
-            ".moai/specs/SPEC-CI-0001/progress.md",
-            ".moai/specs/SPEC-CI-0001/risks.md",
-            ".moai/specs/SPEC-CI-0001/scenarios.md",
-            ".moai/specs/SPEC-CI-0001/spec.md",
-            "AGENTS.md",
-            "README.md",
-            "docs/CICD.md",
-            "docs/DELIVERY_PIPELINE.md",
-            "docs/SPEC_CICD_WORKFLOW.md",
-            "docs/dashboard/index.html",
-            "docs/dashboard/status.json",
-            "src/harness_engine/artifacts.py",
-            "tests/test_cicd_workflow.py"
           ]
         }
       ]
@@ -2203,6 +2179,20 @@
       "issue_url": null,
       "commits": [
         {
+          "short_sha": "e42b372",
+          "sha": "e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+          "author": "txc-link",
+          "committed_at": "2026-05-17T14:09:22+08:00",
+          "subject": "Add interactive execution dashboard",
+          "url": "https://github.com/txc-link/test-harness/commit/e42b37272121a5b5fa0db1b77c8d87e9194ea075",
+          "changed_files": [
+            "docs/dashboard/index.html",
+            "docs/dashboard/status.json",
+            "src/harness_engine/dashboard.py",
+            "tests/test_dashboard.py"
+          ]
+        },
+        {
           "short_sha": "e4871fb",
           "sha": "e4871fbb458dc0f12569e94e6e742e70dbb139ad",
           "author": "txc-link",
@@ -2272,32 +2262,6 @@
             "templates/trellis_task.md",
             "tests/test_harness_artifacts.py",
             "tests/test_unified_harness_workflow.py"
-          ]
-        },
-        {
-          "short_sha": "8ae4691",
-          "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100",
-          "author": "txc-link",
-          "committed_at": "2026-05-17T09:19:33+08:00",
-          "subject": "Add SPEC driven CI CD workflow",
-          "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100",
-          "changed_files": [
-            ".agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md",
-            ".github/workflows/ci.yml",
-            ".moai/specs/SPEC-CI-0001/plan.md",
-            ".moai/specs/SPEC-CI-0001/progress.md",
-            ".moai/specs/SPEC-CI-0001/risks.md",
-            ".moai/specs/SPEC-CI-0001/scenarios.md",
-            ".moai/specs/SPEC-CI-0001/spec.md",
-            "AGENTS.md",
-            "README.md",
-            "docs/CICD.md",
-            "docs/DELIVERY_PIPELINE.md",
-            "docs/SPEC_CICD_WORKFLOW.md",
-            "docs/dashboard/index.html",
-            "docs/dashboard/status.json",
-            "src/harness_engine/artifacts.py",
-            "tests/test_cicd_workflow.py"
           ]
         }
       ]

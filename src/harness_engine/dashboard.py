@@ -333,20 +333,74 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
   <style>
     :root {{
       color-scheme: light;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-muted: #f8fafc;
+      --line: #d8dde6;
+      --line-soft: #e4e7ec;
+      --text: #20242a;
+      --text-muted: #667085;
+      --text-soft: #475467;
+      --primary: #175cd3;
+      --primary-strong: #1d4ed8;
+      --focus: #2563eb;
+      --radius: 8px;
       font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
-      background: #f6f7f9;
-      color: #20242a;
+      background: var(--bg);
+      color: var(--text);
     }}
-    body {{ margin: 0; }}
+    * {{ box-sizing: border-box; }}
+    body {{ margin: 0; background: var(--bg); }}
+    a {{ color: var(--primary); text-underline-offset: 3px; }}
+    a:hover {{ color: var(--primary-strong); }}
+    :focus-visible {{
+      outline: 3px solid rgba(37, 99, 235, 0.34);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }}
+    .skip-link {{
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      z-index: 10;
+      background: var(--text);
+      color: #ffffff;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+    }}
+    .skip-link:focus {{ top: 12px; }}
     header {{
       padding: 24px 32px 16px;
-      border-bottom: 1px solid #d8dde6;
-      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
     }}
     h1 {{ margin: 0 0 8px; font-size: 28px; }}
     h2 {{ margin-top: 0; font-size: 18px; }}
-    .time {{ color: #667085; font-size: 14px; }}
-    main {{ padding: 24px 32px 40px; }}
+    .time {{ color: var(--text-muted); font-size: 14px; }}
+    .quick-nav {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }}
+    .quick-nav a {{
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      background: var(--surface-muted);
+      color: var(--text-soft);
+      font-size: 13px;
+      text-decoration: none;
+    }}
+    .quick-nav a:hover {{ border-color: var(--primary); color: var(--primary); }}
+    main {{
+      max-width: 1680px;
+      margin: 0 auto;
+      padding: 24px 32px 40px;
+    }}
     .metrics {{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -354,12 +408,12 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       margin-bottom: 20px;
     }}
     .metric, .panel, .trellis-shell {{
-      background: #ffffff;
-      border: 1px solid #d8dde6;
-      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
     }}
     .metric {{ padding: 14px; }}
-    .metric span {{ display: block; color: #667085; font-size: 13px; }}
+    .metric span {{ display: block; color: var(--text-muted); font-size: 13px; }}
     .metric strong {{ display: block; margin-top: 6px; font-size: 26px; }}
     .trellis-shell {{ padding: 18px; margin-bottom: 20px; }}
     .section-title {{
@@ -520,11 +574,14 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       margin-bottom: 14px;
     }}
     .execution-toolbar input, .execution-toolbar select {{
-      border: 1px solid #d8dde6;
-      border-radius: 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 10px 12px;
       font: inherit;
       min-width: 0;
+      min-height: 44px;
+      background: var(--surface);
+      color: var(--text);
     }}
     .execution-grid {{
       display: grid;
@@ -541,21 +598,24 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
     }}
     .execution-task {{
       text-align: left;
-      border: 1px solid #d8dde6;
-      border-radius: 8px;
-      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-muted);
       padding: 10px;
       cursor: pointer;
       font: inherit;
+      min-height: 44px;
+      transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
     }}
+    .execution-task:hover {{ border-color: var(--primary); background: #eff6ff; }}
     .execution-task.active {{
-      border-color: #2563eb;
+      border-color: var(--focus);
       background: #eff6ff;
       box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
     }}
     .execution-task strong, .execution-task span, .execution-task em {{ display: block; }}
     .execution-task strong {{ font-size: 13px; }}
-    .execution-task span {{ color: #667085; font-size: 12px; margin-top: 4px; }}
+    .execution-task span {{ color: var(--text-muted); font-size: 12px; margin-top: 4px; }}
     .execution-task em {{
       color: #344054;
       font-size: 12px;
@@ -649,21 +709,32 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
     @media (max-width: 980px) {{
       .layout {{ grid-template-columns: 1fr; }}
       .board {{ grid-template-columns: repeat(5, 220px); }}
+      .execution-grid {{ grid-template-columns: 1fr; }}
     }}
     @media (max-width: 620px) {{
       main, header {{ padding-left: 18px; padding-right: 18px; }}
       .trellis-grid, .phase-flow {{ grid-template-columns: 1fr; }}
+      .execution-toolbar {{ grid-template-columns: 1fr; }}
+      .quick-nav a {{ min-height: 44px; }}
     }}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到主内容</a>
   <header>
     <h1>投资 Agent Harness 面板</h1>
     <div class="time">生成时间：{dashboard.generated_at.isoformat()}</div>
+    <nav class="quick-nav" aria-label="面板快捷导航">
+      <a href="#trellis">Trellis 控制台</a>
+      <a href="#execution">执行面板</a>
+      <a href="#task-tree">任务树</a>
+      <a href="#trace">代码追踪</a>
+      <a href="#progress">进度与提交</a>
+    </nav>
   </header>
-  <main>
+  <main id="main">
     <section class="metrics">{summary_cards}</section>
-    <section class="trellis-shell">
+    <section class="trellis-shell" id="trellis">
       <div class="section-title">
         <h2>Trellis 控制台</h2>
         <p>从共享规格到任务、工作区、日志回写，展示 Harness 的完整执行轨迹。</p>
@@ -676,7 +747,7 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       </div>
       <div class="trellis-grid">{trellis_lanes}</div>
     </section>
-    <section class="execution-shell" data-execution-panel>
+    <section class="execution-shell" id="execution" data-execution-panel>
       <div class="section-title">
         <h2>可交互执行面板</h2>
         <p>选择任务后查看执行上下文、门禁、交付物、CI 和代码变更证据。</p>
@@ -722,21 +793,21 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         {EXECUTION_PANEL_SCRIPT}
       </script>
     </section>
-    <section class="task-tree-shell">
+    <section class="task-tree-shell" id="task-tree">
       <div class="section-title">
         <h2>任务树视图</h2>
         <p>按 Trellis 的任务拆解方式展示需求、任务、门禁和交付物的父子关系。</p>
       </div>
       <div class="task-tree">{task_tree_html}</div>
     </section>
-    <section class="trace-shell">
+    <section class="trace-shell" id="trace">
       <div class="section-title">
         <h2>任务到代码追踪链</h2>
         <p>把任务、分支、提交、变更文件和 CI 入口串成一条可审计链路。</p>
       </div>
       <div class="trace-grid">{code_trace_html}</div>
     </section>
-    <section class="layout">
+    <section class="layout" id="progress">
       <aside class="panel">
         <h2>需求进度</h2>
         <table>
@@ -1257,6 +1328,7 @@ def _render_execution_task_button(trace: CodeTraceLink) -> str:
       type="button"
       data-task-id="{html.escape(trace.task_id)}"
       data-status="{html.escape(trace.status)}"
+      aria-label="查看任务 {html.escape(trace.task_id)} 的执行详情"
     >
       <strong>{html.escape(trace.task_id)}</strong>
       <span>{html.escape(trace.status)} · {commit_count} 个提交</span>

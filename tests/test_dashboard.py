@@ -52,6 +52,11 @@ def test_render_dashboard_html_contains_core_board_sections() -> None:
     assert "executionSearch" in page_html
     assert "executionStatus" in page_html
     assert "selectTask" in page_html
+    assert "skip-link" in page_html
+    assert "面板快捷导航" in page_html
+    assert "aria-label=\"查看任务" in page_html
+    assert ":focus-visible" in page_html
+    assert "min-height: 44px" in page_html
     assert "需求进度" in page_html
     assert "最近 GitHub 提交" in page_html
     assert "开发中" in page_html
