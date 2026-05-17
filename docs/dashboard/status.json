@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T00:51:46.098169Z",
+  "generated_at": "2026-05-17T01:02:22.732822Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -579,6 +579,64 @@
       "deliverables": [
         "docs/requirements/REQ-0005.yaml"
       ]
+    }
+  ],
+  "commits": [
+    {
+      "short_sha": "d405f48",
+      "sha": "d405f483e3965bd0cbdd395800c43d6e0f111823",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T08:53:35+08:00",
+      "subject": "Add harness dashboard visualization",
+      "url": "https://github.com/txc-link/test-harness/commit/d405f483e3965bd0cbdd395800c43d6e0f111823"
+    },
+    {
+      "short_sha": "68a4627",
+      "sha": "68a4627d3e63bc43dc1c851ee3376129c1a606ee",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T08:41:08+08:00",
+      "subject": "Add coding guidelines",
+      "url": "https://github.com/txc-link/test-harness/commit/68a4627d3e63bc43dc1c851ee3376129c1a606ee"
+    },
+    {
+      "short_sha": "d10daa1",
+      "sha": "d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T08:21:17+08:00",
+      "subject": "Localize project documentation to Chinese",
+      "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1"
+    },
+    {
+      "short_sha": "5d99c06",
+      "sha": "5d99c06da8551100ae233736fc4d4e7d52460492",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T00:21:49+08:00",
+      "subject": "Add strongest investment agent requirements",
+      "url": "https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492"
+    },
+    {
+      "short_sha": "f2dd137",
+      "sha": "f2dd137efda559871492435e6bf9bbe6878e7dad",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T00:08:59+08:00",
+      "subject": "Merge remote-tracking branch 'origin/main'",
+      "url": "https://github.com/txc-link/test-harness/commit/f2dd137efda559871492435e6bf9bbe6878e7dad"
+    },
+    {
+      "short_sha": "d91d29f",
+      "sha": "d91d29f652f625803279d21820116888e6d40804",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T00:02:54+08:00",
+      "subject": "Initialize investment agent harness workflow",
+      "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804"
+    },
+    {
+      "short_sha": "a26c187",
+      "sha": "a26c18777d9718f4c198df23add56a3102798e0f",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T00:01:25+08:00",
+      "subject": "Initial commit",
+      "url": "https://github.com/txc-link/test-harness/commit/a26c18777d9718f4c198df23add56a3102798e0f"
     }
   ]
 }

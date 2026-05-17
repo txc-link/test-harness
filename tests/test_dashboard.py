@@ -13,6 +13,10 @@ def test_collect_dashboard_reports_requirements_and_work_items() -> None:
 
     assert dashboard.summary["需求总数"] >= 1
     assert dashboard.summary["任务总数"] >= 1
+    assert dashboard.commits
+    assert dashboard.commits[0].url is None or dashboard.commits[0].url.startswith(
+        "https://github.com/"
+    )
     assert any(item.kind == "任务" for item in dashboard.work_items)
     assert any(item.status == "开发中" for item in dashboard.work_items)
     assert any(item.status == "测试完成" for item in dashboard.work_items)
@@ -23,6 +27,7 @@ def test_render_dashboard_html_contains_core_board_sections() -> None:
 
     assert "投资 Agent Harness 面板" in html
     assert "需求进度" in html
+    assert "最近 GitHub 提交" in html
     assert "开发中" in html
     assert "测试完成" in html
 

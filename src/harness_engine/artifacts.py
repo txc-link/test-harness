@@ -62,6 +62,8 @@ REQUIRED_DOCS = [
     "docs/SKILL_STACK.md",
     "docs/CODING_GUIDELINES.md",
     "docs/HARNESS_DASHBOARD_RESEARCH.md",
+    "docs/HARNESS_VISUALIZATION_GUIDE.md",
+    "docs/FIGMA_PROTOTYPE_WORKFLOW.md",
 ]
 
 

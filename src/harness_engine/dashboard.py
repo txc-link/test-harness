@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import html
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -39,11 +40,21 @@ class RequirementProgress(BaseModel):
     blocked_tickets: int
 
 
+class CommitRecord(BaseModel):
+    short_sha: str
+    sha: str
+    author: str
+    committed_at: str
+    subject: str
+    url: str | None = None
+
+
 class DashboardModel(BaseModel):
     generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     summary: dict[str, int]
     requirements: list[RequirementProgress]
     work_items: list[WorkItem]
+    commits: list[CommitRecord] = Field(default_factory=list)
 
 
 def collect_dashboard(root: Path) -> DashboardModel:
@@ -97,7 +108,12 @@ def collect_dashboard(root: Path) -> DashboardModel:
         "测试完成": sum(item.status == "测试完成" for item in work_items),
         "门禁受阻": sum(item.status == "门禁受阻" for item in work_items),
     }
-    return DashboardModel(summary=summary, requirements=progress, work_items=work_items)
+    return DashboardModel(
+        summary=summary,
+        requirements=progress,
+        work_items=work_items,
+        commits=_load_recent_commits(root),
+    )
 
 
 def write_dashboard(root: Path) -> tuple[Path, Path]:
@@ -125,6 +141,7 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         for name, value in dashboard.summary.items()
     )
     requirement_rows = "\n".join(_render_requirement_row(item) for item in dashboard.requirements)
+    commit_rows = "\n".join(_render_commit_row(item) for item in dashboard.commits)
     board_columns = "\n".join(
         f"""
         <section class="column">
@@ -222,6 +239,10 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       color: #2d6a35;
     }}
     .gate.fail {{ background: #fff2e8; color: #9a3412; }}
+    .commit-list {{ margin-top: 16px; }}
+    .commit-row {{ padding: 10px 0; border-bottom: 1px solid #edf0f5; }}
+    .commit-row a {{ color: #175cd3; font-weight: 600; text-decoration: none; }}
+    .commit-row div {{ margin-top: 4px; color: #475467; font-size: 12px; }}
     @media (max-width: 980px) {{
       .layout {{ grid-template-columns: 1fr; }}
       .board {{ grid-template-columns: repeat(5, 220px); }}
@@ -242,6 +263,10 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
           <thead><tr><th>需求</th><th>完成</th><th>开发中</th><th>受阻</th></tr></thead>
           <tbody>{requirement_rows}</tbody>
         </table>
+        <section class="commit-list">
+          <h2>最近 GitHub 提交</h2>
+          {commit_rows}
+        </section>
       </aside>
       <section class="board">{board_columns}</section>
     </section>
@@ -270,6 +295,65 @@ def _load_sprint_ticket_ids(root: Path) -> set[str]:
         data = load_model(path, SprintPlan)
         ticket_ids.update(data.tickets)
     return ticket_ids
+
+
+def _load_recent_commits(root: Path, limit: int = 8) -> list[CommitRecord]:
+    try:
+        output = subprocess.check_output(
+            [
+                "git",
+                "log",
+                f"--max-count={limit}",
+                "--date=iso-strict",
+                "--pretty=format:%h%x1f%H%x1f%an%x1f%ad%x1f%s",
+            ],
+            cwd=root,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return []
+
+    base_url = _github_commit_base_url(root)
+    commits: list[CommitRecord] = []
+    for line in output.splitlines():
+        parts = line.split("\x1f")
+        if len(parts) != 5:
+            continue
+        short_sha, sha, author, committed_at, subject = parts
+        commits.append(
+            CommitRecord(
+                short_sha=short_sha,
+                sha=sha,
+                author=author,
+                committed_at=committed_at,
+                subject=subject,
+                url=f"{base_url}/{sha}" if base_url else None,
+            )
+        )
+    return commits
+
+
+def _github_commit_base_url(root: Path) -> str | None:
+    try:
+        remote = subprocess.check_output(
+            ["git", "config", "--get", "remote.origin.url"],
+            cwd=root,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        ).strip()
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return None
+
+    if remote.startswith("git@github.com:"):
+        repo = remote.removeprefix("git@github.com:").removesuffix(".git")
+        return f"https://github.com/{repo}/commit"
+    if remote.startswith("https://github.com/"):
+        repo = remote.removeprefix("https://github.com/").removesuffix(".git")
+        return f"https://github.com/{repo}/commit"
+    return None
 
 
 def _ticket_to_work_item(
@@ -346,5 +430,20 @@ def _render_work_item_card(item: WorkItem) -> str:
       <h3>{html.escape(item.title)}</h3>
       <div class="meta">{html.escape(item.id)} · {html.escape(item.kind)} · 风险 {html.escape(item.risk_level)}</div>
       <div class="gates">{gate_html}</div>
+    </article>
+    """
+
+
+def _render_commit_row(commit: CommitRecord) -> str:
+    subject = html.escape(commit.subject)
+    short_sha = html.escape(commit.short_sha)
+    if commit.url:
+        sha_html = f'<a href="{html.escape(commit.url)}">{short_sha}</a>'
+    else:
+        sha_html = f"<strong>{short_sha}</strong>"
+    return f"""
+    <article class="commit-row">
+      {sha_html} {subject}
+      <div>{html.escape(commit.author)} · {html.escape(commit.committed_at)}</div>
     </article>
     """
