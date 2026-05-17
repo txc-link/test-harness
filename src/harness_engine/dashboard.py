@@ -385,6 +385,7 @@ def _ticket_to_work_item(
 def _gate_evidence(root: Path, requirement_id: str, gate: Gate) -> GateEvidence:
     evidence = {
         Gate.requirement_review: (root / "docs" / "requirements" / f"{requirement_id}.yaml").exists(),
+        Gate.prototype_review: any((root / "docs" / "prototypes").glob("*.md")),
         Gate.design_review: any((root / "docs" / "rfc").glob("*.md"))
         or any((root / "docs" / "adr").glob("*.md")),
         Gate.unit_tests: any((root / "tests").glob("test_*.py")),
@@ -397,6 +398,7 @@ def _gate_evidence(root: Path, requirement_id: str, gate: Gate) -> GateEvidence:
     }
     details = {
         Gate.requirement_review: f"docs/requirements/{requirement_id}.yaml",
+        Gate.prototype_review: "docs/prototypes/*.md",
         Gate.design_review: "docs/rfc 或 docs/adr",
         Gate.unit_tests: "tests/test_*.py",
         Gate.integration_tests: "tests/test_*.py",

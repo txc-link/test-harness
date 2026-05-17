@@ -17,6 +17,7 @@ TEMPLATES: dict[str, TemplateSpec] = {
     "rfc": TemplateSpec("rfc", "docs/rfc", "templates/rfc.md", "RFC"),
     "ticket": TemplateSpec("ticket", "docs/sprints", "templates/ticket.md", "TICKET"),
     "test-plan": TemplateSpec("test-plan", "docs/test-plans", "templates/test_plan.md", "TEST"),
+    "prototype": TemplateSpec("prototype", "docs/prototypes", "templates/prototype_review.md", "PROTO"),
     "evolution": TemplateSpec(
         "evolution", "docs/reviews", "templates/evolution_proposal.md", "EVOLVE"
     ),
@@ -34,6 +35,7 @@ REQUIRED_DIRECTORIES = [
     "docs/roadmap",
     "docs/sprints",
     "docs/test-plans",
+    "docs/prototypes",
     "docs/evals",
     "docs/releases",
     "docs/runbooks",

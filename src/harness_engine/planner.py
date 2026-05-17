@@ -49,6 +49,7 @@ def requirement_from_text(requirement_id: str, text: str) -> Requirement:
 def roadmap_from_requirement(req: Requirement) -> Roadmap:
     milestones = [
         "M1 Harness Foundation",
+        "M1.5 Interface Prototype Review",
         "M2 Investment Ledger Core",
         "M3 Profitability Evaluation",
         "M4 Skill Evolution Loop",
@@ -66,10 +67,20 @@ def roadmap_from_requirement(req: Requirement) -> Roadmap:
             deliverables=["CLI", "README", "tests"],
         ),
         Ticket(
+            id="T-0001A",
+            title="Review investment agent console prototype before implementation",
+            requirement_id=req.id,
+            milestone=milestones[1],
+            description="Create or review a Figma prototype for user-facing dashboards, alerts, analysis, review, and approval workflows before scheduling UI implementation.",
+            risk_level=RiskLevel.medium,
+            gates=[Gate.requirement_review, Gate.prototype_review, Gate.design_review],
+            deliverables=["Figma prototype link", "prototype review note", "revised requirement scope"],
+        ),
+        Ticket(
             id="T-0002",
             title="Define hypothesis, plan, event, result, and review ledgers",
             requirement_id=req.id,
-            milestone=milestones[1],
+            milestone=milestones[2],
             description="Specify the canonical investment ledger schemas for replayable decisions.",
             risk_level=RiskLevel.medium,
             gates=[Gate.requirement_review, Gate.design_review, Gate.unit_tests],
@@ -79,7 +90,7 @@ def roadmap_from_requirement(req: Requirement) -> Roadmap:
             id="T-0003",
             title="Build account and agent profitability attribution model",
             requirement_id=req.id,
-            milestone=milestones[2],
+            milestone=milestones[3],
             description="Separate market beta, strategy contribution, agent contribution, and user execution impact.",
             risk_level=RiskLevel.high,
             gates=[Gate.design_review, Gate.integration_tests, Gate.data_quality],
@@ -89,7 +100,7 @@ def roadmap_from_requirement(req: Requirement) -> Roadmap:
             id="T-0004",
             title="Implement versioned skill registry with promotion gates",
             requirement_id=req.id,
-            milestone=milestones[3],
+            milestone=milestones[4],
             description="Track candidate/backtested/shadow_live/active/retired skill lifecycle states.",
             risk_level=RiskLevel.high,
             gates=[
@@ -105,7 +116,7 @@ def roadmap_from_requirement(req: Requirement) -> Roadmap:
             id="T-0005",
             title="Create shadow portfolio evaluation loop",
             requirement_id=req.id,
-            milestone=milestones[4],
+            milestone=milestones[5],
             description="Compare actual account, agent-advised portfolio, strategy portfolio, and benchmark.",
             risk_level=RiskLevel.critical,
             gates=[

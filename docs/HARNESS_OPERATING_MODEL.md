@@ -10,6 +10,8 @@
   -> 调研发现
   -> PRD
   -> RFC（涉及架构或流程变化时）
+  -> Figma 原型确认（涉及界面和可视化交互时）
+  -> 需求回写（原型确认后）
   -> ADR（接受决策后）
   -> roadmap 拆解
   -> sprint 排期
@@ -29,6 +31,7 @@
 | --- | --- | --- |
 | 需求 | `docs/requirements/` | 描述用户问题、范围和验收标准 |
 | PRD | `docs/requirements/` | 描述产品行为和用户工作流 |
+| 原型评审 | `docs/prototypes/` | 保存 Figma 原型、人工确认和需求回写 |
 | RFC | `docs/rfc/` | 描述架构或工作流提案 |
 | ADR | `docs/adr/` | 记录已接受的架构或策略决策 |
 | Roadmap | `docs/roadmap/` | 拆解里程碑和工程任务 |
@@ -57,6 +60,8 @@ candidate -> backtested -> shadow_live -> approved -> active -> monitored -> ret
 ## 决策规则
 
 - 影响系统架构时，必须创建 RFC。
+- 影响界面、控制台、盯盘、告警、分析、复盘、审批队列或可视化交互时，必须先完成 Figma 原型确认。
+- 原型确认改变用户路径、信息架构或验收标准时，必须先回写需求和 PRD/RFC，再进入 roadmap 和 sprint。
 - RFC 被接受后，必须记录 ADR。
 - 影响账户风险时，必须创建或更新评估规格。
 - 影响实盘交易时，必须要求人工审批并提供回滚标准。

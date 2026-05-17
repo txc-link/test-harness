@@ -12,11 +12,15 @@ def test_requirement_to_roadmap_contains_gated_evolution_ticket() -> None:
 
     titles = {ticket.title for ticket in roadmap.tickets}
     assert "Implement versioned skill registry with promotion gates" in titles
+    assert "Review investment agent console prototype before implementation" in titles
 
     evolution_ticket = next(ticket for ticket in roadmap.tickets if "skill registry" in ticket.title)
     assert "backtest" in evolution_ticket.gates
     assert "shadow_live" in evolution_ticket.gates
     assert "human_approval" in evolution_ticket.gates
+
+    prototype_ticket = next(ticket for ticket in roadmap.tickets if "prototype" in ticket.title)
+    assert "prototype_review" in prototype_ticket.gates
 
 
 def test_sprint_uses_first_foundation_tickets() -> None:
@@ -24,7 +28,7 @@ def test_sprint_uses_first_foundation_tickets() -> None:
     roadmap = roadmap_from_requirement(req)
     sprint = sprint_from_roadmap(roadmap)
 
-    assert sprint.tickets == ["T-0001", "T-0002"]
+    assert sprint.tickets == ["T-0001", "T-0001A"]
     assert sprint.exit_criteria
 
 

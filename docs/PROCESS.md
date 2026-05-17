@@ -39,7 +39,36 @@ python -m harness_engine.cli intake "需求文本"
 - `templates/rfc.md` 描述架构或工作流提案。
 - `docs/adr/` 记录已接受决策。
 
-## 4. 拆解
+## 4. Figma 原型确认
+
+凡是涉及界面、控制台、盯盘、告警、分析、复盘、回测、审批队列或可视化交互的需求，必须在排期开发前完成原型确认。
+
+标准顺序：
+
+```text
+需求 / PRD
+  -> Figma 原型
+  -> 人工确认
+  -> 需求回写
+  -> roadmap 拆解
+  -> sprint 排期
+  -> 开发实现
+```
+
+原型确认必须记录在 `docs/prototypes/`，并说明：
+
+- Figma 原型链接或截图。
+- 人工确认结论。
+- 需求、范围或交互路径的调整。
+- 是否允许进入排期开发。
+
+命令：
+
+```powershell
+python -m harness_engine.cli new prototype "投资 Agent 控制台原型评审"
+```
+
+## 5. 拆解
 
 每个已批准需求都要拆解为：
 
@@ -49,13 +78,15 @@ python -m harness_engine.cli intake "需求文本"
 - 必需门禁。
 - 交付物。
 
+界面类任务必须包含 `prototype_review` 门禁。原型确认导致需求变化时，必须先更新需求和 PRD/RFC，再生成或调整路线图。
+
 命令：
 
 ```powershell
 python -m harness_engine.cli plan docs\requirements\REQ-0001.yaml
 ```
 
-## 5. 排期
+## 6. 排期
 
 Sprint 计划必须包含：
 
@@ -66,11 +97,12 @@ Sprint 计划必须包含：
 
 Sprint 产物保存在 `docs/sprints/`。
 
-## 6. 开发门禁
+## 7. 开发门禁
 
 默认门禁：
 
 - requirement review。
+- prototype review。
 - design review。
 - unit tests。
 - integration tests。
@@ -80,9 +112,9 @@ Sprint 产物保存在 `docs/sprints/`。
 - human approval。
 - rollback plan。
 
-投资功能按风险选择门禁。纯 UI 或文档变化不需要 backtest；skill 晋升、信号逻辑、组合逻辑和交易规则必须需要。
+投资功能按风险选择门禁。纯 UI 或文档变化不需要 backtest；但界面类需求必须有 prototype review。skill 晋升、信号逻辑、组合逻辑和交易规则必须需要 backtest。
 
-## 7. CI/CD
+## 8. CI/CD
 
 当前 CI：
 
@@ -94,7 +126,7 @@ Sprint 产物保存在 `docs/sprints/`。
 
 在真实部署目标出现前，CD 只发布文档和规划产物。
 
-## 8. 发布
+## 9. 发布
 
 使用 `templates/release_checklist.md`。发布需要：
 
@@ -104,7 +136,7 @@ Sprint 产物保存在 `docs/sprints/`。
 - 监控计划。
 - 风险评审。
 
-## 9. 进化
+## 10. 进化
 
 进化工作必须遵循：
 

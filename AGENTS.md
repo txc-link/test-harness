@@ -18,11 +18,13 @@
 1. 先分类：需求、RFC、ADR、实现、测试、发布、事故或进化提案。
 2. 将新的产品意图记录为 `docs/requirements/` 下的结构化需求。
 3. 面向用户行为创建 PRD；涉及架构或工作流变更时创建 RFC。
-4. 已接受的架构、安全或进化策略决策必须记录为 ADR。
-5. 将批准范围拆解为 `docs/roadmap/` 下的里程碑和带门禁的任务。
-6. 将近期工作放入 `docs/sprints/` 下的 sprint 计划。
-7. 在声明完成前，必须定义测试、评估规格或评审门禁。
-8. 完成前运行本地验证：
+4. 涉及界面、控制台、盯盘、告警、分析、复盘、审批队列或可视化交互时，必须先生成或评审 Figma 原型，并在 `docs/prototypes/` 记录人工确认结论。
+5. 原型确认后，必须把确认结果回写到需求、PRD/RFC、路线图和 sprint 排期；不允许在原型未确认时直接进入大规模 UI 开发。
+6. 已接受的架构、安全或进化策略决策必须记录为 ADR。
+7. 将批准范围拆解为 `docs/roadmap/` 下的里程碑和带门禁的任务。
+8. 将近期工作放入 `docs/sprints/` 下的 sprint 计划。
+9. 在声明完成前，必须定义测试、评估规格或评审门禁。
+10. 完成前运行本地验证：
 
 ```powershell
 & "C:\Users\DELL\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m harness_engine.cli validate
@@ -35,6 +37,7 @@
 - `Discovery`：原始想法、参考项目分析、开放问题。
 - `Requirement`：结构化问题、目标用户、范围、非目标和验收标准。
 - `PRD/RFC/ADR`：产品行为、技术提案和已接受决策。
+- `Prototype`：界面类需求的 Figma 原型、人工确认和需求回写。
 - `Plan`：路线图、架构决策、里程碑、风险和门禁矩阵。
 - `Sprint`：任务选择、退出标准、负责人和预期测试。
 - `Build`：带测试和文档的实现。
@@ -49,6 +52,7 @@
 - `docs/HARNESS_OPERATING_MODEL.md`
 - `docs/QUALITY_GATES.md`
 - `docs/DELIVERY_PIPELINE.md`
+- `docs/FIGMA_PROTOTYPE_WORKFLOW.md`
 - `docs/RISK_CONTROL.md`
 - `docs/CODING_GUIDELINES.md`
 

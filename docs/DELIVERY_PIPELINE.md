@@ -6,6 +6,12 @@
 bootstrap -> 校验 Harness 产物 -> lint -> 测试 -> 包检查
 ```
 
+界面类需求在进入本地流水线前，还必须完成：
+
+```text
+Figma 原型 -> 人工确认 -> 需求回写 -> 排期开发 -> 浏览器验证
+```
+
 命令：
 
 ```powershell
@@ -16,6 +22,7 @@ bootstrap -> 校验 Harness 产物 -> lint -> 测试 -> 包检查
 
 ```text
 schema 和产物校验
+  -> 必要时校验 prototype review 证据
   -> lint
   -> 单元测试
   -> 必要时运行集成测试

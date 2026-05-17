@@ -15,6 +15,7 @@ class RiskLevel(str, Enum):
 
 class Gate(str, Enum):
     requirement_review = "requirement_review"
+    prototype_review = "prototype_review"
     design_review = "design_review"
     unit_tests = "unit_tests"
     integration_tests = "integration_tests"

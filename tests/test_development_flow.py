@@ -31,7 +31,7 @@ def test_development_flow_runs_requirement_to_test_plan(tmp_path: Path) -> None:
     assert requirement.title == "Harness Status Command"
     assert roadmap.requirement_id == requirement.id
     assert sprint.id == "SPRINT-0001"
-    assert sprint.tickets == ["T-0001", "T-0002"]
+    assert sprint.tickets == ["T-0001", "T-0001A"]
 
     report = result.report.read_text(encoding="utf-8")
     assert "Development Flow Report: Harness Status Command" in report

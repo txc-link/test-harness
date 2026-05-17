@@ -27,6 +27,7 @@ prd
 rfc
 ticket
 test-plan
+prototype
 evolution
 release
 postmortem

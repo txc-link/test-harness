@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T01:02:22.732822Z",
+  "generated_at": "2026-05-17T01:08:36.845984Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -582,6 +582,14 @@
     }
   ],
   "commits": [
+    {
+      "short_sha": "fec2817",
+      "sha": "fec28177e7567de0a41aefeb906bd4712308af33",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T09:03:38+08:00",
+      "subject": "Add GitHub commits and Figma prototype workflow",
+      "url": "https://github.com/txc-link/test-harness/commit/fec28177e7567de0a41aefeb906bd4712308af33"
+    },
     {
       "short_sha": "d405f48",
       "sha": "d405f483e3965bd0cbdd395800c43d6e0f111823",
