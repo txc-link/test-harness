@@ -56,6 +56,32 @@ class TrellisArtifact(BaseModel):
     path: str
 
 
+class TaskTreeGate(BaseModel):
+    name: str
+    passed: bool
+    detail: str
+
+
+class TaskTreeTicketNode(BaseModel):
+    id: str
+    title: str
+    status: str
+    risk_level: str
+    milestone: str | None = None
+    gates: list[TaskTreeGate] = Field(default_factory=list)
+    deliverables: list[str] = Field(default_factory=list)
+
+
+class TaskTreeRequirementNode(BaseModel):
+    id: str
+    title: str
+    status: str
+    source_path: str
+    total_tickets: int
+    completed_tickets: int
+    tickets: list[TaskTreeTicketNode] = Field(default_factory=list)
+
+
 class DashboardModel(BaseModel):
     generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     summary: dict[str, int]
@@ -64,6 +90,7 @@ class DashboardModel(BaseModel):
     commits: list[CommitRecord] = Field(default_factory=list)
     trellis_artifacts: list[TrellisArtifact] = Field(default_factory=list)
     trellis_summary: dict[str, int] = Field(default_factory=dict)
+    task_tree: list[TaskTreeRequirementNode] = Field(default_factory=list)
 
 
 def collect_dashboard(root: Path) -> DashboardModel:
@@ -74,6 +101,7 @@ def collect_dashboard(root: Path) -> DashboardModel:
 
     work_items: list[WorkItem] = []
     progress: list[RequirementProgress] = []
+    task_tree: list[TaskTreeRequirementNode] = []
 
     for requirement in requirements:
         roadmap = roadmaps.get(requirement.id)
@@ -108,6 +136,13 @@ def collect_dashboard(root: Path) -> DashboardModel:
                 blocked_tickets=sum(item.status == "门禁受阻" for item in ticket_items),
             )
         )
+        task_tree.append(
+            _build_task_tree_requirement(
+                requirement=requirement,
+                status=requirement_status,
+                ticket_items=ticket_items,
+            )
+        )
 
     summary = {
         "需求总数": len(requirements),
@@ -125,6 +160,7 @@ def collect_dashboard(root: Path) -> DashboardModel:
         commits=_load_recent_commits(root),
         trellis_artifacts=trellis_artifacts,
         trellis_summary=_summarize_trellis(trellis_artifacts),
+        task_tree=task_tree,
     )
 
 
@@ -167,6 +203,7 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         _render_trellis_lane(kind, dashboard.trellis_artifacts)
         for kind in ["共享规格", "任务中心", "工作区", "工作日志"]
     )
+    task_tree_html = "\n".join(_render_task_tree_requirement(node) for node in dashboard.task_tree)
 
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -256,6 +293,54 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
     }}
     .trellis-item strong {{ display: block; font-size: 13px; line-height: 1.35; }}
     .trellis-item span {{ display: block; margin-top: 6px; color: #667085; font-size: 11px; }}
+    .task-tree-shell {{
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }}
+    .task-tree {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+    }}
+    .tree-node {{
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 12px;
+    }}
+    .tree-node summary {{
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 1.4;
+    }}
+    .tree-node summary span {{
+      color: #667085;
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: 6px;
+    }}
+    .tree-children {{
+      margin-top: 10px;
+      padding-left: 12px;
+      border-left: 2px solid #d8dde6;
+    }}
+    .ticket-node {{
+      background: #ffffff;
+      border: 1px solid #e4e7ec;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }}
+    .ticket-node summary {{ font-size: 13px; font-weight: 700; }}
+    .deliverables {{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: #475467;
+      font-size: 12px;
+    }}
     .layout {{
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
@@ -339,6 +424,13 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       </div>
       <div class="trellis-grid">{trellis_lanes}</div>
     </section>
+    <section class="task-tree-shell">
+      <div class="section-title">
+        <h2>任务树视图</h2>
+        <p>按 Trellis 的任务拆解方式展示需求、任务、门禁和交付物的父子关系。</p>
+      </div>
+      <div class="task-tree">{task_tree_html}</div>
+    </section>
     <section class="layout">
       <aside class="panel">
         <h2>需求进度</h2>
@@ -407,6 +499,35 @@ def _summarize_trellis(artifacts: list[TrellisArtifact]) -> dict[str, int]:
         kind: sum(artifact.kind == kind for artifact in artifacts)
         for kind in ["共享规格", "任务中心", "工作区", "工作日志"]
     }
+
+
+def _build_task_tree_requirement(
+    requirement: Requirement, status: str, ticket_items: list[WorkItem]
+) -> TaskTreeRequirementNode:
+    tickets = [
+        TaskTreeTicketNode(
+            id=item.id,
+            title=item.title,
+            status=item.status,
+            risk_level=item.risk_level,
+            milestone=item.milestone,
+            gates=[
+                TaskTreeGate(name=gate.gate, passed=gate.passed, detail=gate.detail)
+                for gate in item.gates
+            ],
+            deliverables=item.deliverables,
+        )
+        for item in ticket_items
+    ]
+    return TaskTreeRequirementNode(
+        id=requirement.id,
+        title=requirement.title,
+        status=status,
+        source_path=f"docs/requirements/{requirement.id}.yaml",
+        total_tickets=len(tickets),
+        completed_tickets=sum(ticket.status == "测试完成" for ticket in tickets),
+        tickets=tickets,
+    )
 
 
 def _load_recent_commits(root: Path, limit: int = 8) -> list[CommitRecord]:
@@ -582,6 +703,46 @@ def _render_trellis_item(artifact: TrellisArtifact) -> str:
       <strong>{html.escape(artifact.title)}</strong>
       <span>{html.escape(artifact.phase)} · {html.escape(artifact.path)}</span>
     </article>
+    """
+
+
+def _render_task_tree_requirement(node: TaskTreeRequirementNode) -> str:
+    tickets = "".join(_render_task_tree_ticket(ticket) for ticket in node.tickets)
+    if not tickets:
+        tickets = '<div class="ticket-node">等待拆解任务</div>'
+    return f"""
+    <details class="tree-node" open>
+      <summary>
+        {html.escape(node.id)} · {html.escape(node.title)}
+        <span>{html.escape(node.status)} · {node.completed_tickets}/{node.total_tickets}</span>
+      </summary>
+      <div class="meta">{html.escape(node.source_path)}</div>
+      <div class="tree-children">{tickets}</div>
+    </details>
+    """
+
+
+def _render_task_tree_ticket(ticket: TaskTreeTicketNode) -> str:
+    gates = "".join(
+        f'<span class="gate{" fail" if not gate.passed else ""}" title="{html.escape(gate.detail)}">'
+        f"{html.escape(gate.name)}</span>"
+        for gate in ticket.gates
+    )
+    deliverables = "".join(
+        f"<li>{html.escape(deliverable)}</li>" for deliverable in ticket.deliverables
+    )
+    if deliverables:
+        deliverables = f'<ul class="deliverables">{deliverables}</ul>'
+    return f"""
+    <details class="ticket-node">
+      <summary>
+        {html.escape(ticket.title)}
+        <span>{html.escape(ticket.status)} · 风险 {html.escape(ticket.risk_level)}</span>
+      </summary>
+      <div class="meta">{html.escape(ticket.id)} · {html.escape(ticket.milestone or "未分配里程碑")}</div>
+      <div class="gates">{gates}</div>
+      {deliverables}
+    </details>
     """
 
 

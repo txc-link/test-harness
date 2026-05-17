@@ -86,6 +86,54 @@
     }
     .trellis-item strong { display: block; font-size: 13px; line-height: 1.35; }
     .trellis-item span { display: block; margin-top: 6px; color: #667085; font-size: 11px; }
+    .task-tree-shell {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .task-tree {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .tree-node {
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 12px;
+    }
+    .tree-node summary {
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .tree-node summary span {
+      color: #667085;
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+    .tree-children {
+      margin-top: 10px;
+      padding-left: 12px;
+      border-left: 2px solid #d8dde6;
+    }
+    .ticket-node {
+      background: #ffffff;
+      border: 1px solid #e4e7ec;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .ticket-node summary { font-size: 13px; font-weight: 700; }
+    .deliverables {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: #475467;
+      font-size: 12px;
+    }
     .layout {
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
@@ -152,7 +200,7 @@
 <body>
   <header>
     <h1>投资 Agent Harness 面板</h1>
-    <div class="time">生成时间：2026-05-17T05:50:47.517051+00:00</div>
+    <div class="time">生成时间：2026-05-17T05:58:21.903771+00:00</div>
   </header>
   <main>
     <section class="metrics"><div class="metric"><span>需求总数</span><strong>4</strong></div>
@@ -243,6 +291,202 @@
     </section>
     </div>
     </section>
+    <section class="task-tree-shell">
+      <div class="section-title">
+        <h2>任务树视图</h2>
+        <p>按 Trellis 的任务拆解方式展示需求、任务、门禁和交付物的父子关系。</p>
+      </div>
+      <div class="task-tree">
+    <details class="tree-node" open>
+      <summary>
+        REQ-0001 · 可复盘自我进化投资 Agent
+        <span>已拆解 · 3/5</span>
+      </summary>
+      <div class="meta">docs/requirements/REQ-0001.yaml</div>
+      <div class="tree-children">
+    <details class="ticket-node">
+      <summary>
+        创建工程 Harness CLI 和产物目录
+        <span>测试完成 · 风险 low</span>
+      </summary>
+      <div class="meta">REQ-0001:T-0001 · M1 Harness 基础</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">unit_tests</span></div>
+      <ul class="deliverables"><li>CLI</li><li>README</li><li>tests</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        定义假设、计划、事件、结果和复盘 ledgers
+        <span>测试完成 · 风险 medium</span>
+      </summary>
+      <div class="meta">REQ-0001:T-0002 · M2 投资 Ledger 核心</div>
+      <div class="gates"><span class="gate" title="docs/rfc 或 docs/adr">design_review</span><span class="gate" title="tests/test_*.py">unit_tests</span></div>
+      <ul class="deliverables"><li>ledger schema</li><li>sample records</li><li>validation tests</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        构建账户和 Agent 盈利归因模型
+        <span>测试完成 · 风险 high</span>
+      </summary>
+      <div class="meta">REQ-0001:T-0003 · M3 盈利评估</div>
+      <div class="gates"><span class="gate" title="docs/rfc 或 docs/adr">design_review</span><span class="gate" title="tests/test_*.py">integration_tests</span></div>
+      <ul class="deliverables"><li>evaluation spec</li><li>metric definitions</li><li>fixture portfolio</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        实现带晋升门禁的版本化 skill registry
+        <span>开发中 · 风险 high</span>
+      </summary>
+      <div class="meta">REQ-0001:T-0004 · M4 Skill 进化闭环</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">unit_tests</span><span class="gate" title="docs/evals/*SKILL*.yaml">backtest</span><span class="gate fail" title="docs/reviews/*shadow*.md">shadow_live</span><span class="gate fail" title="docs/releases/*.md">human_approval</span></div>
+      <ul class="deliverables"><li>skill schema</li><li>promotion policy</li><li>rollback policy</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        创建 shadow portfolio 评估闭环
+        <span>门禁受阻 · 风险 critical</span>
+      </summary>
+      <div class="meta">REQ-0001:T-0005 · M5 Shadow 交易和晋升门禁</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">integration_tests</span><span class="gate fail" title="docs/reviews/*shadow*.md">shadow_live</span><span class="gate fail" title="docs/releases/*.md">human_approval</span></div>
+      <ul class="deliverables"><li>shadow portfolio spec</li><li>daily review job</li><li>promotion report</li></ul>
+    </details>
+    </div>
+    </details>
+    
+
+    <details class="tree-node" open>
+      <summary>
+        REQ-0002 · Harness 全流程验证
+        <span>已拆解 · 3/5</span>
+      </summary>
+      <div class="meta">docs/requirements/REQ-0002.yaml</div>
+      <div class="tree-children">
+    <details class="ticket-node">
+      <summary>
+        创建工程 Harness CLI 和产物目录
+        <span>测试完成 · 风险 low</span>
+      </summary>
+      <div class="meta">REQ-0002:T-0001 · M1 Harness 基础</div>
+      <div class="gates"><span class="gate" title="docs/requirements/REQ-0002.yaml">requirement_review</span><span class="gate" title="tests/test_*.py">unit_tests</span></div>
+      <ul class="deliverables"><li>CLI</li><li>README</li><li>tests</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        定义假设、计划、事件、结果和复盘 ledgers
+        <span>测试完成 · 风险 medium</span>
+      </summary>
+      <div class="meta">REQ-0002:T-0002 · M2 投资 Ledger 核心</div>
+      <div class="gates"><span class="gate" title="docs/requirements/REQ-0002.yaml">requirement_review</span><span class="gate" title="docs/rfc 或 docs/adr">design_review</span><span class="gate" title="tests/test_*.py">unit_tests</span></div>
+      <ul class="deliverables"><li>ledger schema</li><li>sample records</li><li>validation tests</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        构建账户和 Agent 盈利归因模型
+        <span>测试完成 · 风险 high</span>
+      </summary>
+      <div class="meta">REQ-0002:T-0003 · M3 盈利评估</div>
+      <div class="gates"><span class="gate" title="docs/rfc 或 docs/adr">design_review</span><span class="gate" title="tests/test_*.py">integration_tests</span><span class="gate" title="docs/evals/*.yaml">data_quality</span></div>
+      <ul class="deliverables"><li>evaluation spec</li><li>metric definitions</li><li>fixture portfolio</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        实现带晋升门禁的版本化 skill registry
+        <span>开发中 · 风险 high</span>
+      </summary>
+      <div class="meta">REQ-0002:T-0004 · M4 Skill 进化闭环</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">unit_tests</span><span class="gate" title="docs/evals/*SKILL*.yaml">backtest</span><span class="gate fail" title="docs/reviews/*shadow*.md">shadow_live</span><span class="gate fail" title="docs/releases/*.md">human_approval</span><span class="gate fail" title="docs/releases/*.md">rollback_plan</span></div>
+      <ul class="deliverables"><li>skill schema</li><li>promotion policy</li><li>rollback policy</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        创建 shadow portfolio 评估闭环
+        <span>门禁受阻 · 风险 critical</span>
+      </summary>
+      <div class="meta">REQ-0002:T-0005 · M5 Shadow 交易和晋升门禁</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">integration_tests</span><span class="gate" title="docs/evals/*.yaml">data_quality</span><span class="gate fail" title="docs/reviews/*shadow*.md">shadow_live</span><span class="gate fail" title="docs/releases/*.md">human_approval</span><span class="gate fail" title="docs/releases/*.md">rollback_plan</span></div>
+      <ul class="deliverables"><li>shadow portfolio spec</li><li>daily review job</li><li>promotion report</li></ul>
+    </details>
+    </div>
+    </details>
+    
+
+    <details class="tree-node" open>
+      <summary>
+        REQ-0004 · UTF-8 需求文档 Smoke Test
+        <span>已拆解 · 3/5</span>
+      </summary>
+      <div class="meta">docs/requirements/REQ-0004.yaml</div>
+      <div class="tree-children">
+    <details class="ticket-node">
+      <summary>
+        创建工程 Harness CLI 和产物目录
+        <span>测试完成 · 风险 low</span>
+      </summary>
+      <div class="meta">REQ-0004:T-0001 · M1 Harness 基础</div>
+      <div class="gates"><span class="gate" title="docs/requirements/REQ-0004.yaml">requirement_review</span><span class="gate" title="tests/test_*.py">unit_tests</span></div>
+      <ul class="deliverables"><li>CLI</li><li>README</li><li>tests</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        定义假设、计划、事件、结果和复盘 ledgers
+        <span>测试完成 · 风险 medium</span>
+      </summary>
+      <div class="meta">REQ-0004:T-0002 · M2 投资 Ledger 核心</div>
+      <div class="gates"><span class="gate" title="docs/requirements/REQ-0004.yaml">requirement_review</span><span class="gate" title="docs/rfc 或 docs/adr">design_review</span><span class="gate" title="tests/test_*.py">unit_tests</span></div>
+      <ul class="deliverables"><li>ledger schema</li><li>sample records</li><li>validation tests</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        构建账户和 Agent 盈利归因模型
+        <span>测试完成 · 风险 high</span>
+      </summary>
+      <div class="meta">REQ-0004:T-0003 · M3 盈利评估</div>
+      <div class="gates"><span class="gate" title="docs/rfc 或 docs/adr">design_review</span><span class="gate" title="tests/test_*.py">integration_tests</span><span class="gate" title="docs/evals/*.yaml">data_quality</span></div>
+      <ul class="deliverables"><li>evaluation spec</li><li>metric definitions</li><li>fixture portfolio</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        实现带晋升门禁的版本化 skill registry
+        <span>开发中 · 风险 high</span>
+      </summary>
+      <div class="meta">REQ-0004:T-0004 · M4 Skill 进化闭环</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">unit_tests</span><span class="gate" title="docs/evals/*SKILL*.yaml">backtest</span><span class="gate fail" title="docs/reviews/*shadow*.md">shadow_live</span><span class="gate fail" title="docs/releases/*.md">human_approval</span><span class="gate fail" title="docs/releases/*.md">rollback_plan</span></div>
+      <ul class="deliverables"><li>skill schema</li><li>promotion policy</li><li>rollback policy</li></ul>
+    </details>
+    
+    <details class="ticket-node">
+      <summary>
+        创建 shadow portfolio 评估闭环
+        <span>门禁受阻 · 风险 critical</span>
+      </summary>
+      <div class="meta">REQ-0004:T-0005 · M5 Shadow 交易和晋升门禁</div>
+      <div class="gates"><span class="gate" title="tests/test_*.py">integration_tests</span><span class="gate" title="docs/evals/*.yaml">data_quality</span><span class="gate fail" title="docs/reviews/*shadow*.md">shadow_live</span><span class="gate fail" title="docs/releases/*.md">human_approval</span><span class="gate fail" title="docs/releases/*.md">rollback_plan</span></div>
+      <ul class="deliverables"><li>shadow portfolio spec</li><li>daily review job</li><li>promotion report</li></ul>
+    </details>
+    </div>
+    </details>
+    
+
+    <details class="tree-node" open>
+      <summary>
+        REQ-0005 · 最强自我进化投资 Agent
+        <span>待拆解 · 0/0</span>
+      </summary>
+      <div class="meta">docs/requirements/REQ-0005.yaml</div>
+      <div class="tree-children"><div class="ticket-node">等待拆解任务</div></div>
+    </details>
+    </div>
+    </section>
     <section class="layout">
       <aside class="panel">
         <h2>需求进度</h2>
@@ -256,6 +500,12 @@
         <section class="commit-list">
           <h2>最近 GitHub 提交</h2>
           
+    <article class="commit-row">
+      <a href="https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b">4f0daa6</a> Add Trellis-style dashboard view
+      <div>txc-link · 2026-05-17T13:52:10+08:00</div>
+    </article>
+    
+
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
       <div>txc-link · 2026-05-17T13:44:25+08:00</div>
@@ -295,12 +545,6 @@
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
       <div>txc-link · 2026-05-17T08:21:17+08:00</div>
-    </article>
-    
-
-    <article class="commit-row">
-      <a href="https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492">5d99c06</a> Add strongest investment agent requirements
-      <div>txc-link · 2026-05-17T00:21:49+08:00</div>
     </article>
     
         </section>

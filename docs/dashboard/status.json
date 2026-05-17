@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T05:50:47.517051Z",
+  "generated_at": "2026-05-17T05:58:21.903771Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -583,6 +583,14 @@
   ],
   "commits": [
     {
+      "short_sha": "4f0daa6",
+      "sha": "4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T13:52:10+08:00",
+      "subject": "Add Trellis-style dashboard view",
+      "url": "https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b"
+    },
+    {
       "short_sha": "c89e9d9",
       "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44",
       "author": "txc-link",
@@ -637,14 +645,6 @@
       "committed_at": "2026-05-17T08:21:17+08:00",
       "subject": "Localize project documentation to Chinese",
       "url": "https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1"
-    },
-    {
-      "short_sha": "5d99c06",
-      "sha": "5d99c06da8551100ae233736fc4d4e7d52460492",
-      "author": "txc-link",
-      "committed_at": "2026-05-17T00:21:49+08:00",
-      "subject": "Add strongest investment agent requirements",
-      "url": "https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492"
     }
   ],
   "trellis_artifacts": [
@@ -684,5 +684,496 @@
     "任务中心": 1,
     "工作区": 1,
     "工作日志": 1
-  }
+  },
+  "task_tree": [
+    {
+      "id": "REQ-0001",
+      "title": "可复盘自我进化投资 Agent",
+      "status": "已拆解",
+      "source_path": "docs/requirements/REQ-0001.yaml",
+      "total_tickets": 5,
+      "completed_tickets": 3,
+      "tickets": [
+        {
+          "id": "REQ-0001:T-0001",
+          "title": "创建工程 Harness CLI 和产物目录",
+          "status": "测试完成",
+          "risk_level": "low",
+          "milestone": "M1 Harness 基础",
+          "gates": [
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "CLI",
+            "README",
+            "tests"
+          ]
+        },
+        {
+          "id": "REQ-0001:T-0002",
+          "title": "定义假设、计划、事件、结果和复盘 ledgers",
+          "status": "测试完成",
+          "risk_level": "medium",
+          "milestone": "M2 投资 Ledger 核心",
+          "gates": [
+            {
+              "name": "design_review",
+              "passed": true,
+              "detail": "docs/rfc 或 docs/adr"
+            },
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "ledger schema",
+            "sample records",
+            "validation tests"
+          ]
+        },
+        {
+          "id": "REQ-0001:T-0003",
+          "title": "构建账户和 Agent 盈利归因模型",
+          "status": "测试完成",
+          "risk_level": "high",
+          "milestone": "M3 盈利评估",
+          "gates": [
+            {
+              "name": "design_review",
+              "passed": true,
+              "detail": "docs/rfc 或 docs/adr"
+            },
+            {
+              "name": "integration_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "evaluation spec",
+            "metric definitions",
+            "fixture portfolio"
+          ]
+        },
+        {
+          "id": "REQ-0001:T-0004",
+          "title": "实现带晋升门禁的版本化 skill registry",
+          "status": "开发中",
+          "risk_level": "high",
+          "milestone": "M4 Skill 进化闭环",
+          "gates": [
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "backtest",
+              "passed": true,
+              "detail": "docs/evals/*SKILL*.yaml"
+            },
+            {
+              "name": "shadow_live",
+              "passed": false,
+              "detail": "docs/reviews/*shadow*.md"
+            },
+            {
+              "name": "human_approval",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            }
+          ],
+          "deliverables": [
+            "skill schema",
+            "promotion policy",
+            "rollback policy"
+          ]
+        },
+        {
+          "id": "REQ-0001:T-0005",
+          "title": "创建 shadow portfolio 评估闭环",
+          "status": "门禁受阻",
+          "risk_level": "critical",
+          "milestone": "M5 Shadow 交易和晋升门禁",
+          "gates": [
+            {
+              "name": "integration_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "shadow_live",
+              "passed": false,
+              "detail": "docs/reviews/*shadow*.md"
+            },
+            {
+              "name": "human_approval",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            }
+          ],
+          "deliverables": [
+            "shadow portfolio spec",
+            "daily review job",
+            "promotion report"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REQ-0002",
+      "title": "Harness 全流程验证",
+      "status": "已拆解",
+      "source_path": "docs/requirements/REQ-0002.yaml",
+      "total_tickets": 5,
+      "completed_tickets": 3,
+      "tickets": [
+        {
+          "id": "REQ-0002:T-0001",
+          "title": "创建工程 Harness CLI 和产物目录",
+          "status": "测试完成",
+          "risk_level": "low",
+          "milestone": "M1 Harness 基础",
+          "gates": [
+            {
+              "name": "requirement_review",
+              "passed": true,
+              "detail": "docs/requirements/REQ-0002.yaml"
+            },
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "CLI",
+            "README",
+            "tests"
+          ]
+        },
+        {
+          "id": "REQ-0002:T-0002",
+          "title": "定义假设、计划、事件、结果和复盘 ledgers",
+          "status": "测试完成",
+          "risk_level": "medium",
+          "milestone": "M2 投资 Ledger 核心",
+          "gates": [
+            {
+              "name": "requirement_review",
+              "passed": true,
+              "detail": "docs/requirements/REQ-0002.yaml"
+            },
+            {
+              "name": "design_review",
+              "passed": true,
+              "detail": "docs/rfc 或 docs/adr"
+            },
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "ledger schema",
+            "sample records",
+            "validation tests"
+          ]
+        },
+        {
+          "id": "REQ-0002:T-0003",
+          "title": "构建账户和 Agent 盈利归因模型",
+          "status": "测试完成",
+          "risk_level": "high",
+          "milestone": "M3 盈利评估",
+          "gates": [
+            {
+              "name": "design_review",
+              "passed": true,
+              "detail": "docs/rfc 或 docs/adr"
+            },
+            {
+              "name": "integration_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "data_quality",
+              "passed": true,
+              "detail": "docs/evals/*.yaml"
+            }
+          ],
+          "deliverables": [
+            "evaluation spec",
+            "metric definitions",
+            "fixture portfolio"
+          ]
+        },
+        {
+          "id": "REQ-0002:T-0004",
+          "title": "实现带晋升门禁的版本化 skill registry",
+          "status": "开发中",
+          "risk_level": "high",
+          "milestone": "M4 Skill 进化闭环",
+          "gates": [
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "backtest",
+              "passed": true,
+              "detail": "docs/evals/*SKILL*.yaml"
+            },
+            {
+              "name": "shadow_live",
+              "passed": false,
+              "detail": "docs/reviews/*shadow*.md"
+            },
+            {
+              "name": "human_approval",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            },
+            {
+              "name": "rollback_plan",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            }
+          ],
+          "deliverables": [
+            "skill schema",
+            "promotion policy",
+            "rollback policy"
+          ]
+        },
+        {
+          "id": "REQ-0002:T-0005",
+          "title": "创建 shadow portfolio 评估闭环",
+          "status": "门禁受阻",
+          "risk_level": "critical",
+          "milestone": "M5 Shadow 交易和晋升门禁",
+          "gates": [
+            {
+              "name": "integration_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "data_quality",
+              "passed": true,
+              "detail": "docs/evals/*.yaml"
+            },
+            {
+              "name": "shadow_live",
+              "passed": false,
+              "detail": "docs/reviews/*shadow*.md"
+            },
+            {
+              "name": "human_approval",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            },
+            {
+              "name": "rollback_plan",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            }
+          ],
+          "deliverables": [
+            "shadow portfolio spec",
+            "daily review job",
+            "promotion report"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REQ-0004",
+      "title": "UTF-8 需求文档 Smoke Test",
+      "status": "已拆解",
+      "source_path": "docs/requirements/REQ-0004.yaml",
+      "total_tickets": 5,
+      "completed_tickets": 3,
+      "tickets": [
+        {
+          "id": "REQ-0004:T-0001",
+          "title": "创建工程 Harness CLI 和产物目录",
+          "status": "测试完成",
+          "risk_level": "low",
+          "milestone": "M1 Harness 基础",
+          "gates": [
+            {
+              "name": "requirement_review",
+              "passed": true,
+              "detail": "docs/requirements/REQ-0004.yaml"
+            },
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "CLI",
+            "README",
+            "tests"
+          ]
+        },
+        {
+          "id": "REQ-0004:T-0002",
+          "title": "定义假设、计划、事件、结果和复盘 ledgers",
+          "status": "测试完成",
+          "risk_level": "medium",
+          "milestone": "M2 投资 Ledger 核心",
+          "gates": [
+            {
+              "name": "requirement_review",
+              "passed": true,
+              "detail": "docs/requirements/REQ-0004.yaml"
+            },
+            {
+              "name": "design_review",
+              "passed": true,
+              "detail": "docs/rfc 或 docs/adr"
+            },
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            }
+          ],
+          "deliverables": [
+            "ledger schema",
+            "sample records",
+            "validation tests"
+          ]
+        },
+        {
+          "id": "REQ-0004:T-0003",
+          "title": "构建账户和 Agent 盈利归因模型",
+          "status": "测试完成",
+          "risk_level": "high",
+          "milestone": "M3 盈利评估",
+          "gates": [
+            {
+              "name": "design_review",
+              "passed": true,
+              "detail": "docs/rfc 或 docs/adr"
+            },
+            {
+              "name": "integration_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "data_quality",
+              "passed": true,
+              "detail": "docs/evals/*.yaml"
+            }
+          ],
+          "deliverables": [
+            "evaluation spec",
+            "metric definitions",
+            "fixture portfolio"
+          ]
+        },
+        {
+          "id": "REQ-0004:T-0004",
+          "title": "实现带晋升门禁的版本化 skill registry",
+          "status": "开发中",
+          "risk_level": "high",
+          "milestone": "M4 Skill 进化闭环",
+          "gates": [
+            {
+              "name": "unit_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "backtest",
+              "passed": true,
+              "detail": "docs/evals/*SKILL*.yaml"
+            },
+            {
+              "name": "shadow_live",
+              "passed": false,
+              "detail": "docs/reviews/*shadow*.md"
+            },
+            {
+              "name": "human_approval",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            },
+            {
+              "name": "rollback_plan",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            }
+          ],
+          "deliverables": [
+            "skill schema",
+            "promotion policy",
+            "rollback policy"
+          ]
+        },
+        {
+          "id": "REQ-0004:T-0005",
+          "title": "创建 shadow portfolio 评估闭环",
+          "status": "门禁受阻",
+          "risk_level": "critical",
+          "milestone": "M5 Shadow 交易和晋升门禁",
+          "gates": [
+            {
+              "name": "integration_tests",
+              "passed": true,
+              "detail": "tests/test_*.py"
+            },
+            {
+              "name": "data_quality",
+              "passed": true,
+              "detail": "docs/evals/*.yaml"
+            },
+            {
+              "name": "shadow_live",
+              "passed": false,
+              "detail": "docs/reviews/*shadow*.md"
+            },
+            {
+              "name": "human_approval",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            },
+            {
+              "name": "rollback_plan",
+              "passed": false,
+              "detail": "docs/releases/*.md"
+            }
+          ],
+          "deliverables": [
+            "shadow portfolio spec",
+            "daily review job",
+            "promotion report"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REQ-0005",
+      "title": "最强自我进化投资 Agent",
+      "status": "待拆解",
+      "source_path": "docs/requirements/REQ-0005.yaml",
+      "total_tickets": 0,
+      "completed_tickets": 0,
+      "tickets": []
+    }
+  ]
 }

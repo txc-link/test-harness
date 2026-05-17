@@ -20,6 +20,9 @@ def test_collect_dashboard_reports_requirements_and_work_items() -> None:
     assert dashboard.trellis_summary["共享规格"] >= 1
     assert dashboard.trellis_summary["任务中心"] >= 1
     assert any(artifact.phase == "Plan" for artifact in dashboard.trellis_artifacts)
+    assert dashboard.task_tree
+    assert any(node.tickets for node in dashboard.task_tree)
+    assert any(ticket.gates for node in dashboard.task_tree for ticket in node.tickets)
     assert any(item.kind == "任务" for item in dashboard.work_items)
     assert any(item.status == "开发中" for item in dashboard.work_items)
     assert any(item.status == "测试完成" for item in dashboard.work_items)
@@ -35,6 +38,9 @@ def test_render_dashboard_html_contains_core_board_sections() -> None:
     assert "Verify" in page_html
     assert "Finish" in page_html
     assert ".trellis/spec" in page_html
+    assert "任务树视图" in page_html
+    assert "tree-node" in page_html
+    assert "ticket-node" in page_html
     assert "需求进度" in page_html
     assert "最近 GitHub 提交" in page_html
     assert "开发中" in page_html
