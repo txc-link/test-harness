@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T05:43:24.526655Z",
+  "generated_at": "2026-05-17T05:50:47.517051Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -583,6 +583,14 @@
   ],
   "commits": [
     {
+      "short_sha": "c89e9d9",
+      "sha": "c89e9d922088dd00eb2e75fb87e5be2535dbcb44",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T13:44:25+08:00",
+      "subject": "Add Trellis-inspired unified harness workflow",
+      "url": "https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44"
+    },
+    {
       "short_sha": "8ae4691",
       "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100",
       "author": "txc-link",
@@ -637,14 +645,44 @@
       "committed_at": "2026-05-17T00:21:49+08:00",
       "subject": "Add strongest investment agent requirements",
       "url": "https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492"
+    }
+  ],
+  "trellis_artifacts": [
+    {
+      "kind": "共享规格",
+      "phase": "Plan",
+      "title": "投资 Agent Harness 共享规格",
+      "path": ".trellis/spec/investment-agent-harness.md"
     },
     {
-      "short_sha": "f2dd137",
-      "sha": "f2dd137efda559871492435e6bf9bbe6878e7dad",
-      "author": "txc-link",
-      "committed_at": "2026-05-17T00:08:59+08:00",
-      "subject": "Merge remote-tracking branch 'origin/main'",
-      "url": "https://github.com/txc-link/test-harness/commit/f2dd137efda559871492435e6bf9bbe6878e7dad"
+      "kind": "共享规格",
+      "phase": "Plan",
+      "title": "Trellis 共享规格",
+      "path": ".trellis/spec/README.md"
+    },
+    {
+      "kind": "任务中心",
+      "phase": "Implement",
+      "title": "Trellis 任务中心",
+      "path": ".trellis/tasks/README.md"
+    },
+    {
+      "kind": "工作区",
+      "phase": "Verify",
+      "title": "Trellis 工作区",
+      "path": ".trellis/workspaces/README.md"
+    },
+    {
+      "kind": "工作日志",
+      "phase": "Finish",
+      "title": "Trellis 工作日志",
+      "path": ".trellis/journal/README.md"
     }
-  ]
+  ],
+  "trellis_summary": {
+    "共享规格": 2,
+    "任务中心": 1,
+    "工作区": 1,
+    "工作日志": 1
+  }
 }

@@ -49,18 +49,28 @@ class CommitRecord(BaseModel):
     url: str | None = None
 
 
+class TrellisArtifact(BaseModel):
+    kind: str
+    phase: str
+    title: str
+    path: str
+
+
 class DashboardModel(BaseModel):
     generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     summary: dict[str, int]
     requirements: list[RequirementProgress]
     work_items: list[WorkItem]
     commits: list[CommitRecord] = Field(default_factory=list)
+    trellis_artifacts: list[TrellisArtifact] = Field(default_factory=list)
+    trellis_summary: dict[str, int] = Field(default_factory=dict)
 
 
 def collect_dashboard(root: Path) -> DashboardModel:
     requirements = _load_requirements(root)
     roadmaps = _load_roadmaps(root)
     sprint_ticket_ids = _load_sprint_ticket_ids(root)
+    trellis_artifacts = _load_trellis_artifacts(root)
 
     work_items: list[WorkItem] = []
     progress: list[RequirementProgress] = []
@@ -113,6 +123,8 @@ def collect_dashboard(root: Path) -> DashboardModel:
         requirements=progress,
         work_items=work_items,
         commits=_load_recent_commits(root),
+        trellis_artifacts=trellis_artifacts,
+        trellis_summary=_summarize_trellis(trellis_artifacts),
     )
 
 
@@ -151,6 +163,10 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         """
         for status in columns
     )
+    trellis_lanes = "\n".join(
+        _render_trellis_lane(kind, dashboard.trellis_artifacts)
+        for kind in ["共享规格", "任务中心", "工作区", "工作日志"]
+    )
 
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -172,34 +188,81 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       background: #ffffff;
     }}
     h1 {{ margin: 0 0 8px; font-size: 28px; }}
+    h2 {{ margin-top: 0; font-size: 18px; }}
     .time {{ color: #667085; font-size: 14px; }}
     main {{ padding: 24px 32px 40px; }}
     .metrics {{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }}
-    .metric {{
+    .metric, .panel, .trellis-shell {{
       background: #ffffff;
       border: 1px solid #d8dde6;
       border-radius: 8px;
-      padding: 14px;
     }}
+    .metric {{ padding: 14px; }}
     .metric span {{ display: block; color: #667085; font-size: 13px; }}
     .metric strong {{ display: block; margin-top: 6px; font-size: 26px; }}
+    .trellis-shell {{ padding: 18px; margin-bottom: 20px; }}
+    .section-title {{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }}
+    .section-title p {{ margin: 0; color: #667085; font-size: 13px; }}
+    .phase-flow {{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }}
+    .phase-step {{
+      border: 1px solid #d8dde6;
+      border-left: 4px solid #2563eb;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+    }}
+    .phase-step strong {{ display: block; margin-bottom: 5px; }}
+    .phase-step span {{ color: #475467; font-size: 12px; line-height: 1.5; }}
+    .trellis-grid {{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 12px;
+    }}
+    .trellis-lane {{
+      background: #f6f7f9;
+      border: 1px solid #e4e7ec;
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 150px;
+    }}
+    .trellis-lane h3 {{
+      margin: 0 0 10px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }}
+    .trellis-item {{
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }}
+    .trellis-item strong {{ display: block; font-size: 13px; line-height: 1.35; }}
+    .trellis-item span {{ display: block; margin-top: 6px; color: #667085; font-size: 11px; }}
     .layout {{
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
       gap: 20px;
       align-items: start;
     }}
-    .panel {{
-      background: #ffffff;
-      border: 1px solid #d8dde6;
-      border-radius: 8px;
-      padding: 16px;
-    }}
+    .panel {{ padding: 16px; }}
     table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
     th, td {{ padding: 9px 6px; border-bottom: 1px solid #edf0f5; text-align: left; }}
     th {{ color: #667085; font-weight: 600; }}
@@ -243,9 +306,16 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
     .commit-row {{ padding: 10px 0; border-bottom: 1px solid #edf0f5; }}
     .commit-row a {{ color: #175cd3; font-weight: 600; text-decoration: none; }}
     .commit-row div {{ margin-top: 4px; color: #475467; font-size: 12px; }}
+    @media (max-width: 1180px) {{
+      .trellis-grid, .phase-flow {{ grid-template-columns: repeat(2, minmax(180px, 1fr)); }}
+    }}
     @media (max-width: 980px) {{
       .layout {{ grid-template-columns: 1fr; }}
       .board {{ grid-template-columns: repeat(5, 220px); }}
+    }}
+    @media (max-width: 620px) {{
+      main, header {{ padding-left: 18px; padding-right: 18px; }}
+      .trellis-grid, .phase-flow {{ grid-template-columns: 1fr; }}
     }}
   </style>
 </head>
@@ -256,6 +326,19 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
   </header>
   <main>
     <section class="metrics">{summary_cards}</section>
+    <section class="trellis-shell">
+      <div class="section-title">
+        <h2>Trellis 控制台</h2>
+        <p>从共享规格到任务、工作区、日志回写，展示 Harness 的完整执行轨迹。</p>
+      </div>
+      <div class="phase-flow">
+        {_render_phase_step("Plan", "需求澄清、规格沉淀、任务拆解和排期。")}
+        {_render_phase_step("Implement", "在任务中心领取工作，生成代码、文档和原型。")}
+        {_render_phase_step("Verify", "在隔离工作区运行测试、门禁和 CI/CD 验证。")}
+        {_render_phase_step("Finish", "记录复盘结论，把有效反馈回写到规格和技能。")}
+      </div>
+      <div class="trellis-grid">{trellis_lanes}</div>
+    </section>
     <section class="layout">
       <aside class="panel">
         <h2>需求进度</h2>
@@ -295,6 +378,35 @@ def _load_sprint_ticket_ids(root: Path) -> set[str]:
         data = load_model(path, SprintPlan)
         ticket_ids.update(data.tickets)
     return ticket_ids
+
+
+def _load_trellis_artifacts(root: Path) -> list[TrellisArtifact]:
+    folders = {
+        "共享规格": ("spec", "Plan"),
+        "任务中心": ("tasks", "Implement"),
+        "工作区": ("workspaces", "Verify"),
+        "工作日志": ("journal", "Finish"),
+    }
+    artifacts: list[TrellisArtifact] = []
+    trellis_root = root / ".trellis"
+    for kind, (folder, phase) in folders.items():
+        for path in sorted((trellis_root / folder).glob("*.md")):
+            artifacts.append(
+                TrellisArtifact(
+                    kind=kind,
+                    phase=phase,
+                    title=_read_markdown_title(path),
+                    path=_relative_path(root, path),
+                )
+            )
+    return artifacts
+
+
+def _summarize_trellis(artifacts: list[TrellisArtifact]) -> dict[str, int]:
+    return {
+        kind: sum(artifact.kind == kind for artifact in artifacts)
+        for kind in ["共享规格", "任务中心", "工作区", "工作日志"]
+    }
 
 
 def _load_recent_commits(root: Path, limit: int = 8) -> list[CommitRecord]:
@@ -411,6 +523,21 @@ def _gate_evidence(root: Path, requirement_id: str, gate: Gate) -> GateEvidence:
     return GateEvidence(gate=gate.value, passed=evidence[gate], detail=details[gate])
 
 
+def _read_markdown_title(path: Path) -> str:
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if stripped.startswith("# "):
+                return stripped.removeprefix("# ").strip()
+    except OSError:
+        return path.stem
+    return path.stem
+
+
+def _relative_path(root: Path, path: Path) -> str:
+    return path.relative_to(root).as_posix()
+
+
 def _render_requirement_row(requirement: RequirementProgress) -> str:
     return (
         "<tr>"
@@ -432,6 +559,37 @@ def _render_work_item_card(item: WorkItem) -> str:
       <h3>{html.escape(item.title)}</h3>
       <div class="meta">{html.escape(item.id)} · {html.escape(item.kind)} · 风险 {html.escape(item.risk_level)}</div>
       <div class="gates">{gate_html}</div>
+    </article>
+    """
+
+
+def _render_trellis_lane(kind: str, artifacts: list[TrellisArtifact]) -> str:
+    lane_artifacts = [artifact for artifact in artifacts if artifact.kind == kind]
+    items = "".join(_render_trellis_item(artifact) for artifact in lane_artifacts)
+    if not items:
+        items = '<div class="trellis-item"><strong>暂无工件</strong><span>等待 Harness 生成</span></div>'
+    return f"""
+    <section class="trellis-lane">
+      <h3>{html.escape(kind)}<span>{len(lane_artifacts)}</span></h3>
+      {items}
+    </section>
+    """
+
+
+def _render_trellis_item(artifact: TrellisArtifact) -> str:
+    return f"""
+    <article class="trellis-item">
+      <strong>{html.escape(artifact.title)}</strong>
+      <span>{html.escape(artifact.phase)} · {html.escape(artifact.path)}</span>
+    </article>
+    """
+
+
+def _render_phase_step(name: str, description: str) -> str:
+    return f"""
+    <article class="phase-step">
+      <strong>{html.escape(name)}</strong>
+      <span>{html.escape(description)}</span>
     </article>
     """
 

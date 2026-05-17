@@ -17,19 +17,28 @@ def test_collect_dashboard_reports_requirements_and_work_items() -> None:
     assert dashboard.commits[0].url is None or dashboard.commits[0].url.startswith(
         "https://github.com/"
     )
+    assert dashboard.trellis_summary["共享规格"] >= 1
+    assert dashboard.trellis_summary["任务中心"] >= 1
+    assert any(artifact.phase == "Plan" for artifact in dashboard.trellis_artifacts)
     assert any(item.kind == "任务" for item in dashboard.work_items)
     assert any(item.status == "开发中" for item in dashboard.work_items)
     assert any(item.status == "测试完成" for item in dashboard.work_items)
 
 
 def test_render_dashboard_html_contains_core_board_sections() -> None:
-    html = render_dashboard_html(collect_dashboard(ROOT))
+    page_html = render_dashboard_html(collect_dashboard(ROOT))
 
-    assert "投资 Agent Harness 面板" in html
-    assert "需求进度" in html
-    assert "最近 GitHub 提交" in html
-    assert "开发中" in html
-    assert "测试完成" in html
+    assert "投资 Agent Harness 面板" in page_html
+    assert "Trellis 控制台" in page_html
+    assert "Plan" in page_html
+    assert "Implement" in page_html
+    assert "Verify" in page_html
+    assert "Finish" in page_html
+    assert ".trellis/spec" in page_html
+    assert "需求进度" in page_html
+    assert "最近 GitHub 提交" in page_html
+    assert "开发中" in page_html
+    assert "测试完成" in page_html
 
 
 def test_write_dashboard_creates_json_and_html(tmp_path: Path) -> None:
@@ -42,6 +51,7 @@ def test_write_dashboard_creates_json_and_html(tmp_path: Path) -> None:
         else:
             (docs / name).mkdir()
     shutil.copytree(ROOT / "tests", tmp_path / "tests")
+    shutil.copytree(ROOT / ".trellis", tmp_path / ".trellis")
 
     json_path, html_path = write_dashboard(tmp_path)
 

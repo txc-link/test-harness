@@ -18,34 +18,81 @@
       background: #ffffff;
     }
     h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin-top: 0; font-size: 18px; }
     .time { color: #667085; font-size: 14px; }
     main { padding: 24px 32px 40px; }
     .metrics {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
-    .metric {
+    .metric, .panel, .trellis-shell {
       background: #ffffff;
       border: 1px solid #d8dde6;
       border-radius: 8px;
-      padding: 14px;
     }
+    .metric { padding: 14px; }
     .metric span { display: block; color: #667085; font-size: 13px; }
     .metric strong { display: block; margin-top: 6px; font-size: 26px; }
+    .trellis-shell { padding: 18px; margin-bottom: 20px; }
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+    .section-title p { margin: 0; color: #667085; font-size: 13px; }
+    .phase-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .phase-step {
+      border: 1px solid #d8dde6;
+      border-left: 4px solid #2563eb;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+    }
+    .phase-step strong { display: block; margin-bottom: 5px; }
+    .phase-step span { color: #475467; font-size: 12px; line-height: 1.5; }
+    .trellis-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .trellis-lane {
+      background: #f6f7f9;
+      border: 1px solid #e4e7ec;
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 150px;
+    }
+    .trellis-lane h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .trellis-item {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+    .trellis-item strong { display: block; font-size: 13px; line-height: 1.35; }
+    .trellis-item span { display: block; margin-top: 6px; color: #667085; font-size: 11px; }
     .layout {
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
       gap: 20px;
       align-items: start;
     }
-    .panel {
-      background: #ffffff;
-      border: 1px solid #d8dde6;
-      border-radius: 8px;
-      padding: 16px;
-    }
+    .panel { padding: 16px; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th, td { padding: 9px 6px; border-bottom: 1px solid #edf0f5; text-align: left; }
     th { color: #667085; font-weight: 600; }
@@ -89,16 +136,23 @@
     .commit-row { padding: 10px 0; border-bottom: 1px solid #edf0f5; }
     .commit-row a { color: #175cd3; font-weight: 600; text-decoration: none; }
     .commit-row div { margin-top: 4px; color: #475467; font-size: 12px; }
+    @media (max-width: 1180px) {
+      .trellis-grid, .phase-flow { grid-template-columns: repeat(2, minmax(180px, 1fr)); }
+    }
     @media (max-width: 980px) {
       .layout { grid-template-columns: 1fr; }
       .board { grid-template-columns: repeat(5, 220px); }
+    }
+    @media (max-width: 620px) {
+      main, header { padding-left: 18px; padding-right: 18px; }
+      .trellis-grid, .phase-flow { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>投资 Agent Harness 面板</h1>
-    <div class="time">生成时间：2026-05-17T05:43:24.526655+00:00</div>
+    <div class="time">生成时间：2026-05-17T05:50:47.517051+00:00</div>
   </header>
   <main>
     <section class="metrics"><div class="metric"><span>需求总数</span><strong>4</strong></div>
@@ -108,6 +162,87 @@
 <div class="metric"><span>开发中</span><strong>3</strong></div>
 <div class="metric"><span>测试完成</span><strong>9</strong></div>
 <div class="metric"><span>门禁受阻</span><strong>3</strong></div></section>
+    <section class="trellis-shell">
+      <div class="section-title">
+        <h2>Trellis 控制台</h2>
+        <p>从共享规格到任务、工作区、日志回写，展示 Harness 的完整执行轨迹。</p>
+      </div>
+      <div class="phase-flow">
+        
+    <article class="phase-step">
+      <strong>Plan</strong>
+      <span>需求澄清、规格沉淀、任务拆解和排期。</span>
+    </article>
+    
+        
+    <article class="phase-step">
+      <strong>Implement</strong>
+      <span>在任务中心领取工作，生成代码、文档和原型。</span>
+    </article>
+    
+        
+    <article class="phase-step">
+      <strong>Verify</strong>
+      <span>在隔离工作区运行测试、门禁和 CI/CD 验证。</span>
+    </article>
+    
+        
+    <article class="phase-step">
+      <strong>Finish</strong>
+      <span>记录复盘结论，把有效反馈回写到规格和技能。</span>
+    </article>
+    
+      </div>
+      <div class="trellis-grid">
+    <section class="trellis-lane">
+      <h3>共享规格<span>2</span></h3>
+      
+    <article class="trellis-item">
+      <strong>投资 Agent Harness 共享规格</strong>
+      <span>Plan · .trellis/spec/investment-agent-harness.md</span>
+    </article>
+    
+    <article class="trellis-item">
+      <strong>Trellis 共享规格</strong>
+      <span>Plan · .trellis/spec/README.md</span>
+    </article>
+    
+    </section>
+    
+
+    <section class="trellis-lane">
+      <h3>任务中心<span>1</span></h3>
+      
+    <article class="trellis-item">
+      <strong>Trellis 任务中心</strong>
+      <span>Implement · .trellis/tasks/README.md</span>
+    </article>
+    
+    </section>
+    
+
+    <section class="trellis-lane">
+      <h3>工作区<span>1</span></h3>
+      
+    <article class="trellis-item">
+      <strong>Trellis 工作区</strong>
+      <span>Verify · .trellis/workspaces/README.md</span>
+    </article>
+    
+    </section>
+    
+
+    <section class="trellis-lane">
+      <h3>工作日志<span>1</span></h3>
+      
+    <article class="trellis-item">
+      <strong>Trellis 工作日志</strong>
+      <span>Finish · .trellis/journal/README.md</span>
+    </article>
+    
+    </section>
+    </div>
+    </section>
     <section class="layout">
       <aside class="panel">
         <h2>需求进度</h2>
@@ -121,6 +256,12 @@
         <section class="commit-list">
           <h2>最近 GitHub 提交</h2>
           
+    <article class="commit-row">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <div>txc-link · 2026-05-17T13:44:25+08:00</div>
+    </article>
+    
+
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
       <div>txc-link · 2026-05-17T09:19:33+08:00</div>
@@ -160,12 +301,6 @@
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492">5d99c06</a> Add strongest investment agent requirements
       <div>txc-link · 2026-05-17T00:21:49+08:00</div>
-    </article>
-    
-
-    <article class="commit-row">
-      <a href="https://github.com/txc-link/test-harness/commit/f2dd137efda559871492435e6bf9bbe6878e7dad">f2dd137</a> Merge remote-tracking branch &#x27;origin/main&#x27;
-      <div>txc-link · 2026-05-17T00:08:59+08:00</div>
     </article>
     
         </section>
