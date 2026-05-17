@@ -13,6 +13,7 @@
   -> Figma 原型确认（涉及界面和可视化交互时）
   -> 需求回写（原型确认后）
   -> ADR（接受决策后）
+  -> Trellis 任务化（跨会话或多 Agent 协作时）
   -> roadmap 拆解
   -> sprint 排期
   -> 实现
@@ -36,6 +37,10 @@
 | ADR | `docs/adr/` | 记录已接受的架构或策略决策 |
 | Roadmap | `docs/roadmap/` | 拆解里程碑和工程任务 |
 | Sprint | `docs/sprints/` | 近期交付计划 |
+| Trellis 共享规格 | `.trellis/spec/` | 保存长期规则、约束和 Finish 回写经验 |
+| Trellis 任务 | `.trellis/tasks/` | 保存可交接任务卡 |
+| Trellis 工作区 | `.trellis/workspaces/` | 保存大任务上下文 |
+| Trellis 日志 | `.trellis/journal/` | 保存会话日志和经验回写入口 |
 | 测试计划 | `docs/test-plans/` | 描述风险验证方式 |
 | 评估规格 | `docs/evals/` | 描述投资或 Agent 质量评估 |
 | 发布 | `docs/releases/` | 发布清单和说明 |
@@ -62,6 +67,8 @@ candidate -> backtested -> shadow_live -> approved -> active -> monitored -> ret
 - 影响系统架构时，必须创建 RFC。
 - 影响界面、控制台、盯盘、告警、分析、复盘、审批队列或可视化交互时，必须先完成 Figma 原型确认。
 - 原型确认改变用户路径、信息架构或验收标准时，必须先回写需求和 PRD/RFC，再进入 roadmap 和 sprint。
+- 跨会话、多人或多 Agent 协作任务，必须建立 Trellis 任务卡和工作日志。
+- Finish 阶段发现的可复用经验，必须回写到 `.trellis/spec/`。
 - RFC 被接受后，必须记录 ADR。
 - 影响账户风险时，必须创建或更新评估规格。
 - 影响实盘交易时，必须要求人工审批并提供回滚标准。

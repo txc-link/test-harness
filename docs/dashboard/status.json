@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T01:18:22.773143Z",
+  "generated_at": "2026-05-17T05:43:24.526655Z",
   "summary": {
     "需求总数": 4,
     "任务总数": 15,
@@ -583,6 +583,14 @@
   ],
   "commits": [
     {
+      "short_sha": "8ae4691",
+      "sha": "8ae4691cc4979244f1cbaa59e996ca2472f4a100",
+      "author": "txc-link",
+      "committed_at": "2026-05-17T09:19:33+08:00",
+      "subject": "Add SPEC driven CI CD workflow",
+      "url": "https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100"
+    },
+    {
       "short_sha": "b914e13",
       "sha": "b914e13b8e88c271e97d91d3d26b8e956769b427",
       "author": "txc-link",
@@ -637,14 +645,6 @@
       "committed_at": "2026-05-17T00:08:59+08:00",
       "subject": "Merge remote-tracking branch 'origin/main'",
       "url": "https://github.com/txc-link/test-harness/commit/f2dd137efda559871492435e6bf9bbe6878e7dad"
-    },
-    {
-      "short_sha": "d91d29f",
-      "sha": "d91d29f652f625803279d21820116888e6d40804",
-      "author": "txc-link",
-      "committed_at": "2026-05-17T00:02:54+08:00",
-      "subject": "Initialize investment agent harness workflow",
-      "url": "https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804"
     }
   ]
 }

@@ -11,6 +11,9 @@ python -m harness_engine.cli plan docs\requirements\REQ-0001.yaml
 python -m harness_engine.cli develop "需求文本" --title "Harness 状态命令"
 python -m harness_engine.cli develop-file docs\requirements\REQ-smoke-input.md --title "Harness 状态命令"
 python -m harness_engine.cli new rfc "Harness 控制平面"
+python -m harness_engine.cli new trellis-spec "投资 Agent 共享规格"
+python -m harness_engine.cli new trellis-task "盯盘告警控制台"
+python -m harness_engine.cli new trellis-journal "盯盘告警控制台开发日志"
 python -m harness_engine.cli status
 python -m harness_engine.cli status --write
 python -m harness_engine.cli dashboard
@@ -26,6 +29,9 @@ python -m harness_engine.cli validate
 prd
 rfc
 ticket
+trellis-spec
+trellis-task
+trellis-journal
 test-plan
 prototype
 evolution
@@ -52,6 +58,7 @@ runbook
 - 让质量门禁显式化。
 - 让成熟度可见。
 - 让进化提案绑定证据。
+- 让跨会话任务拥有 Trellis 上下文，并在 Finish 阶段回写经验。
 - 避免交易、账户风险和 skill 晋升逻辑失控。
 
 ## 可视化面板

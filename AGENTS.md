@@ -22,10 +22,12 @@
 5. 原型确认后，必须把确认结果回写到需求、PRD/RFC、路线图和 sprint 排期；不允许在原型未确认时直接进入大规模 UI 开发。
 6. 已接受的架构、安全或进化策略决策必须记录为 ADR。
 7. 涉及 CI/CD、Harness 平台、工作流或跨阶段交付变化时，必须在 `.moai/specs/` 下建立 SPEC，使用 EARS 风格需求、验收标准、计划、场景、风险和进度文件。
-8. 将批准范围拆解为 `docs/roadmap/` 下的里程碑和带门禁的任务。
-9. 将近期工作放入 `docs/sprints/` 下的 sprint 计划。
-10. 在声明完成前，必须定义测试、评估规格或评审门禁。
-11. 完成前运行本地验证：
+8. 对跨会话、多人或多 Agent 协作任务，必须建立 Trellis 任务卡，并在 `.trellis/spec/`、`.trellis/tasks/`、`.trellis/workspaces/` 或 `.trellis/journal/` 中保留上下文。
+9. 将批准范围拆解为 `docs/roadmap/` 下的里程碑和带门禁的任务。
+10. 将近期工作放入 `docs/sprints/` 下的 sprint 计划。
+11. 在声明完成前，必须定义测试、评估规格或评审门禁。
+12. Finish 阶段必须把可复用经验回写到 `.trellis/spec/`，并更新相关 SPEC、需求、复盘或任务记录。
+13. 完成前运行本地验证：
 
 ```powershell
 & "C:\Users\DELL\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m harness_engine.cli validate
@@ -40,6 +42,7 @@
 - `PRD/RFC/ADR`：产品行为、技术提案和已接受决策。
 - `Prototype`：界面类需求的 Figma 原型、人工确认和需求回写。
 - `SPEC`：CI/CD、Harness 平台或跨阶段工作流变化的 EARS 需求、计划、场景、风险和进度。
+- `Trellis`：共享规格、任务中心、工作区上下文和 Finish 经验回写。
 - `Plan`：路线图、架构决策、里程碑、风险和门禁矩阵。
 - `Sprint`：任务选择、退出标准、负责人和预期测试。
 - `Build`：带测试和文档的实现。
@@ -56,6 +59,7 @@
 - `docs/DELIVERY_PIPELINE.md`
 - `docs/FIGMA_PROTOTYPE_WORKFLOW.md`
 - `docs/SPEC_CICD_WORKFLOW.md`
+- `docs/UNIFIED_HARNESS_WORKFLOW.md`
 - `docs/RISK_CONTROL.md`
 - `docs/CODING_GUIDELINES.md`
 

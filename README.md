@@ -9,6 +9,8 @@
   -> 需求摄入
   -> 发现与调研
   -> PRD/RFC/ADR
+  -> Figma 原型确认
+  -> SPEC / Trellis 上下文
   -> 路线图
   -> sprint 计划
   -> 开发任务
@@ -40,6 +42,8 @@ pytest
 - `docs/adr/`：架构、安全和策略决策记录。
 - `docs/rfc/`：架构或流程提案。
 - `docs/test-plans/`：测试计划。
+- `.moai/specs/`：SPEC、EARS 需求、验收标准、计划、场景、风险和进度。
+- `.trellis/spec/`、`.trellis/tasks/`、`.trellis/workspaces/`、`.trellis/journal/`：共享规格、任务中心、工作区上下文和 Finish 经验回写。
 - `docs/releases/`：发布清单。
 - `docs/runbooks/`：可重复执行的运行手册。
 - `docs/reviews/`、`docs/risks/`、`docs/incidents/`、`docs/metrics/`：复盘、风险、事故和指标记录。
@@ -61,6 +65,7 @@ pytest
 - [可视化实施说明](docs/HARNESS_VISUALIZATION_GUIDE.md)
 - [Figma 原型验证流程](docs/FIGMA_PROTOTYPE_WORKFLOW.md)
 - [SPEC 驱动 CI/CD 流程](docs/SPEC_CICD_WORKFLOW.md)
+- [统一 Harness 工作流](docs/UNIFIED_HARNESS_WORKFLOW.md)
 - [编码规范](docs/CODING_GUIDELINES.md)
 
 ## 运行原则

@@ -18,6 +18,7 @@
 - `gstack`：来自 `garrytan/gstack` 的通用项目和 Agent 栈工作流。
 - `using-superpowers`：来自 `obra/superpowers` 的工作流入口。
 - `everything-claude-code`：来自 `affaan-m/everything-claude-code` 的核心约定。
+- `Trellis`：来自 `mindfold-ai/Trellis` 的共享规格、任务中心、workspace journal 和 Plan / Implement / Verify / Finish 回写思想；本项目已融合到 `.trellis/` 目录和统一 Harness 工作流。
 
 ## Everything Claude Code 安装情况
 

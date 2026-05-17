@@ -86,7 +86,31 @@ python -m harness_engine.cli new prototype "投资 Agent 控制台原型评审"
 python -m harness_engine.cli plan docs\requirements\REQ-0001.yaml
 ```
 
-## 6. 排期
+## 6. Trellis 任务化
+
+当任务需要跨会话、多人或多 Agent 协作时，必须建立 Trellis 上下文：
+
+- `.trellis/spec/`：保存长期共享规则和经验。
+- `.trellis/tasks/`：保存可交接任务卡。
+- `.trellis/workspaces/`：保存大任务工作区上下文。
+- `.trellis/journal/`：保存会话日志和 Finish 回写。
+
+标准阶段：
+
+```text
+Plan -> Implement -> Verify -> Finish
+```
+
+Finish 阶段必须把可复用经验回写到 `.trellis/spec/`，并根据需要更新需求、SPEC、roadmap、sprint 或复盘记录。
+
+命令：
+
+```powershell
+python -m harness_engine.cli new trellis-task "盯盘告警控制台"
+python -m harness_engine.cli new trellis-journal "盯盘告警控制台开发日志"
+```
+
+## 7. 排期
 
 Sprint 计划必须包含：
 
@@ -97,7 +121,7 @@ Sprint 计划必须包含：
 
 Sprint 产物保存在 `docs/sprints/`。
 
-## 7. 开发门禁
+## 8. 开发门禁
 
 默认门禁：
 
@@ -114,7 +138,7 @@ Sprint 产物保存在 `docs/sprints/`。
 
 投资功能按风险选择门禁。纯 UI 或文档变化不需要 backtest；但界面类需求必须有 prototype review。skill 晋升、信号逻辑、组合逻辑和交易规则必须需要 backtest。
 
-## 8. CI/CD
+## 9. CI/CD
 
 当前 CI：
 
@@ -126,7 +150,7 @@ Sprint 产物保存在 `docs/sprints/`。
 
 在真实部署目标出现前，CD 只发布文档和规划产物。
 
-## 9. 发布
+## 10. 发布
 
 使用 `templates/release_checklist.md`。发布需要：
 
@@ -136,7 +160,7 @@ Sprint 产物保存在 `docs/sprints/`。
 - 监控计划。
 - 风险评审。
 
-## 10. 进化
+## 11. 进化
 
 进化工作必须遵循：
 

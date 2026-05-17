@@ -16,6 +16,7 @@ def test_mature_harness_docs_exist() -> None:
         "docs/OBSERVABILITY_METRICS.md",
         "docs/CICD.md",
         "docs/PROCESS.md",
+        "docs/UNIFIED_HARNESS_WORKFLOW.md",
     ]
 
     missing = [path for path in required_docs if not (ROOT / path).exists()]
@@ -28,6 +29,9 @@ def test_delivery_templates_exist() -> None:
         "templates/prd.md",
         "templates/rfc.md",
         "templates/ticket.md",
+        "templates/trellis_spec.md",
+        "templates/trellis_task.md",
+        "templates/trellis_journal.md",
         "templates/test_plan.md",
         "templates/evolution_proposal.md",
         "templates/release_checklist.md",
@@ -37,6 +41,19 @@ def test_delivery_templates_exist() -> None:
     ]
 
     missing = [path for path in required_templates if not (ROOT / path).exists()]
+
+    assert missing == []
+
+
+def test_trellis_context_directories_exist() -> None:
+    required_dirs = [
+        ".trellis/spec",
+        ".trellis/tasks",
+        ".trellis/workspaces",
+        ".trellis/journal",
+    ]
+
+    missing = [path for path in required_dirs if not (ROOT / path).is_dir()]
 
     assert missing == []
 

@@ -16,6 +16,15 @@ TEMPLATES: dict[str, TemplateSpec] = {
     "prd": TemplateSpec("prd", "docs/requirements", "templates/prd.md", "PRD"),
     "rfc": TemplateSpec("rfc", "docs/rfc", "templates/rfc.md", "RFC"),
     "ticket": TemplateSpec("ticket", "docs/sprints", "templates/ticket.md", "TICKET"),
+    "trellis-spec": TemplateSpec(
+        "trellis-spec", ".trellis/spec", "templates/trellis_spec.md", "SPEC"
+    ),
+    "trellis-task": TemplateSpec(
+        "trellis-task", ".trellis/tasks", "templates/trellis_task.md", "TASK"
+    ),
+    "trellis-journal": TemplateSpec(
+        "trellis-journal", ".trellis/journal", "templates/trellis_journal.md", "JOURNAL"
+    ),
     "test-plan": TemplateSpec("test-plan", "docs/test-plans", "templates/test_plan.md", "TEST"),
     "prototype": TemplateSpec("prototype", "docs/prototypes", "templates/prototype_review.md", "PROTO"),
     "evolution": TemplateSpec(
@@ -45,6 +54,10 @@ REQUIRED_DIRECTORIES = [
     "docs/metrics",
     "docs/dashboard",
     ".moai/specs",
+    ".trellis/spec",
+    ".trellis/tasks",
+    ".trellis/workspaces",
+    ".trellis/journal",
     "data/runtime",
 ]
 
@@ -68,6 +81,7 @@ REQUIRED_DOCS = [
     "docs/HARNESS_VISUALIZATION_GUIDE.md",
     "docs/FIGMA_PROTOTYPE_WORKFLOW.md",
     "docs/SPEC_CICD_WORKFLOW.md",
+    "docs/UNIFIED_HARNESS_WORKFLOW.md",
 ]
 
 
