@@ -134,6 +134,52 @@
       color: #475467;
       font-size: 12px;
     }
+    .trace-shell {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .trace-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 12px;
+    }
+    .trace-card {
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+    }
+    .trace-card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    .trace-meta, .trace-empty {
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .trace-commits {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .trace-commit {
+      border: 1px solid #e4e7ec;
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 9px;
+      font-size: 12px;
+    }
+    .trace-commit a { color: #175cd3; font-weight: 700; text-decoration: none; }
+    .trace-files {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      color: #475467;
+    }
     .layout {
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
@@ -200,7 +246,7 @@
 <body>
   <header>
     <h1>投资 Agent Harness 面板</h1>
-    <div class="time">生成时间：2026-05-17T05:58:21.903771+00:00</div>
+    <div class="time">生成时间：2026-05-17T06:04:30.003513+00:00</div>
   </header>
   <main>
     <section class="metrics"><div class="metric"><span>需求总数</span><strong>4</strong></div>
@@ -487,6 +533,327 @@
     </details>
     </div>
     </section>
+    <section class="trace-shell">
+      <div class="section-title">
+        <h2>任务到代码追踪链</h2>
+        <p>把任务、分支、提交、变更文件和 CI 入口串成一条可审计链路。</p>
+      </div>
+      <div class="trace-grid">
+    <article class="trace-card">
+      <h3>REQ-0001:T-0001 · 创建工程 Harness CLI 和产物目录</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b">4f0daa6</a> Add Trellis-style dashboard view
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <ul class="trace-files"><li>.trellis/journal/README.md</li><li>.trellis/spec/README.md</li><li>.trellis/spec/investment-agent-harness.md</li><li>.trellis/tasks/README.md</li><li>.trellis/workspaces/README.md</li><li>还有 15 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
+      <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427">b914e13</a> Integrate Figma prototypes into harness flow
+      <ul class="trace-files"><li>AGENTS.md</li><li>docs/DELIVERY_PIPELINE.md</li><li>docs/FIGMA_PROTOTYPE_WORKFLOW.md</li><li>docs/HARNESS_ENGINE.md</li><li>docs/HARNESS_OPERATING_MODEL.md</li><li>还有 12 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0001:T-0002 · 定义假设、计划、事件、结果和复盘 ledgers</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits"><div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div></div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0001:T-0003 · 构建账户和 Agent 盈利归因模型</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 48 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492">5d99c06</a> Add strongest investment agent requirements
+      <ul class="trace-files"><li>docs/metrics/HARNESS_STATUS.md</li><li>docs/requirements/PRD-strongest-self-evolving-investment-agent.md</li><li>docs/requirements/REQ-0005.yaml</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804">d91d29f</a> Initialize investment agent harness workflow
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 66 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0001:T-0004 · 实现带晋升门禁的版本化 skill registry</h3>
+      <div class="trace-meta">
+        状态：开发中 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <ul class="trace-files"><li>.trellis/journal/README.md</li><li>.trellis/spec/README.md</li><li>.trellis/spec/investment-agent-harness.md</li><li>.trellis/tasks/README.md</li><li>.trellis/workspaces/README.md</li><li>还有 15 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
+      <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 48 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804">d91d29f</a> Initialize investment agent harness workflow
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 66 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0001:T-0005 · 创建 shadow portfolio 评估闭环</h3>
+      <div class="trace-meta">
+        状态：门禁受阻 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits"><div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div></div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0002:T-0001 · 创建工程 Harness CLI 和产物目录</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b">4f0daa6</a> Add Trellis-style dashboard view
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <ul class="trace-files"><li>.trellis/journal/README.md</li><li>.trellis/spec/README.md</li><li>.trellis/spec/investment-agent-harness.md</li><li>.trellis/tasks/README.md</li><li>.trellis/workspaces/README.md</li><li>还有 15 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
+      <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427">b914e13</a> Integrate Figma prototypes into harness flow
+      <ul class="trace-files"><li>AGENTS.md</li><li>docs/DELIVERY_PIPELINE.md</li><li>docs/FIGMA_PROTOTYPE_WORKFLOW.md</li><li>docs/HARNESS_ENGINE.md</li><li>docs/HARNESS_OPERATING_MODEL.md</li><li>还有 12 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0002:T-0002 · 定义假设、计划、事件、结果和复盘 ledgers</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits"><div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div></div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0002:T-0003 · 构建账户和 Agent 盈利归因模型</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 48 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492">5d99c06</a> Add strongest investment agent requirements
+      <ul class="trace-files"><li>docs/metrics/HARNESS_STATUS.md</li><li>docs/requirements/PRD-strongest-self-evolving-investment-agent.md</li><li>docs/requirements/REQ-0005.yaml</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804">d91d29f</a> Initialize investment agent harness workflow
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 66 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0002:T-0004 · 实现带晋升门禁的版本化 skill registry</h3>
+      <div class="trace-meta">
+        状态：开发中 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <ul class="trace-files"><li>.trellis/journal/README.md</li><li>.trellis/spec/README.md</li><li>.trellis/spec/investment-agent-harness.md</li><li>.trellis/tasks/README.md</li><li>.trellis/workspaces/README.md</li><li>还有 15 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
+      <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 48 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804">d91d29f</a> Initialize investment agent harness workflow
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 66 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0002:T-0005 · 创建 shadow portfolio 评估闭环</h3>
+      <div class="trace-meta">
+        状态：门禁受阻 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits"><div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div></div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0004:T-0001 · 创建工程 Harness CLI 和产物目录</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b">4f0daa6</a> Add Trellis-style dashboard view
+      <ul class="trace-files"><li>docs/dashboard/index.html</li><li>docs/dashboard/status.json</li><li>src/harness_engine/dashboard.py</li><li>tests/test_dashboard.py</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <ul class="trace-files"><li>.trellis/journal/README.md</li><li>.trellis/spec/README.md</li><li>.trellis/spec/investment-agent-harness.md</li><li>.trellis/tasks/README.md</li><li>.trellis/workspaces/README.md</li><li>还有 15 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
+      <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/b914e13b8e88c271e97d91d3d26b8e956769b427">b914e13</a> Integrate Figma prototypes into harness flow
+      <ul class="trace-files"><li>AGENTS.md</li><li>docs/DELIVERY_PIPELINE.md</li><li>docs/FIGMA_PROTOTYPE_WORKFLOW.md</li><li>docs/HARNESS_ENGINE.md</li><li>docs/HARNESS_OPERATING_MODEL.md</li><li>还有 12 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0004:T-0002 · 定义假设、计划、事件、结果和复盘 ledgers</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits"><div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div></div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0004:T-0003 · 构建账户和 Agent 盈利归因模型</h3>
+      <div class="trace-meta">
+        状态：测试完成 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 48 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/5d99c06da8551100ae233736fc4d4e7d52460492">5d99c06</a> Add strongest investment agent requirements
+      <ul class="trace-files"><li>docs/metrics/HARNESS_STATUS.md</li><li>docs/requirements/PRD-strongest-self-evolving-investment-agent.md</li><li>docs/requirements/REQ-0005.yaml</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804">d91d29f</a> Initialize investment agent harness workflow
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 66 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0004:T-0004 · 实现带晋升门禁的版本化 skill registry</h3>
+      <div class="trace-meta">
+        状态：开发中 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits">
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/c89e9d922088dd00eb2e75fb87e5be2535dbcb44">c89e9d9</a> Add Trellis-inspired unified harness workflow
+      <ul class="trace-files"><li>.trellis/journal/README.md</li><li>.trellis/spec/README.md</li><li>.trellis/spec/investment-agent-harness.md</li><li>.trellis/tasks/README.md</li><li>.trellis/workspaces/README.md</li><li>还有 15 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/8ae4691cc4979244f1cbaa59e996ca2472f4a100">8ae4691</a> Add SPEC driven CI CD workflow
+      <ul class="trace-files"><li>.agents/skills/modu-ai-moai-adk-my-harness-workflow/SKILL.md</li><li>.github/workflows/ci.yml</li><li>.moai/specs/SPEC-CI-0001/plan.md</li><li>.moai/specs/SPEC-CI-0001/progress.md</li><li>.moai/specs/SPEC-CI-0001/risks.md</li><li>还有 11 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 48 个文件</li></ul>
+    </div>
+    
+    <div class="trace-commit">
+      <a href="https://github.com/txc-link/test-harness/commit/d91d29f652f625803279d21820116888e6d40804">d91d29f</a> Initialize investment agent harness workflow
+      <ul class="trace-files"><li>.codex/AGENTS.ECC.md</li><li>.codex/agents/docs-researcher.toml</li><li>.codex/agents/explorer.toml</li><li>.codex/agents/reviewer.toml</li><li>.codex/config.toml</li><li>还有 66 个文件</li></ul>
+    </div>
+    </div>
+    </article>
+    
+
+    <article class="trace-card">
+      <h3>REQ-0004:T-0005 · 创建 shadow portfolio 评估闭环</h3>
+      <div class="trace-meta">
+        状态：门禁受阻 · 分支：main · CI：<a href="https://github.com/txc-link/test-harness/actions">GitHub Actions</a> · Issue：待绑定
+      </div>
+      <div class="trace-commits"><div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div></div>
+    </article>
+    </div>
+    </section>
     <section class="layout">
       <aside class="panel">
         <h2>需求进度</h2>
@@ -500,6 +867,12 @@
         <section class="commit-list">
           <h2>最近 GitHub 提交</h2>
           
+    <article class="commit-row">
+      <a href="https://github.com/txc-link/test-harness/commit/f580834b3fa3be6e4345f16c5d36cf1507c7c751">f580834</a> Add Trellis task tree dashboard
+      <div>txc-link · 2026-05-17T13:59:04+08:00</div>
+    </article>
+    
+
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/4f0daa6aa62d4a280bc6a260eccaff7f0fd3e73b">4f0daa6</a> Add Trellis-style dashboard view
       <div>txc-link · 2026-05-17T13:52:10+08:00</div>
@@ -539,12 +912,6 @@
     <article class="commit-row">
       <a href="https://github.com/txc-link/test-harness/commit/68a4627d3e63bc43dc1c851ee3376129c1a606ee">68a4627</a> Add coding guidelines
       <div>txc-link · 2026-05-17T08:41:08+08:00</div>
-    </article>
-    
-
-    <article class="commit-row">
-      <a href="https://github.com/txc-link/test-harness/commit/d10daa1c9b0512efbd2653bbeb7583b35ddbe4d1">d10daa1</a> Localize project documentation to Chinese
-      <div>txc-link · 2026-05-17T08:21:17+08:00</div>
     </article>
     
         </section>

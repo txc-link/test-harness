@@ -49,6 +49,10 @@ class CommitRecord(BaseModel):
     url: str | None = None
 
 
+class CommitChangeRecord(CommitRecord):
+    changed_files: list[str] = Field(default_factory=list)
+
+
 class TrellisArtifact(BaseModel):
     kind: str
     phase: str
@@ -82,6 +86,17 @@ class TaskTreeRequirementNode(BaseModel):
     tickets: list[TaskTreeTicketNode] = Field(default_factory=list)
 
 
+class CodeTraceLink(BaseModel):
+    task_id: str
+    task_title: str
+    requirement_id: str
+    status: str
+    branch: str
+    ci_url: str | None = None
+    issue_url: str | None = None
+    commits: list[CommitChangeRecord] = Field(default_factory=list)
+
+
 class DashboardModel(BaseModel):
     generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     summary: dict[str, int]
@@ -91,6 +106,7 @@ class DashboardModel(BaseModel):
     trellis_artifacts: list[TrellisArtifact] = Field(default_factory=list)
     trellis_summary: dict[str, int] = Field(default_factory=dict)
     task_tree: list[TaskTreeRequirementNode] = Field(default_factory=list)
+    code_traces: list[CodeTraceLink] = Field(default_factory=list)
 
 
 def collect_dashboard(root: Path) -> DashboardModel:
@@ -98,6 +114,7 @@ def collect_dashboard(root: Path) -> DashboardModel:
     roadmaps = _load_roadmaps(root)
     sprint_ticket_ids = _load_sprint_ticket_ids(root)
     trellis_artifacts = _load_trellis_artifacts(root)
+    commit_changes = _load_recent_commit_changes(root)
 
     work_items: list[WorkItem] = []
     progress: list[RequirementProgress] = []
@@ -161,6 +178,7 @@ def collect_dashboard(root: Path) -> DashboardModel:
         trellis_artifacts=trellis_artifacts,
         trellis_summary=_summarize_trellis(trellis_artifacts),
         task_tree=task_tree,
+        code_traces=_build_code_traces(root, work_items, commit_changes),
     )
 
 
@@ -204,6 +222,7 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         for kind in ["共享规格", "任务中心", "工作区", "工作日志"]
     )
     task_tree_html = "\n".join(_render_task_tree_requirement(node) for node in dashboard.task_tree)
+    code_trace_html = "\n".join(_render_code_trace(trace) for trace in dashboard.code_traces)
 
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -341,6 +360,52 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
       color: #475467;
       font-size: 12px;
     }}
+    .trace-shell {{
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }}
+    .trace-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 12px;
+    }}
+    .trace-card {{
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+    }}
+    .trace-card h3 {{
+      margin: 0 0 8px;
+      font-size: 14px;
+      line-height: 1.35;
+    }}
+    .trace-meta, .trace-empty {{
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.5;
+    }}
+    .trace-commits {{
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }}
+    .trace-commit {{
+      border: 1px solid #e4e7ec;
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 9px;
+      font-size: 12px;
+    }}
+    .trace-commit a {{ color: #175cd3; font-weight: 700; text-decoration: none; }}
+    .trace-files {{
+      margin: 6px 0 0;
+      padding-left: 18px;
+      color: #475467;
+    }}
     .layout {{
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
@@ -430,6 +495,13 @@ def render_dashboard_html(dashboard: DashboardModel) -> str:
         <p>按 Trellis 的任务拆解方式展示需求、任务、门禁和交付物的父子关系。</p>
       </div>
       <div class="task-tree">{task_tree_html}</div>
+    </section>
+    <section class="trace-shell">
+      <div class="section-title">
+        <h2>任务到代码追踪链</h2>
+        <p>把任务、分支、提交、变更文件和 CI 入口串成一条可审计链路。</p>
+      </div>
+      <div class="trace-grid">{code_trace_html}</div>
     </section>
     <section class="layout">
       <aside class="panel">
@@ -568,6 +640,52 @@ def _load_recent_commits(root: Path, limit: int = 8) -> list[CommitRecord]:
     return commits
 
 
+def _load_recent_commit_changes(root: Path, limit: int = 80) -> list[CommitChangeRecord]:
+    try:
+        output = subprocess.check_output(
+            [
+                "git",
+                "log",
+                f"--max-count={limit}",
+                "--date=iso-strict",
+                "--pretty=format:%x1e%h%x1f%H%x1f%an%x1f%ad%x1f%s",
+                "--name-only",
+            ],
+            cwd=root,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return []
+
+    base_url = _github_commit_base_url(root)
+    changes: list[CommitChangeRecord] = []
+    for raw_block in output.split("\x1e"):
+        block = raw_block.strip()
+        if not block:
+            continue
+        lines = [line.strip() for line in block.splitlines() if line.strip()]
+        if not lines:
+            continue
+        parts = lines[0].split("\x1f")
+        if len(parts) != 5:
+            continue
+        short_sha, sha, author, committed_at, subject = parts
+        changes.append(
+            CommitChangeRecord(
+                short_sha=short_sha,
+                sha=sha,
+                author=author,
+                committed_at=committed_at,
+                subject=subject,
+                url=f"{base_url}/{sha}" if base_url else None,
+                changed_files=[_normalize_path(line) for line in lines[1:]],
+            )
+        )
+    return changes
+
+
 def _github_commit_base_url(root: Path) -> str | None:
     try:
         remote = subprocess.check_output(
@@ -587,6 +705,112 @@ def _github_commit_base_url(root: Path) -> str | None:
         repo = remote.removeprefix("https://github.com/").removesuffix(".git")
         return f"https://github.com/{repo}/commit"
     return None
+
+
+def _github_actions_url(root: Path) -> str | None:
+    try:
+        remote = subprocess.check_output(
+            ["git", "config", "--get", "remote.origin.url"],
+            cwd=root,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        ).strip()
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return None
+
+    if remote.startswith("git@github.com:"):
+        repo = remote.removeprefix("git@github.com:").removesuffix(".git")
+        return f"https://github.com/{repo}/actions"
+    if remote.startswith("https://github.com/"):
+        repo = remote.removeprefix("https://github.com/").removesuffix(".git")
+        return f"https://github.com/{repo}/actions"
+    return None
+
+
+def _current_branch(root: Path) -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "branch", "--show-current"],
+            cwd=root,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        ).strip() or "HEAD"
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return "unknown"
+
+
+def _build_code_traces(
+    root: Path, work_items: list[WorkItem], commit_changes: list[CommitChangeRecord]
+) -> list[CodeTraceLink]:
+    branch = _current_branch(root)
+    ci_url = _github_actions_url(root)
+    traces: list[CodeTraceLink] = []
+    for item in work_items:
+        if item.kind != "任务":
+            continue
+        matched_commits = [
+            commit
+            for commit in commit_changes
+            if _commit_matches_work_item(commit, item)
+        ][:5]
+        traces.append(
+            CodeTraceLink(
+                task_id=item.id,
+                task_title=item.title,
+                requirement_id=item.requirement_id,
+                status=item.status,
+                branch=branch,
+                ci_url=ci_url,
+                issue_url=None,
+                commits=matched_commits,
+            )
+        )
+    return traces
+
+
+def _commit_matches_work_item(commit: CommitChangeRecord, item: WorkItem) -> bool:
+    subject = commit.subject.lower()
+    if item.requirement_id.lower() in subject or item.id.lower() in subject:
+        return True
+    ticket_id = item.id.split(":")[-1].lower()
+    if ticket_id in subject:
+        return True
+    return any(
+        _path_matches_deliverable(path, deliverable)
+        for path in commit.changed_files
+        for deliverable in item.deliverables
+    )
+
+
+def _path_matches_deliverable(path: str, deliverable: str) -> bool:
+    normalized_path = _normalize_path(path).lower()
+    normalized_deliverable = _normalize_text(deliverable)
+    if not normalized_deliverable:
+        return False
+    filename = normalized_path.rsplit("/", maxsplit=1)[-1]
+    if normalized_deliverable in normalized_path:
+        return True
+    if normalized_deliverable == "readme":
+        return filename.startswith("readme")
+    if normalized_deliverable == "tests":
+        return normalized_path.startswith("tests/")
+    if normalized_deliverable == "cli":
+        return filename == "cli.py" or normalized_path.endswith("/cli.py")
+    if normalized_deliverable in {"evaluation spec", "metric definitions"}:
+        return normalized_path.startswith("docs/evals/") or normalized_path.startswith("docs/metrics/")
+    if normalized_deliverable in {"skill schema", "promotion policy", "rollback policy"}:
+        return "skill" in normalized_path or "release" in normalized_path
+    return False
+
+
+def _normalize_path(path: str) -> str:
+    return path.replace("\\", "/").strip()
+
+
+def _normalize_text(value: str) -> str:
+    return " ".join(value.lower().replace("_", " ").replace("-", " ").split())
 
 
 def _ticket_to_work_item(
@@ -743,6 +967,39 @@ def _render_task_tree_ticket(ticket: TaskTreeTicketNode) -> str:
       <div class="gates">{gates}</div>
       {deliverables}
     </details>
+    """
+
+
+def _render_code_trace(trace: CodeTraceLink) -> str:
+    commits = "".join(_render_trace_commit(commit) for commit in trace.commits)
+    if not commits:
+        commits = '<div class="trace-empty">暂无匹配提交，等待在 commit message 或交付物路径中绑定任务。</div>'
+    ci_link = f'<a href="{html.escape(trace.ci_url)}">GitHub Actions</a>' if trace.ci_url else "未配置"
+    issue_link = f'<a href="{html.escape(trace.issue_url)}">GitHub Issue</a>' if trace.issue_url else "待绑定"
+    return f"""
+    <article class="trace-card">
+      <h3>{html.escape(trace.task_id)} · {html.escape(trace.task_title)}</h3>
+      <div class="trace-meta">
+        状态：{html.escape(trace.status)} · 分支：{html.escape(trace.branch)} · CI：{ci_link} · Issue：{issue_link}
+      </div>
+      <div class="trace-commits">{commits}</div>
+    </article>
+    """
+
+
+def _render_trace_commit(commit: CommitChangeRecord) -> str:
+    files = "".join(
+        f"<li>{html.escape(path)}</li>" for path in commit.changed_files[:5]
+    )
+    if len(commit.changed_files) > 5:
+        files += f"<li>还有 {len(commit.changed_files) - 5} 个文件</li>"
+    sha = html.escape(commit.short_sha)
+    sha_html = f'<a href="{html.escape(commit.url)}">{sha}</a>' if commit.url else f"<strong>{sha}</strong>"
+    return f"""
+    <div class="trace-commit">
+      {sha_html} {html.escape(commit.subject)}
+      <ul class="trace-files">{files}</ul>
+    </div>
     """
 
 
