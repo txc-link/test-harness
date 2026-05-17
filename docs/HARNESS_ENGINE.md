@@ -13,6 +13,7 @@ python -m harness_engine.cli develop-file docs\requirements\REQ-smoke-input.md -
 python -m harness_engine.cli new rfc "Harness 控制平面"
 python -m harness_engine.cli status
 python -m harness_engine.cli status --write
+python -m harness_engine.cli dashboard
 python -m harness_engine.cli maturity
 python -m harness_engine.cli validate
 ```
@@ -51,3 +52,12 @@ runbook
 - 让成熟度可见。
 - 让进化提案绑定证据。
 - 避免交易、账户风险和 skill 晋升逻辑失控。
+
+## 可视化面板
+
+`dashboard` 命令会从 `docs/requirements/`、`docs/roadmap/`、`docs/sprints/`、`docs/evals/`、`docs/reviews/` 和 `docs/releases/` 聚合需求、任务、门禁和测试状态，并生成：
+
+- `docs/dashboard/status.json`：供 CI、外部面板或 GitHub Pages 读取的结构化状态。
+- `docs/dashboard/index.html`：本地可打开的静态看板，按“待拆解、待开发、开发中、测试完成、门禁受阻”展示工作项。
+
+该面板用于回答三个问题：大需求拆成了哪些任务，哪些任务正在开发，哪些任务已经通过测试或仍被门禁阻塞。

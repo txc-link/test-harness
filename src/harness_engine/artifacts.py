@@ -41,6 +41,7 @@ REQUIRED_DIRECTORIES = [
     "docs/risks",
     "docs/incidents",
     "docs/metrics",
+    "docs/dashboard",
     "data/runtime",
 ]
 
@@ -59,6 +60,8 @@ REQUIRED_DOCS = [
     "docs/CICD.md",
     "docs/PROCESS.md",
     "docs/SKILL_STACK.md",
+    "docs/CODING_GUIDELINES.md",
+    "docs/HARNESS_DASHBOARD_RESEARCH.md",
 ]
 
 

@@ -7,6 +7,7 @@ goals:
 tickets:
 - T-0001
 - T-0002
+- T-0004
 exit_criteria:
 - CLI 的 intake、plan 和 validate 命令在本地通过。
 - 初始 ledger 和 evolution specs 已完成评审。

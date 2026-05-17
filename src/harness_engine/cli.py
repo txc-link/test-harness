@@ -5,6 +5,7 @@ from pathlib import Path
 import typer
 
 from .artifacts import scaffold_from_template
+from .dashboard import write_dashboard
 from .models import Requirement, Roadmap
 from .planner import requirement_from_text, roadmap_from_requirement, sprint_from_roadmap
 from .storage import dump_model, load_model, next_id
@@ -131,6 +132,14 @@ def status(write: bool = False) -> None:
         typer.echo(str(path))
     else:
         typer.echo(markdown)
+
+
+@app.command()
+def dashboard() -> None:
+    """生成需求、任务、门禁和测试状态面板。"""
+    json_path, html_path = write_dashboard(ROOT)
+    typer.echo(str(json_path))
+    typer.echo(str(html_path))
 
 
 @app.command()

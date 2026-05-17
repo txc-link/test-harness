@@ -57,6 +57,8 @@ pytest
 - [CI/CD 方案](docs/CICD.md)
 - [开发环境](docs/DEV_ENVIRONMENT.md)
 - [Harness Skill 栈](docs/SKILL_STACK.md)
+- [任务拆解与可视化调研](docs/HARNESS_DASHBOARD_RESEARCH.md)
+- [编码规范](docs/CODING_GUIDELINES.md)
 
 ## 运行原则
 

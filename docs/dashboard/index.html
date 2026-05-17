@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>投资 Agent Harness 面板</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      background: #f6f7f9;
+      color: #20242a;
+    }
+    body { margin: 0; }
+    header {
+      padding: 24px 32px 16px;
+      border-bottom: 1px solid #d8dde6;
+      background: #ffffff;
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .time { color: #667085; font-size: 14px; }
+    main { padding: 24px 32px 40px; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .metric {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .metric span { display: block; color: #667085; font-size: 13px; }
+    .metric strong { display: block; margin-top: 6px; font-size: 26px; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .panel {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 6px; border-bottom: 1px solid #edf0f5; text-align: left; }
+    th { color: #667085; font-weight: 600; }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(190px, 1fr));
+      gap: 12px;
+      overflow-x: auto;
+    }
+    .column {
+      min-height: 360px;
+      background: #eef1f5;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .column h2 {
+      margin: 2px 4px 10px;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #d8dde6;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 14px; line-height: 1.35; }
+    .meta { color: #667085; font-size: 12px; margin-bottom: 8px; }
+    .gates { display: flex; flex-wrap: wrap; gap: 6px; }
+    .gate {
+      font-size: 11px;
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: #f0f7ee;
+      color: #2d6a35;
+    }
+    .gate.fail { background: #fff2e8; color: #9a3412; }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .board { grid-template-columns: repeat(5, 220px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>投资 Agent Harness 面板</h1>
+    <div class="time">生成时间：2026-05-17T00:51:46.098169+00:00</div>
+  </header>
+  <main>
+    <section class="metrics"><div class="metric"><span>需求总数</span><strong>4</strong></div>
+<div class="metric"><span>任务总数</span><strong>15</strong></div>
+<div class="metric"><span>待拆解</span><strong>1</strong></div>
+<div class="metric"><span>待开发</span><strong>0</strong></div>
+<div class="metric"><span>开发中</span><strong>3</strong></div>
+<div class="metric"><span>测试完成</span><strong>9</strong></div>
+<div class="metric"><span>门禁受阻</span><strong>3</strong></div></section>
+    <section class="layout">
+      <aside class="panel">
+        <h2>需求进度</h2>
+        <table>
+          <thead><tr><th>需求</th><th>完成</th><th>开发中</th><th>受阻</th></tr></thead>
+          <tbody><tr><td>REQ-0001<br>可复盘自我进化投资 Agent</td><td>3/5</td><td>1</td><td>1</td></tr>
+<tr><td>REQ-0002<br>Harness 全流程验证</td><td>3/5</td><td>1</td><td>1</td></tr>
+<tr><td>REQ-0004<br>UTF-8 需求文档 Smoke Test</td><td>3/5</td><td>1</td><td>1</td></tr>
+<tr><td>REQ-0005<br>最强自我进化投资 Agent</td><td>0/0</td><td>0</td><td>0</td></tr></tbody>
+        </table>
+      </aside>
+      <section class="board">
+        <section class="column">
+          <h2>待拆解<span>1</span></h2>
+          
+    <article class="card">
+      <h3>最强自我进化投资 Agent</h3>
+      <div class="meta">REQ-0005 · 需求 · 风险 medium</div>
+      <div class="gates"></div>
+    </article>
+    
+        </section>
+        
+
+        <section class="column">
+          <h2>待开发<span>0</span></h2>
+          
+        </section>
+        
+
+        <section class="column">
+          <h2>开发中<span>3</span></h2>
+          
+    <article class="card">
+      <h3>实现带晋升门禁的版本化 skill registry</h3>
+      <div class="meta">REQ-0001:T-0004 · 任务 · 风险 high</div>
+      <div class="gates"><span class="gate">unit_tests</span><span class="gate">backtest</span><span class="gate fail">shadow_live</span><span class="gate fail">human_approval</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>实现带晋升门禁的版本化 skill registry</h3>
+      <div class="meta">REQ-0002:T-0004 · 任务 · 风险 high</div>
+      <div class="gates"><span class="gate">unit_tests</span><span class="gate">backtest</span><span class="gate fail">shadow_live</span><span class="gate fail">human_approval</span><span class="gate fail">rollback_plan</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>实现带晋升门禁的版本化 skill registry</h3>
+      <div class="meta">REQ-0004:T-0004 · 任务 · 风险 high</div>
+      <div class="gates"><span class="gate">unit_tests</span><span class="gate">backtest</span><span class="gate fail">shadow_live</span><span class="gate fail">human_approval</span><span class="gate fail">rollback_plan</span></div>
+    </article>
+    
+        </section>
+        
+
+        <section class="column">
+          <h2>测试完成<span>9</span></h2>
+          
+    <article class="card">
+      <h3>创建工程 Harness CLI 和产物目录</h3>
+      <div class="meta">REQ-0001:T-0001 · 任务 · 风险 low</div>
+      <div class="gates"><span class="gate">unit_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>定义假设、计划、事件、结果和复盘 ledgers</h3>
+      <div class="meta">REQ-0001:T-0002 · 任务 · 风险 medium</div>
+      <div class="gates"><span class="gate">design_review</span><span class="gate">unit_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>构建账户和 Agent 盈利归因模型</h3>
+      <div class="meta">REQ-0001:T-0003 · 任务 · 风险 high</div>
+      <div class="gates"><span class="gate">design_review</span><span class="gate">integration_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>创建工程 Harness CLI 和产物目录</h3>
+      <div class="meta">REQ-0002:T-0001 · 任务 · 风险 low</div>
+      <div class="gates"><span class="gate">requirement_review</span><span class="gate">unit_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>定义假设、计划、事件、结果和复盘 ledgers</h3>
+      <div class="meta">REQ-0002:T-0002 · 任务 · 风险 medium</div>
+      <div class="gates"><span class="gate">requirement_review</span><span class="gate">design_review</span><span class="gate">unit_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>构建账户和 Agent 盈利归因模型</h3>
+      <div class="meta">REQ-0002:T-0003 · 任务 · 风险 high</div>
+      <div class="gates"><span class="gate">design_review</span><span class="gate">integration_tests</span><span class="gate">data_quality</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>创建工程 Harness CLI 和产物目录</h3>
+      <div class="meta">REQ-0004:T-0001 · 任务 · 风险 low</div>
+      <div class="gates"><span class="gate">requirement_review</span><span class="gate">unit_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>定义假设、计划、事件、结果和复盘 ledgers</h3>
+      <div class="meta">REQ-0004:T-0002 · 任务 · 风险 medium</div>
+      <div class="gates"><span class="gate">requirement_review</span><span class="gate">design_review</span><span class="gate">unit_tests</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>构建账户和 Agent 盈利归因模型</h3>
+      <div class="meta">REQ-0004:T-0003 · 任务 · 风险 high</div>
+      <div class="gates"><span class="gate">design_review</span><span class="gate">integration_tests</span><span class="gate">data_quality</span></div>
+    </article>
+    
+        </section>
+        
+
+        <section class="column">
+          <h2>门禁受阻<span>3</span></h2>
+          
+    <article class="card">
+      <h3>创建 shadow portfolio 评估闭环</h3>
+      <div class="meta">REQ-0001:T-0005 · 任务 · 风险 critical</div>
+      <div class="gates"><span class="gate">integration_tests</span><span class="gate fail">shadow_live</span><span class="gate fail">human_approval</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>创建 shadow portfolio 评估闭环</h3>
+      <div class="meta">REQ-0002:T-0005 · 任务 · 风险 critical</div>
+      <div class="gates"><span class="gate">integration_tests</span><span class="gate">data_quality</span><span class="gate fail">shadow_live</span><span class="gate fail">human_approval</span><span class="gate fail">rollback_plan</span></div>
+    </article>
+    
+    <article class="card">
+      <h3>创建 shadow portfolio 评估闭环</h3>
+      <div class="meta">REQ-0004:T-0005 · 任务 · 风险 critical</div>
+      <div class="gates"><span class="gate">integration_tests</span><span class="gate">data_quality</span><span class="gate fail">shadow_live</span><span class="gate fail">human_approval</span><span class="gate fail">rollback_plan</span></div>
+    </article>
+    
+        </section>
+        </section>
+    </section>
+  </main>
+</body>
+</html>
