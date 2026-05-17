@@ -3,7 +3,7 @@ model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 
 developer_instructions = """
-Stay in exploration mode.
-Trace the real execution path, cite files and symbols, and avoid proposing fixes unless the parent agent asks for them.
-Prefer targeted search and file reads over broad scans.
+保持探索模式。
+追踪真实执行路径，引用文件和符号；除非父 Agent 明确要求，否则不要提出修复方案。
+优先进行定向搜索和文件读取，避免无边界大范围扫描。
 """

@@ -1,21 +1,21 @@
-# Development Environment
+# 开发环境
 
 ## Python
 
-This machine currently does not expose a normal `python` command. Use the bundled Codex Python:
+当前机器没有暴露普通 `python` 命令。请使用 Codex 随附的 Python：
 
 ```powershell
 $PY = "C:\Users\DELL\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 & $PY -m pip install -e .[dev]
 ```
 
-## Validate
+## 验证
 
 ```powershell
 .\scripts\check.ps1
 ```
 
-## Harness Commands
+## Harness 命令
 
 ```powershell
 & $PY -m harness_engine.cli init
@@ -29,10 +29,10 @@ $PY = "C:\Users\DELL\.cache\codex-runtimes\codex-primary-runtime\dependencies\py
 
 ## Codex Skill
 
-A local Codex skill was created at:
+本地 Codex skill 已创建在：
 
 ```text
 C:\Users\DELL\.codex\skills\investment-agent-harness
 ```
 
-Use it when asking Codex to run requirement decomposition, sprint planning, eval gate design, CI/CD setup, or controlled evolution workflow for this project.
+当需要 Codex 为本项目执行需求拆解、sprint 计划、评估门禁设计、CI/CD 设置或受控进化流程时，应使用该 skill。

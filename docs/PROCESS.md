@@ -1,116 +1,115 @@
-# Engineering Process
+# 工程流程
 
-This harness makes the investment-agent project work like a small product and platform organization.
+本 Harness 让投资 Agent 项目像一个小型产品和平台组织一样运行。
 
-## 1. Intake
+## 1. 需求摄入
 
-Raw ideas are converted into structured records:
+原始想法会被转换为结构化记录：
 
-- problem
-- users
-- outcomes
-- scope
-- non-goals
-- risks
-- acceptance criteria
+- 问题。
+- 用户。
+- 预期结果。
+- 范围。
+- 非目标。
+- 风险。
+- 验收标准。
 
-Command:
+命令：
 
 ```powershell
-python -m harness_engine.cli intake "requirement text"
+python -m harness_engine.cli intake "需求文本"
 ```
 
-## 2. Discovery
+## 2. 调研发现
 
-Discovery answers:
+调研需要回答：
 
-- What user pain does this solve?
-- What existing project or module can be reused?
-- What data, model, account, or execution risk exists?
-- What must be tested before release?
+- 这个需求解决什么用户痛点？
+- 哪个已有项目或模块可以复用？
+- 存在哪些数据、模型、账户或执行风险？
+- 发布前必须测试什么？
 
-Discovery output can become a PRD, RFC, or both.
+调研结果可以进入 PRD、RFC，或两者同时进入。
 
 ## 3. PRD / RFC / ADR
 
-Use:
+使用：
 
-- `templates/prd.md` for product behavior.
-- `templates/rfc.md` for architecture or workflow proposals.
-- `docs/adr/` for accepted decisions.
+- `templates/prd.md` 描述产品行为。
+- `templates/rfc.md` 描述架构或工作流提案。
+- `docs/adr/` 记录已接受决策。
 
-## 4. Decomposition
+## 4. 拆解
 
-Each approved requirement is decomposed into:
+每个已批准需求都要拆解为：
 
-- milestones
-- tickets
-- risk level
-- required gates
-- deliverables
+- 里程碑。
+- 任务。
+- 风险等级。
+- 必需门禁。
+- 交付物。
 
-Command:
+命令：
 
 ```powershell
 python -m harness_engine.cli plan docs\requirements\REQ-0001.yaml
 ```
 
-## 5. Scheduling
+## 5. 排期
 
-Sprint plans must include:
+Sprint 计划必须包含：
 
-- goals
-- ticket IDs
-- start and end dates
-- exit criteria
+- 目标。
+- 任务 ID。
+- 开始和结束日期。
+- 退出标准。
 
-Sprint artifacts live in `docs/sprints/`.
+Sprint 产物保存在 `docs/sprints/`。
 
-## 6. Development Gates
+## 6. 开发门禁
 
-Default gates:
+默认门禁：
 
-- requirement review
-- design review
-- unit tests
-- integration tests
-- data quality check
-- backtest
-- shadow-live evaluation
-- human approval
-- rollback plan
+- requirement review。
+- design review。
+- unit tests。
+- integration tests。
+- data quality check。
+- backtest。
+- shadow live evaluation。
+- human approval。
+- rollback plan。
 
-Investment features choose gates by risk. UI-only documentation changes do not need backtest. Skill promotion, signal logic, portfolio logic, and trading rules do.
+投资功能按风险选择门禁。纯 UI 或文档变化不需要 backtest；skill 晋升、信号逻辑、组合逻辑和交易规则必须需要。
 
 ## 7. CI/CD
 
-Current CI:
+当前 CI：
 
-- install package
-- initialize harness artifacts
-- validate harness artifacts
-- run lint
-- run tests
+- 安装包。
+- 初始化 Harness 产物。
+- 校验 Harness 产物。
+- 运行 lint。
+- 运行测试。
 
-CD is intentionally documentation/artifact-only until a real deploy target exists.
+在真实部署目标出现前，CD 只发布文档和规划产物。
 
-## 8. Release
+## 8. 发布
 
-Use `templates/release_checklist.md`. Releases require:
+使用 `templates/release_checklist.md`。发布需要：
 
-- green CI
-- updated docs
-- rollback plan
-- monitoring plan
-- risk review
+- CI 通过。
+- 文档更新。
+- 回滚计划。
+- 监控计划。
+- 风险评审。
 
-## 9. Evolution
+## 9. 进化
 
-Evolution work must follow:
+进化工作必须遵循：
 
 ```text
-runtime traces -> review attribution -> candidate change -> eval gate -> promotion -> monitoring -> rollback
+运行轨迹 -> 复盘归因 -> 候选变更 -> 评估门禁 -> 晋升 -> 监控 -> 回滚
 ```
 
-Do not merge evolution proposals that lack metrics.
-
+缺少指标的进化提案不得合并。

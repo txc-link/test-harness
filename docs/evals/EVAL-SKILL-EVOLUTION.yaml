@@ -1,7 +1,6 @@
 id: EVAL-SKILL-EVOLUTION
-name: Skill Evolution Gate
-objective: Promote only skill versions that prove better through backtest and shadow-live
-  evidence.
+name: Skill 进化门禁
+objective: 只晋升通过回测和 shadow live 证明更优的 skill 版本。
 metrics:
 - hit_rate_by_horizon
 - excess_return_by_horizon
@@ -17,11 +16,11 @@ data_sources:
 - backtest_results
 cadence: weekly_or_after_30_new_signals
 promotion_rules:
-- Candidate skill beats active version on primary metric
-- Candidate skill does not worsen max drawdown
-- Candidate skill passes at least one out-of-sample market regime
-- High-risk changes require human approval
+- 候选 skill 在主指标上优于当前 active 版本。
+- 候选 skill 不恶化最大回撤。
+- 候选 skill 至少通过一个样本外市场 regime。
+- 高风险变更必须人工审批。
 rollback_rules:
-- Shadow-live performance falls below active skill
-- Market regime detector marks the skill out of scope
-- Risk agent flags a repeated failure mode
+- shadow live 表现低于当前 active skill。
+- 市场 regime 检测器判定该 skill 不适用。
+- 风险 Agent 标记重复失败模式。

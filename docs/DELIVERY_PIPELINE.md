@@ -1,48 +1,47 @@
-# Delivery Pipeline
+# 交付流水线
 
-## Local Pipeline
+## 本地流水线
 
 ```text
-bootstrap -> validate artifacts -> lint -> test -> package check
+bootstrap -> 校验 Harness 产物 -> lint -> 测试 -> 包检查
 ```
 
-Command:
+命令：
 
 ```powershell
 .\scripts\check.ps1
 ```
 
-## Pull Request Pipeline
+## Pull Request 流水线
 
 ```text
-schema/artifact validation
+schema 和产物校验
   -> lint
-  -> unit tests
-  -> integration tests when present
-  -> eval smoke tests when present
-  -> review
+  -> 单元测试
+  -> 必要时运行集成测试
+  -> 必要时运行评估 smoke test
+  -> 代码评审
 ```
 
-## Release Pipeline
+## 发布流水线
 
 ```text
 release branch
-  -> freeze scope
-  -> run full validation
-  -> generate release notes
-  -> review rollback plan
-  -> tag release
-  -> deploy docs/artifacts
-  -> monitor
+  -> 冻结范围
+  -> 运行完整验证
+  -> 生成发布说明
+  -> 评审回滚计划
+  -> 打 tag
+  -> 发布文档和产物
+  -> 监控
 ```
 
-## Environment Strategy
+## 环境策略
 
-| Environment | Purpose | Allowed Behavior |
+| 环境 | 用途 | 允许行为 |
 | --- | --- | --- |
-| local | Development | No live trading |
-| test | CI validation | Synthetic fixtures only |
-| staging | Integration and dry runs | Paper trading only |
-| shadow_live | Real market data, no execution | Shadow portfolios only |
-| production | User-facing operation | Human-gated trading only |
-
+| local | 本地开发 | 不允许实盘交易 |
+| test | CI 验证 | 只允许合成 fixture |
+| staging | 集成和 dry run | 只允许模拟交易 |
+| shadow_live | 真实市场数据但不执行交易 | 只允许 shadow portfolio |
+| production | 用户可见运行环境 | 交易必须经过人工门禁 |

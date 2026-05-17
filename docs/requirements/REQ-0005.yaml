@@ -1,52 +1,48 @@
 id: REQ-0005
-title: Strongest Self-Evolving Investment Agent
+title: 最强自我进化投资 Agent
 created_at: '2026-05-17T00:00:00+08:00'
-problem: >-
-  Build a reviewable, replayable, multi-market investment agent that supports
-  research, quant analysis, watchlist monitoring, alerting, portfolio
-  evaluation, account attribution, post-trade review, and controlled
-  self-evolution.
+problem: 建设一个可评审、可回放、覆盖多市场的投资 Agent，支持投研、量化分析、观察池盯盘、告警、组合评估、账户归因、交易后复盘和受控自我进化。
 target_users:
-  - individual investors
-  - small investment research teams
-  - quantitative strategy researchers
-  - developers building private investment agents
+- 个人投资者
+- 小型投研团队
+- 量化策略研究者
+- 构建私有投资 Agent 的开发者
 outcomes:
-  - Multi-market investment workflows are unified across research, monitoring, alerts, review, and evaluation.
-  - Every recommendation becomes a replayable hypothesis with evidence, invalidation rules, benchmark, and review date.
-  - Account performance separates benchmark beta, strategy contribution, agent contribution, and user execution impact.
-  - Candidate skills and strategy changes can evolve only through evidence-based gates.
-  - The system remains human-gated for live trading and high-risk account behavior.
+- 多市场投资工作流在投研、监控、告警、复盘和评估之间统一。
+- 每条推荐都成为可回放的假设，包含证据、失效条件、基准和复盘日期。
+- 账户表现能够区分 benchmark beta、strategy contribution、agent contribution 和 user execution impact。
+- 候选 skill 和策略变化只能通过基于证据的门禁进化。
+- 系统对实盘交易和高风险账户行为保持人工门禁。
 scope:
-  - A-share, US, Hong Kong, Japan, and Asia-Pacific market watchlists and analysis
-  - investment hypothesis ledger
-  - trade plan ledger
-  - alert ledger
-  - execution ledger
-  - review ledger
-  - evolution ledger
-  - multi-agent research workflow
-  - quant backtest and shadow portfolio workflow
-  - account profitability attribution
-  - controlled skill and config evolution workflow
-  - local and GitHub Actions CI
+- A 股、美股、港股、日股和亚太市场观察池与分析。
+- 投资假设 ledger。
+- 交易计划 ledger。
+- 告警 ledger。
+- 执行 ledger。
+- 复盘 ledger。
+- 进化 ledger。
+- 多 Agent 投研工作流。
+- 量化回测和 shadow portfolio 工作流。
+- 账户盈利归因。
+- 受控 skill 和 config 进化工作流。
+- 本地和 GitHub Actions CI。
 non_goals:
-  - Do not enable live automated trading by default.
-  - Do not perform online model-weight self-training in the first phase.
-  - Do not treat LLM reflection as evidence of improvement.
-  - Do not make guaranteed-return claims.
-  - Do not bypass broker, data-provider, exchange, or regulatory requirements.
+- 默认不启用实盘自动交易。
+- 第一阶段不做模型权重在线自训练。
+- 不把 LLM 自我反思当作有效改进证据。
+- 不承诺收益。
+- 不绕过券商、数据供应商、交易所或监管要求。
 risks:
-  - Market data may be delayed, stale, incomplete, or incorrectly adjusted.
-  - Agent conclusions may hallucinate, overfit, or overstate confidence.
-  - Strategy backtests may fail out of sample or decay by market regime.
-  - Alert fatigue may cause users to ignore important risk events.
-  - Self-evolution may promote changes that improve historical metrics but weaken live behavior.
-  - Live account integration may introduce operational, privacy, and compliance risk.
+- 市场数据可能延迟、过期、不完整或复权错误。
+- Agent 结论可能幻觉、过拟合或过度自信。
+- 策略回测可能样本外失效或随市场 regime 衰退。
+- 告警疲劳可能导致用户忽视重要风险事件。
+- 自我进化可能提升历史指标却削弱真实运行表现。
+- 真实账户集成可能带来运营、隐私和合规风险。
 acceptance_criteria:
-  - A Chinese PRD can be captured as a structured requirement artifact.
-  - Roadmap, sprint, ticket, test plan, and review evidence can be generated from the requirement.
-  - Investment ledgers are defined for hypothesis, trade plan, alert, execution, review, and evolution records.
-  - Account evaluation includes benchmark, strategy, agent, and user-execution attribution.
-  - Skill evolution requires evaluation, backtest, shadow live, human approval, monitoring, and rollback gates.
-  - Local validation and GitHub Actions CI pass.
+- 中文 PRD 可以被记录为结构化需求产物。
+- 可以从需求生成 roadmap、sprint、ticket、test plan 和 review 证据。
+- 已定义 hypothesis、trade plan、alert、execution、review 和 evolution ledger。
+- 账户评估包含 benchmark、strategy、agent 和 user execution attribution。
+- Skill 进化要求 evaluation、backtest、shadow live、human approval、monitoring 和 rollback gates。
+- 本地验证和 GitHub Actions CI 通过。

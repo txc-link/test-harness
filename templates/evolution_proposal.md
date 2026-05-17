@@ -1,23 +1,28 @@
-# Evolution Proposal: <Title>
+# 进化提案：<Title>
 
-## Candidate Change
+## 状态
 
-## Source Evidence
+candidate
 
-- Failed hypotheses:
-- Successful trajectories:
-- User corrections:
-- Account metrics:
+## 来源
 
-## Affected Skill Or Config
+## 失败模式或机会
 
-## Expected Improvement
+## 候选变更
 
-## Evaluation Plan
+## 影响范围
 
-## Promotion Criteria
+## 评估指标
 
-## Rollback Criteria
+## 必需门禁
 
-## Approval
+- [ ] 离线评估
+- [ ] 回测
+- [ ] Shadow live
+- [ ] 人工审批
 
+## 晋升规则
+
+## 回滚规则
+
+## 监控计划

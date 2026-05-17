@@ -1,26 +1,25 @@
-name: Requirement
-description: Capture a product or platform requirement
+name: 需求
+description: 记录产品或平台需求
 title: "[REQ] "
 labels: ["requirement"]
 body:
   - type: textarea
     id: problem
     attributes:
-      label: Problem
+      label: 问题
     validations:
       required: true
   - type: textarea
     id: outcome
     attributes:
-      label: Desired outcome
+      label: 期望结果
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Acceptance criteria
+      label: 验收标准
   - type: textarea
     id: risk
     attributes:
-      label: Risks
-
+      label: 风险

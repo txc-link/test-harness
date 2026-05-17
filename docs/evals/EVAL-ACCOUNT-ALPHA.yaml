@@ -1,7 +1,6 @@
 id: EVAL-ACCOUNT-ALPHA
-name: Account Profitability Attribution
-objective: Measure whether the agent improves account outcomes after separating market
-  movement and user execution.
+name: 账户盈利归因评估
+objective: 在剥离市场波动和用户执行影响后，衡量 Agent 是否真实改善账户结果。
 metrics:
 - total_return
 - benchmark_excess_return
@@ -20,10 +19,10 @@ data_sources:
 - market_bars
 cadence: daily_close_and_weekly_review
 promotion_rules:
-- Agent-advised shadow portfolio outperforms benchmark over the evaluation window
-- Drawdown does not exceed approved risk budget
-- Confidence calibration error improves or remains stable
+- Agent 建议的 shadow portfolio 在评估窗口内跑赢基准。
+- 回撤不超过已批准的风险预算。
+- 置信度校准误差改善或保持稳定。
 rollback_rules:
-- Excess drawdown breaches limit
-- Signal false-positive rate exceeds threshold
-- User override success rate is materially higher than agent acceptance success rate
+- 超额回撤突破限制。
+- 信号误报率超过阈值。
+- 用户覆盖 Agent 建议后的成功率显著高于采纳 Agent 建议的成功率。

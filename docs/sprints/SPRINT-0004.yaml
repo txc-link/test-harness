@@ -2,12 +2,12 @@ id: SPRINT-0004
 starts_on: '2026-05-16'
 ends_on: '2026-05-30'
 goals:
-- Make the engineering harness runnable end to end
-- Lock the ledger schema needed for reviewable investment decisions
+- 让工程 Harness 可以端到端运行。
+- 固化可复盘投资决策所需的 ledger schema。
 tickets:
 - T-0001
 - T-0002
 exit_criteria:
-- CLI intake, plan, and validate commands pass locally
-- Initial ledger and evolution specs are reviewed
-- Unit tests pass
+- CLI 的 intake、plan 和 validate 命令在本地通过。
+- 初始 ledger 和 evolution specs 已完成评审。
+- 单元测试通过。

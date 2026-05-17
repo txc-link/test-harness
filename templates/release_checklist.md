@@ -1,22 +1,21 @@
-# Release Checklist: <Version>
+# 发布清单：<Title>
 
-## Scope
+## 发布范围
 
-## Included Tickets
+## 包含任务
 
-## Validation
+## 验证结果
 
-- [ ] Harness validation passed
-- [ ] Lint passed
-- [ ] Tests passed
-- [ ] Eval gates passed
-- [ ] Rollback plan reviewed
+- [ ] Harness 校验通过
+- [ ] lint 通过
+- [ ] 测试通过
+- [ ] 投资评估通过
+- [ ] 风险评审完成
 
-## Risk Review
+## 迁移说明
 
-## Deployment Plan
+## 回滚计划
 
-## Rollback Plan
+## 监控计划
 
-## Monitoring Plan
-
+## 审批

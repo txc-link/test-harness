@@ -1,18 +1,20 @@
-# Postmortem: <Incident Or Failure>
+# 复盘：<Title>
 
-## Summary
+## 摘要
 
-## Timeline
+## 时间线
 
-## Impact
+## 影响
 
-## Root Cause
+## 根因
 
-## Detection Gap
+## 检测方式
 
-## Resolution
+## 处置过程
 
-## Preventive Actions
+## 经验教训
 
-## Follow-Up Tickets
+## 后续行动
 
+| 行动 | 负责人 | 截止日期 | 状态 |
+| --- | --- | --- | --- |

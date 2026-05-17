@@ -1,102 +1,58 @@
-# ECC for Codex CLI
+# Codex CLI 的 ECC 补充说明
 
-This supplements the root `AGENTS.md` with Codex-specific guidance.
+本文档补充根目录 `AGENTS.md`，用于说明 Codex/ECC 相关约定。
 
-## Model Recommendations
+## 模型建议
 
-| Task Type | Recommended Model |
-|-----------|------------------|
-| Routine coding, tests, formatting | GPT 5.4 |
-| Complex features, architecture | GPT 5.4 |
-| Debugging, refactoring | GPT 5.4 |
-| Security review | GPT 5.4 |
+| 任务类型 | 建议模型 |
+| --- | --- |
+| 常规编码、测试、格式化 | GPT 5.4 |
+| 复杂功能、架构设计 | GPT 5.4 |
+| 调试、重构 | GPT 5.4 |
+| 安全评审 | GPT 5.4 |
 
-## Skills Discovery
+## Skills 发现
 
-Skills are auto-loaded from `.agents/skills/`. Each skill contains:
-- `SKILL.md` — Detailed instructions and workflow
-- `agents/openai.yaml` — Codex interface metadata
+Skills 从 `.agents/skills/` 自动加载。每个 skill 通常包含：
 
-Available skills:
-- tdd-workflow — Test-driven development with 80%+ coverage
-- security-review — Comprehensive security checklist
-- coding-standards — Universal coding standards
-- frontend-patterns — React/Next.js patterns
-- frontend-slides — Viewport-safe HTML presentations and PPTX-to-web conversion
-- article-writing — Long-form writing from notes and voice references
-- content-engine — Platform-native social content and repurposing
-- market-research — Source-attributed market and competitor research
-- investor-materials — Decks, memos, models, and one-pagers
-- investor-outreach — Personalized investor outreach and follow-ups
-- backend-patterns — API design, database, caching
-- e2e-testing — Playwright E2E tests
-- eval-harness — Eval-driven development
-- strategic-compact — Context management
-- api-design — REST API design patterns
-- verification-loop — Build, test, lint, typecheck, security
-- deep-research — Multi-source research with firecrawl and exa MCPs
-- exa-search — Neural search via Exa MCP for web, code, and companies
-- claude-api — Anthropic Claude API patterns and SDKs
-- x-api — X/Twitter API integration for posting, threads, and analytics
-- crosspost — Multi-platform content distribution
-- fal-ai-media — AI image/video/audio generation via fal.ai
-- dmux-workflows — Multi-agent orchestration with dmux
+- `SKILL.md`：详细说明和工作流。
+- `agents/openai.yaml`：Codex 接口元数据。
+
+常用 skills：
+
+- `tdd-workflow`：测试驱动开发。
+- `security-review`：安全检查清单。
+- `coding-standards`：通用编码标准。
+- `frontend-patterns`：React/Next.js 模式。
+- `e2e-testing`：Playwright 端到端测试。
+- `eval-harness`：评估驱动开发。
+- `verification-loop`：构建、测试、lint、类型检查和安全检查。
+- `deep-research`：多源研究。
+- `dmux-workflows`：多 Agent 编排。
 
 ## MCP Servers
 
-Treat the project-local `.codex/config.toml` as the default Codex baseline for ECC. The current ECC baseline enables GitHub, Context7, Exa, Memory, Playwright, and Sequential Thinking; add heavier extras in `~/.codex/config.toml` only when a task actually needs them.
+项目本地 `.codex/config.toml` 是 ECC 的默认 Codex 基线。当前基线启用 GitHub、Context7、Exa、Memory、Playwright 和 Sequential Thinking。更重的扩展只应在任务真正需要时放入 `~/.codex/config.toml`。
 
-ECC's canonical Codex section name is `[mcp_servers.context7]`. The launcher package remains `@upstash/context7-mcp`; only the TOML section name is normalized for consistency with `codex mcp list` and the reference config.
+ECC 的规范 Codex section 名称是 `[mcp_servers.context7]`。启动包仍是 `@upstash/context7-mcp`。
 
-### Automatic config.toml merging
+## 外部操作边界
 
-The sync script (`scripts/sync-ecc-to-codex.sh`) uses a Node-based TOML parser to safely merge ECC MCP servers into `~/.codex/config.toml`:
+联网工具默认按只读方式使用。可以在用户请求范围内搜索、检查和起草；但发布、推送、合并、打开付费任务、派发远程 Agent、修改第三方资源或改动凭据前，必须获得明确授权。
 
-- **Add-only by default** — missing ECC servers are appended; existing servers are never modified or removed.
-- **7 managed servers** — Supabase, Playwright, Context7, Exa, GitHub, Memory, Sequential Thinking.
-- **Canonical naming** — ECC manages Context7 as `[mcp_servers.context7]`; legacy `[mcp_servers.context7-mcp]` entries are treated as aliases during updates.
-- **Package-manager aware** — uses the project's configured package manager (npm/pnpm/yarn/bun) instead of hardcoding `pnpm`.
-- **Drift warnings** — if an existing server's config differs from the ECC recommendation, the script logs a warning.
-- **`--update-mcp`** — explicitly replaces all ECC-managed servers with the latest recommended config (safely removes subtables like `[mcp_servers.supabase.env]`).
-- **User config is always preserved** — custom servers, args, env vars, and credentials outside ECC-managed sections are never touched.
+当授权不清晰时，先生成本地计划或草稿，不直接执行外部动作。除非用户明确要求，不要修改用户配置和私有状态。
 
-## External Action Boundaries
+## 多 Agent 支持
 
-Treat networked tools as read-only by default. Search, inspect, and draft freely within the user's requested scope, but require explicit user approval before posting, publishing, pushing, merging, opening paid jobs, dispatching remote agents, changing third-party resources, or modifying credentials.
+Codex 支持通过 `features.multi_agent` 使用多 Agent 工作流。
 
-When approval is ambiguous, produce a local plan or draft artifact instead of taking the external action. Preserve user config and private state unless the user specifically asks for a scoped change.
+- 在 `.codex/config.toml` 中通过 `[features] multi_agent = true` 启用。
+- 在 `[agents.<name>]` 下定义项目本地角色。
+- 每个角色指向 `.codex/agents/` 下的 TOML 配置。
+- 在 Codex CLI 中使用 `/agent` 查看和引导子 Agent。
 
-## Multi-Agent Support
+本仓库示例角色：
 
-Codex now supports multi-agent workflows behind the experimental `features.multi_agent` flag.
-
-- Enable it in `.codex/config.toml` with `[features] multi_agent = true`
-- Define project-local roles under `[agents.<name>]`
-- Point each role at a TOML layer under `.codex/agents/`
-- Use `/agent` inside Codex CLI to inspect and steer child agents
-
-Sample role configs in this repo:
-- `.codex/agents/explorer.toml` — read-only evidence gathering
-- `.codex/agents/reviewer.toml` — correctness/security review
-- `.codex/agents/docs-researcher.toml` — API and release-note verification
-
-## Key Differences from Claude Code
-
-| Feature | Claude Code | Codex CLI |
-|---------|------------|-----------|
-| Hooks | 8+ event types | Not yet supported |
-| Context file | CLAUDE.md + AGENTS.md | AGENTS.md only |
-| Skills | Skills loaded via plugin | `.agents/skills/` directory |
-| Commands | `/slash` commands | Instruction-based |
-| Agents | Subagent Task tool | Multi-agent via `/agent` and `[agents.<name>]` roles |
-| Security | Hook-based enforcement | Instruction + sandbox |
-| MCP | Full support | Supported via `config.toml` and `codex mcp add` |
-
-## Security Without Hooks
-
-Since Codex lacks hooks, security enforcement is instruction-based:
-1. Always validate inputs at system boundaries
-2. Never hardcode secrets — use environment variables
-3. Run `npm audit` / `pip audit` before committing
-4. Review `git diff` before every push
-5. Use `sandbox_mode = "workspace-write"` in config
+- `.codex/agents/explorer.toml`：只读证据收集。
+- `.codex/agents/reviewer.toml`：正确性和安全评审。
+- `.codex/agents/docs-researcher.toml`：文档和 API 研究。

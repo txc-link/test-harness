@@ -1,25 +1,24 @@
-# ADR-0001: Controlled Offline Evolution
+# ADR-0001：受控离线进化
 
-## Status
+## 状态
 
-Accepted
+已接受
 
-## Context
+## 背景
 
-The investment agent must improve from account results, failed hypotheses, user corrections, and strategy evaluations. Because investment decisions affect real capital, the agent must not freely rewrite live trading rules or promote strategies without evidence.
+投资 Agent 必须从账户结果、失败假设、用户修正和策略评估中改进。由于投资决策会影响真实资金，Agent 不得自由改写实盘交易规则，也不得在缺少证据时晋升策略或 skill。
 
-## Decision
+## 决策
 
-Use a controlled offline evolution loop:
+采用受控离线进化闭环：
 
 ```text
-runtime learning -> review attribution -> candidate skill/config generation -> backtest -> shadow-live -> human approval -> promotion -> rollback monitoring
+运行学习 -> 复盘归因 -> 候选 skill/config 生成 -> backtest -> shadow live -> 人工审批 -> 晋升 -> 回滚监控
 ```
 
-## Consequences
+## 后果
 
-- Runtime learning can update memory and examples.
-- High-risk strategy changes require evaluation gates.
-- Skill versions are promoted only with measurable improvement.
-- Rollback is part of the lifecycle, not an afterthought.
-
+- 运行学习可以更新记忆和示例。
+- 高风险策略变化必须通过评估门禁。
+- skill 版本只有在可衡量改进后才能晋升。
+- 回滚是生命周期的一部分，不是事后补救。

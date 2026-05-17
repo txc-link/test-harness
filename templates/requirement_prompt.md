@@ -1,20 +1,19 @@
-# Requirement Intake Prompt
+# 需求输入提示：<Title>
 
-Turn the user request into:
+请用中文描述：
 
-- Problem
-- Target users
-- Desired outcomes
-- Scope
-- Non-goals
-- Risks
-- Acceptance criteria
+## 背景
 
-For investment-agent work, always ask whether the feature affects:
+## 用户是谁
 
-- Live trading
-- Account risk
-- Skill promotion
-- User-visible recommendations
-- Evaluation metrics
+## 要解决的问题
 
+## 期望结果
+
+## 范围
+
+## 不做什么
+
+## 风险
+
+## 验收标准

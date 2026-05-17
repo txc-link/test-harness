@@ -1,5 +1,21 @@
-# Risk Register
+# 风险登记：<Title>
 
-| ID | Risk | Class | Severity | Likelihood | Owner | Mitigation | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+## 风险摘要
 
+## 风险类别
+
+## 触发条件
+
+## 影响范围
+
+## 可能性
+
+## 严重程度
+
+## 缓解措施
+
+## 负责人
+
+## 复查节奏
+
+## 状态

@@ -1,43 +1,29 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Everything Claude Code (ECC) — Codex Reference Configuration
-#
-# Copy this file to ~/.codex/config.toml for global defaults, or keep it in
-# the project root as .codex/config.toml for project-local settings.
-#
-# Official docs:
-# - https://developers.openai.com/codex/config-reference
-# - https://developers.openai.com/codex/multi-agent
+# Everything Claude Code（ECC）的项目本地 Codex 参考配置。
+# 全局默认值请放在 ~/.codex/config.toml；本文件只描述本仓库期望。
 
-# Model selection
-# Leave `model` and `model_provider` unset so Codex CLI uses its current
-# built-in defaults. Uncomment and pin them only if you intentionally want
-# repo-local or global model overrides.
+# 模型选择保持为空，让 Codex CLI 使用当前内置默认值。
+# 只有在明确需要固定模型时，才在本文件或全局配置中设置 model。
 
-# Top-level runtime settings (current Codex schema)
+# 顶层运行时设置。
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 web_search = "live"
 
-# External notifications receive a JSON payload on stdin.
+# 外部通知会从 stdin 接收 JSON payload。
 notify = [
   "terminal-notifier",
   "-title", "Codex ECC",
-  "-message", "Task completed!",
+  "-message", "任务已完成",
   "-sound", "default",
 ]
 
-# Persistent instructions are appended to every prompt (additive, unlike
-# model_instructions_file which replaces AGENTS.md).
-persistent_instructions = "Follow project AGENTS.md guidelines. Use available MCP servers when they can help."
+# 追加到每次提示的持久说明。
+persistent_instructions = "遵循项目 AGENTS.md。可用 MCP server 能帮助任务时优先使用。"
 
-# model_instructions_file replaces built-in instructions instead of AGENTS.md,
-# so leave it unset unless you intentionally want a single override file.
-# model_instructions_file = "/absolute/path/to/instructions.md"
-
-# MCP servers
-# Keep the default project set lean. API-backed servers inherit credentials from
-# the launching environment or can be supplied by a user-level ~/.codex/config.toml.
+# MCP servers。
+# API 凭据应来自启动环境或用户级 ~/.codex/config.toml，不要写入本仓库。
 [mcp_servers.github]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-github"]
@@ -45,8 +31,6 @@ startup_timeout_sec = 30
 
 [mcp_servers.context7]
 command = "npx"
-# Canonical Codex section name is `context7`; the package itself remains
-# `@upstash/context7-mcp`.
 args = ["-y", "@upstash/context7-mcp@latest"]
 startup_timeout_sec = 30
 
@@ -68,29 +52,11 @@ command = "npx"
 args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
 startup_timeout_sec = 30
 
-# Additional MCP servers (uncomment as needed):
-# [mcp_servers.supabase]
-# command = "npx"
-# args = ["-y", "supabase-mcp-server@latest", "--read-only"]
-#
-# [mcp_servers.firecrawl]
-# command = "npx"
-# args = ["-y", "firecrawl-mcp"]
-#
-# [mcp_servers.fal-ai]
-# command = "npx"
-# args = ["-y", "fal-ai-mcp-server"]
-#
-# [mcp_servers.cloudflare]
-# command = "npx"
-# args = ["-y", "@cloudflare/mcp-server-cloudflare"]
-
 [features]
-# Codex multi-agent collaboration is stable and on by default in current builds.
-# Keep the explicit toggle here so the repo documents its expectation clearly.
+# 明确记录本仓库期望支持多 Agent 协作。
 multi_agent = true
 
-# Profiles — switch with `codex -p <name>`
+# profile 可通过 codex -p <name> 切换。
 [profiles.strict]
 approval_policy = "on-request"
 sandbox_mode = "read-only"
@@ -102,19 +68,18 @@ sandbox_mode = "workspace-write"
 web_search = "live"
 
 [agents]
-# Multi-agent role limits and local role definitions.
-# These map to `.codex/agents/*.toml` and mirror the repo's explorer/reviewer/docs workflow.
+# 多 Agent 角色限制和项目本地角色定义。
 max_threads = 6
 max_depth = 1
 
 [agents.explorer]
-description = "Read-only codebase explorer for gathering evidence before changes are proposed."
+description = "只读代码库探索者，用于在变更前收集证据。"
 config_file = "agents/explorer.toml"
 
 [agents.reviewer]
-description = "PR reviewer focused on correctness, security, and missing tests."
+description = "PR 评审者，关注正确性、安全性和缺失测试。"
 config_file = "agents/reviewer.toml"
 
 [agents.docs_researcher]
-description = "Documentation specialist that verifies APIs, framework behavior, and release notes."
+description = "文档研究者，用于验证 API、框架行为和发布说明。"
 config_file = "agents/docs-researcher.toml"

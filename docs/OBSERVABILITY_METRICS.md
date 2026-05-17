@@ -1,47 +1,46 @@
-# Observability And Metrics
+# 可观测性与指标
 
-The harness must measure both engineering delivery and investment-agent performance.
+Harness 必须同时衡量工程交付质量和投资 Agent 表现。
 
-## Engineering Metrics
+## 工程指标
 
-- requirement cycle time
-- tickets completed per sprint
-- escaped defects
-- CI pass rate
-- test coverage trend
-- release frequency
-- rollback count
+- 需求周期时间。
+- 每个 sprint 完成的任务数。
+- 逃逸缺陷数量。
+- CI 通过率。
+- 测试覆盖率趋势。
+- 发布频率。
+- 回滚次数。
 
-## Agent Metrics
+## Agent 指标
 
-- recommendation count
-- hypothesis review completion rate
-- confidence calibration error
-- accepted recommendation return
-- rejected recommendation opportunity cost
-- user override success rate
-- failure mode frequency
+- 推荐数量。
+- 假设复盘完成率。
+- 置信度校准误差。
+- 被采纳推荐收益。
+- 被拒绝推荐的机会成本。
+- 用户覆盖 Agent 建议后的成功率。
+- 失败模式频率。
 
-## Account Metrics
+## 账户指标
 
-- total return
-- benchmark excess return
-- max drawdown
-- volatility
-- Sharpe ratio
-- Calmar ratio
-- win rate
-- profit factor
-- turnover
-- fees and slippage
+- 总收益。
+- 相对基准超额收益。
+- 最大回撤。
+- 波动率。
+- 夏普比率。
+- 卡玛比率。
+- 胜率。
+- 盈亏比。
+- 换手率。
+- 费用和滑点。
 
-## Skill Metrics
+## Skill 指标
 
-- hit rate by horizon
-- excess return by horizon
-- false-positive rate
-- max adverse excursion
-- market-regime coverage
-- decay after promotion
-- rollback rate
-
+- 分周期命中率。
+- 分周期超额收益。
+- 误报率。
+- 最大不利波动。
+- 市场 regime 覆盖度。
+- 晋升后衰减。
+- 回滚率。

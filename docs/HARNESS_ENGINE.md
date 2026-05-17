@@ -1,25 +1,25 @@
-# Harness Engine
+# Harness 引擎
 
-The Harness Engine is the local control plane for this project. It converts goals into durable artifacts, validates the engineering environment, and reports maturity.
+Harness 引擎是本项目的本地控制平面。它把目标转成持久化产物，校验工程环境，并报告 Harness 成熟度。
 
-## Commands
+## 命令
 
 ```powershell
 python -m harness_engine.cli init
-python -m harness_engine.cli intake "requirement text"
+python -m harness_engine.cli intake "需求文本"
 python -m harness_engine.cli plan docs\requirements\REQ-0001.yaml
-python -m harness_engine.cli develop "requirement text" --title "Harness Status Command"
-python -m harness_engine.cli develop-file docs\requirements\REQ-smoke-input.md --title "Harness Status Command"
-python -m harness_engine.cli new rfc "Harness Control Plane"
+python -m harness_engine.cli develop "需求文本" --title "Harness 状态命令"
+python -m harness_engine.cli develop-file docs\requirements\REQ-smoke-input.md --title "Harness 状态命令"
+python -m harness_engine.cli new rfc "Harness 控制平面"
 python -m harness_engine.cli status
 python -m harness_engine.cli status --write
 python -m harness_engine.cli maturity
 python -m harness_engine.cli validate
 ```
 
-## Artifact Scaffolding
+## 产物脚手架
 
-Supported `new` kinds:
+`new` 支持的类型：
 
 ```text
 prd
@@ -33,21 +33,21 @@ risk-register
 runbook
 ```
 
-## Development Flow
+## 开发闭环
 
-`develop` is the smallest runnable Harness loop:
+`develop` 和 `develop-file` 是最小可运行 Harness 闭环：
 
-1. Capture the raw requirement text or UTF-8 requirement document as `docs/requirements/REQ-*.yaml`.
-2. Decompose it into `docs/roadmap/REQ-*-roadmap.yaml`.
-3. Create the first sprint as `docs/sprints/SPRINT-*.yaml`.
-4. Scaffold PRD, RFC, ticket, and test-plan documents.
-5. Write a flow evidence report in `docs/reviews/FLOW-*.md`.
-6. Run schema validation before returning generated paths.
+1. 将原始需求文本或 UTF-8 需求文档记录为 `docs/requirements/REQ-*.yaml`。
+2. 拆解为 `docs/roadmap/REQ-*-roadmap.yaml`。
+3. 创建第一个 sprint：`docs/sprints/SPRINT-*.yaml`。
+4. 生成 PRD、RFC、ticket 和 test plan。
+5. 在 `docs/reviews/FLOW-*.md` 写入流程证据报告。
+6. 返回生成路径前运行 schema 校验。
 
-## Control Plane Responsibilities
+## 控制平面职责
 
-- Keep project workflow artifacts discoverable.
-- Keep quality gates explicit.
-- Make maturity visible.
-- Keep evolution proposals tied to evidence.
-- Avoid uncontrolled changes to trading, account-risk, and skill promotion behavior.
+- 让项目工作流产物可发现。
+- 让质量门禁显式化。
+- 让成熟度可见。
+- 让进化提案绑定证据。
+- 避免交易、账户风险和 skill 晋升逻辑失控。

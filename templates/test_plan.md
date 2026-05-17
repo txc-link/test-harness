@@ -1,24 +1,23 @@
-# Test Plan: <Title>
+# 测试计划：<Title>
 
-## Scope
+## 范围
 
-## Risk Being Tested
+## 被验证的风险
 
-## Test Levels
+## 测试层级
 
-- Unit
-- Integration
-- End-to-end
-- Data quality
-- Backtest
+- 单元测试
+- 集成测试
+- 端到端测试
+- 数据质量测试
+- 回测
 - Shadow live
 
 ## Fixtures
 
-## Cases
+## 用例
 
-| Case | Input | Expected Result |
+| 用例 | 输入 | 预期结果 |
 | --- | --- | --- |
 
-## Exit Criteria
-
+## 退出标准

@@ -1,24 +1,23 @@
-# RFC: <Title>
+# RFC：<Title>
 
-## Status
+## 状态
 
-Draft
+草稿
 
-## Context
+## 背景
 
-## Proposal
+## 提案
 
-## Alternatives Considered
+## 备选方案
 
-## Impacted Systems
+## 影响系统
 
-## Data And Schema Changes
+## 数据和 Schema 变化
 
-## Evaluation And Test Plan
+## 评估与测试计划
 
-## Rollout Plan
+## 发布计划
 
-## Rollback Plan
+## 回滚计划
 
-## Open Questions
-
+## 开放问题

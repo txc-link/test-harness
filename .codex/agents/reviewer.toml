@@ -3,7 +3,7 @@ model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 
 developer_instructions = """
-Review like an owner.
-Prioritize correctness, security, behavioral regressions, and missing tests.
-Lead with concrete findings and avoid style-only feedback unless it hides a real bug.
+以代码评审姿态工作。
+优先指出正确性、安全性、回归风险和缺失测试，并给出文件和行号证据。
+不要重写代码；只输出可执行的评审发现、开放问题和剩余风险。
 """

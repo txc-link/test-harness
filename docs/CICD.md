@@ -1,12 +1,12 @@
-# CI/CD Plan
+# CI/CD 方案
 
-## Current CI
+## 当前 CI
 
-GitHub Actions workflow:
+GitHub Actions 工作流：
 
 - `.github/workflows/ci.yml`
 
-Runs:
+运行内容：
 
 ```text
 python -m pip install -e .[dev]
@@ -15,36 +15,33 @@ ruff check .
 pytest
 ```
 
-## Local Equivalent
-
-Use:
+## 本地等价命令
 
 ```powershell
 .\scripts\check.ps1
 ```
 
-## CD Strategy
+## CD 策略
 
-Phase 1 has no production deployment. CD means publishing validated planning artifacts.
+第一阶段没有生产部署目标。此时 CD 表示发布已经验证的规划产物和文档。
 
-Phase 2 should add:
+第二阶段应加入：
 
-- artifact packaging
-- docs site build
-- versioned schema release
+- 产物打包。
+- 文档站点构建。
+- schema 版本化发布。
 
-Phase 3 should add:
+第三阶段应加入：
 
-- staging deploy
-- migration checks
-- shadow-live worker deploy
-- manual promotion approval
+- staging 部署。
+- 迁移检查。
+- shadow live worker 部署。
+- 手动晋升审批。
 
-## Required Release Gates
+## 必需发布门禁
 
-- CI green
-- `docs/requirements/` updated for new scope
-- `docs/roadmap/` updated for milestone changes
-- `docs/evals/` updated for investment evaluation changes
-- ADR added for architecture or safety policy changes
-
+- CI 通过。
+- 新范围已经更新 `docs/requirements/`。
+- 里程碑变化已经更新 `docs/roadmap/`。
+- 投资评估变化已经更新 `docs/evals/`。
+- 架构或安全策略变化已经新增 ADR。

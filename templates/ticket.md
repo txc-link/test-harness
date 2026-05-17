@@ -1,28 +1,27 @@
-# Ticket: <Title>
+# 任务：<Title>
 
-## Requirement
+## 关联需求
 
-## Problem
+## 问题
 
-## Scope
+## 范围
 
-## Out Of Scope
+## 范围外
 
-## Deliverables
+## 交付物
 
-## Gates
+## 门禁
 
-- [ ] Requirement review
-- [ ] Design review
-- [ ] Unit tests
-- [ ] Integration tests
-- [ ] Backtest
+- [ ] 需求评审
+- [ ] 设计评审
+- [ ] 单元测试
+- [ ] 集成测试
+- [ ] 回测
 - [ ] Shadow live
-- [ ] Human approval
+- [ ] 人工审批
 
-## Acceptance Criteria
+## 验收标准
 
-## Risks
+## 风险
 
-## Notes
-
+## 备注

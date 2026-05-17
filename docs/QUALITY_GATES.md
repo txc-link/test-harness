@@ -1,37 +1,36 @@
-# Quality Gates
+# 质量门禁
 
-Quality gates determine whether work can move forward.
+质量门禁决定工作是否可以进入下一阶段。投资 Agent 的门禁不仅覆盖软件质量，也覆盖数据、模型、策略和账户风险。
 
-## Gate Matrix
+## 门禁矩阵
 
-| Gate | Required When | Evidence |
+| 门禁 | 何时需要 | 证据 |
 | --- | --- | --- |
-| Requirement Review | Any new capability | Requirement or PRD reviewed |
-| Design Review | Architecture, schema, workflow, security, or agent behavior changes | RFC or ADR |
-| Unit Tests | Deterministic code | Passing tests |
-| Integration Tests | Multiple modules interact | Passing integration workflow |
-| Data Quality Check | Market/account data is used | Data validation report |
-| Backtest | Strategy, signal, skill, or portfolio logic changes | Backtest report |
-| Shadow Live | Candidate skill or agent decision workflow changes | Shadow portfolio report |
-| Human Approval | Live trading, account-risk, or auto-promotion changes | Release approval |
-| Rollback Plan | Any released behavior | Rollback instructions |
+| Requirement Review | 任意新能力 | 已评审的需求或 PRD |
+| Design Review | 架构、schema、工作流、安全或 Agent 行为变化 | RFC 或 ADR |
+| Unit Tests | 确定性代码 | 通过的单元测试 |
+| Integration Tests | 多模块交互 | 通过的集成流程 |
+| Data Quality Check | 使用市场或账户数据 | 数据质量报告 |
+| Backtest | 策略、信号、skill 或组合逻辑变化 | 回测报告 |
+| Shadow Live | 候选 skill 或 Agent 决策流变化 | shadow portfolio 报告 |
+| Human Approval | 实盘交易、账户风险或自动晋升变化 | 发布审批记录 |
+| Rollback Plan | 任意发布行为 | 回滚说明 |
 
-## Default Done Definition
+## 默认完成定义
 
-A ticket is done only when:
+任务只有同时满足以下条件才算完成：
 
-- Scope matches the requirement.
-- Tests or evals cover the main risk.
-- Documentation is updated.
-- CI passes.
-- Remaining risk is documented.
+- 范围与需求一致。
+- 测试或评估覆盖主要风险。
+- 文档已经更新。
+- CI 通过。
+- 剩余风险已经记录。
 
-## Investment Feature Done Definition
+## 投资功能完成定义
 
-Investment features additionally require:
+投资相关功能还必须满足：
 
-- Hypothesis and review ledger impact described.
-- Benchmark comparison defined.
-- Account-risk impact described.
-- Promotion and rollback criteria defined.
-
+- 描述对 hypothesis ledger 和 review ledger 的影响。
+- 定义基准比较方式。
+- 描述账户风险影响。
+- 定义晋升和回滚标准。

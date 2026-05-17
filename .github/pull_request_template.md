@@ -1,20 +1,19 @@
-## Summary
+## 摘要
 
-## Linked Requirement / Ticket
+## 关联需求 / 任务
 
-## Gates
+## 门禁
 
-- [ ] Requirement updated
-- [ ] Design / ADR updated if needed
-- [ ] Tests added or updated
-- [ ] Evals added or updated if investment behavior changed
-- [ ] Rollback plan documented if release-impacting
+- [ ] 需求已更新
+- [ ] 必要时已更新设计文档 / ADR
+- [ ] 已新增或更新测试
+- [ ] 投资行为变化时已新增或更新评估
+- [ ] 影响发布时已记录回滚计划
 
-## Validation
+## 验证
 
 ```text
-paste local check output here
+在此粘贴本地检查输出
 ```
 
-## Risk
-
+## 风险

@@ -1,26 +1,25 @@
-# PRD: <Title>
+# PRD：<Title>
 
-## Status
+## 状态
 
-Draft
+草稿
 
-## Problem
+## 问题
 
-## Target Users
+## 目标用户
 
-## Goals
+## 目标
 
-## Non-Goals
+## 非目标
 
-## User Workflows
+## 用户工作流
 
-## Functional Requirements
+## 功能需求
 
-## Non-Functional Requirements
+## 非功能需求
 
-## Investment Risk Impact
+## 投资风险影响
 
-## Acceptance Criteria
+## 验收标准
 
-## Open Questions
-
+## 开放问题

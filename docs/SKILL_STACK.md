@@ -1,45 +1,45 @@
-# Harness Skill Stack
+# Harness Skill 栈
 
-These Codex skills are installed to support the investment-agent harness workflow.
+以下 Codex skills 用于支撑投资 Agent Harness 工作流。
 
-## Project Skill
+## 项目专用 Skill
 
-- `investment-agent-harness`: Project-specific workflow for requirements, decomposition, sprint planning, gates, CI/CD, and controlled evolution.
+- `investment-agent-harness`：本项目专用工作流，覆盖需求、拆解、sprint 计划、门禁、CI/CD 和受控进化。
 
-## Core Workflow Skills
+## 核心工作流 Skills
 
-- `dev-workflow`: Local harness workflow skill based on Intake -> Context Load -> Harness Plan -> Gated Execution -> Verification -> Review -> Handoff.
-- `create-plan`: Composio planning skill for implementation planning before coding.
-- `gh-fix-ci`: Debug and fix failing GitHub Actions checks.
-- `webapp-testing`: Composio Playwright-based web application testing workflow.
+- `dev-workflow`：本地 Harness 工作流，覆盖 Intake -> Context Load -> Harness Plan -> Gated Execution -> Verification -> Review -> Handoff。
+- `create-plan`：在编码前生成实现计划。
+- `gh-fix-ci`：调试和修复失败的 GitHub Actions。
+- `webapp-testing`：基于 Playwright 的 Web 应用测试工作流。
 
-## Mainstream Harness Skills
+## 主流 Harness Skills
 
-- `gstack`: General project/agent stack workflow from `garrytan/gstack`.
-- `using-superpowers`: Superpowers workflow entrypoint from `obra/superpowers`.
-- `everything-claude-code`: ECC core conventions from `affaan-m/everything-claude-code`.
+- `gstack`：来自 `garrytan/gstack` 的通用项目和 Agent 栈工作流。
+- `using-superpowers`：来自 `obra/superpowers` 的工作流入口。
+- `everything-claude-code`：来自 `affaan-m/everything-claude-code` 的核心约定。
 
-## Everything Claude Code Installation
+## Everything Claude Code 安装情况
 
-ECC source was downloaded to:
+ECC 源码下载位置：
 
 ```text
 D:\stock-agent\tools\everything-claude-code
 ```
 
-Installed Codex-ready ECC skills from `.agents/skills/` into:
+已将 `.agents/skills/` 中 Codex 可用 skills 安装到：
 
 ```text
 C:\Users\DELL\.codex\skills
 ```
 
-Installed skill count:
+安装数量：
 
 ```text
 33
 ```
 
-Project-local Codex reference configuration was copied to:
+项目本地 Codex 参考配置复制到：
 
 ```text
 D:\stock-agent\investment-agent-harness\.codex\config.toml
@@ -47,9 +47,9 @@ D:\stock-agent\investment-agent-harness\.codex\AGENTS.ECC.md
 D:\stock-agent\investment-agent-harness\.codex\agents\
 ```
 
-Global `~/.codex/config.toml` was not overwritten.
+没有覆盖全局 `~/.codex/config.toml`。
 
-ECC installed skills:
+## 已安装 ECC skills
 
 ```text
 agent-introspection-debugging
@@ -87,70 +87,70 @@ video-editing
 x-api
 ```
 
-## Platform Integration Skills
+## 平台集成 Skills
 
-- `connect`: Composio integration skill for connecting Codex to external apps.
-- `notion-spec-to-implementation`: Convert Notion specs into implementation plans.
-- `notion-research-documentation`: Notion-backed research/documentation workflows.
-- `mcp-builder`: Build and evaluate MCP servers.
+- `connect`：将 Codex 连接到外部应用。
+- `notion-spec-to-implementation`：将 Notion 需求转成实现计划。
+- `notion-research-documentation`：基于 Notion 的研究和文档工作流。
+- `mcp-builder`：构建和评估 MCP server。
 
-## Engineering Delivery Skills
+## 工程交付 Skills
 
-- `gh-address-comments`: Address GitHub PR review comments.
-- `gh-fix-ci`: Debug and fix failing GitHub Actions checks.
-- `yeet`: Publish local changes to GitHub and open a draft PR.
-- `playwright`: Browser-driven testing and verification.
-- `playwright-interactive`: Interactive browser verification.
-- `jupyter-notebook`: Notebook workflows for analysis and experiment artifacts.
-- `cli-creator`: Turn repeated commands/scripts/API calls into reusable CLI tools.
+- `gh-address-comments`：处理 GitHub PR review 评论。
+- `gh-fix-ci`：调试并修复失败的 GitHub Actions。
+- `yeet`：发布本地变更到 GitHub 并打开 draft PR。
+- `playwright`：浏览器驱动的测试和验证。
+- `playwright-interactive`：交互式浏览器验证。
+- `jupyter-notebook`：分析和实验 notebook 工作流。
+- `cli-creator`：将重复命令、脚本或 API 调用转成可复用 CLI。
 
-## Safety And Governance Skills
+## 安全与治理 Skills
 
-- `security-threat-model`: Threat-model security-sensitive changes.
-- `security-best-practices`: Apply secure engineering practices.
-- `security-ownership-map`: Map security ownership and responsibility.
+- `security-threat-model`：为敏感变更建模威胁。
+- `security-best-practices`：应用安全工程实践。
+- `security-ownership-map`：映射安全责任和归属。
 
-## Documentation And API Skills
+## 文档与 API Skills
 
-- `openai-docs`: Use current OpenAI API/product documentation.
-- `stop-slop`: Clean AI-sounding prose from docs and communication.
+- `openai-docs`：使用最新 OpenAI API 和产品文档。
+- `stop-slop`：清理文档和沟通中的 AI 腔。
 
-## Frontend And Design Skills
+## 前端与设计 Skills
 
-- `frontend-skill`: Local frontend quality skill for UI workflow, verification, and anti-generic-AI design checks.
-- `figma`: General Figma workflows.
-- `figma-use`: Use Figma context.
-- `figma-implement-design`: Implement from Figma design.
+- `frontend-skill`：本地前端质量 skill，覆盖 UI 工作流、验证和反泛化 AI 设计检查。
+- `figma`：通用 Figma 工作流。
+- `figma-use`：使用 Figma 上下文。
+- `figma-implement-design`：从 Figma 设计实现代码。
 
-## Harness Platform Skills
+## Harness 平台 Skills
 
-- `create-pipeline`: Generate Harness CI/CD pipeline YAML.
-- `debug-pipeline`: Debug Harness pipeline failures.
-- `run-pipeline`: Run and monitor Harness pipelines.
-- `dora-metrics`: Fetch or reason about DORA metrics through Harness SEI.
-- `manage-feature-flags`: Manage Harness feature flags.
+- `create-pipeline`：生成 Harness CI/CD pipeline YAML。
+- `debug-pipeline`：调试 Harness pipeline 失败。
+- `run-pipeline`：运行和监控 Harness pipeline。
+- `dora-metrics`：通过 Harness SEI 获取或分析 DORA 指标。
+- `manage-feature-flags`：管理 Harness feature flags。
 
-## Multi-Agent Orchestration Tools
+## 多 Agent 编排工具
 
-The npm package `@shpitdev/codexharness` was attempted. The package files were partially present under:
+曾尝试安装 npm 包 `@shpitdev/codexharness`。包文件部分存在于：
 
 ```text
 C:\Users\DELL\AppData\Roaming\npm\node_modules\@shpitdev\codexharness
 ```
 
-The global install timed out before linking Windows commands. Prefer `npx @shpitdev/codexharness ...` or run from Git Bash if using the bash entrypoints.
+全局安装在链接 Windows 命令前超时。需要使用时，优先尝试 `npx @shpitdev/codexharness ...`，或在 Git Bash 中运行 bash 入口。
 
-## Notes
+## 备注
 
-- Restart Codex after installing new skills so the runtime picks them up.
-- Some third-party skills contain UTF-8 punctuation that the system validation helper cannot read under Windows GBK. That is a validator encoding limitation, not necessarily an installation failure.
-- For investment-agent work, prefer this order:
+- 安装新 skills 后应重启 Codex，让运行时加载它们。
+- 部分第三方 skills 包含 UTF-8 标点，Windows GBK 下的系统验证辅助工具可能无法读取。这是验证器编码限制，不一定代表安装失败。
+- 投资 Agent 工作优先按以下顺序选择能力：
 
 ```text
 dev-workflow
   -> investment-agent-harness
-  -> gstack / using-superpowers when the user requests those workflows
-  -> security-threat-model for risk-sensitive changes
-  -> gh-fix-ci / gh-address-comments / yeet for GitHub delivery work
-  -> playwright for UI or browser verification
+  -> 用户指定时使用 gstack / using-superpowers
+  -> 风险敏感变更使用 security-threat-model
+  -> GitHub 交付使用 gh-fix-ci / gh-address-comments / yeet
+  -> UI 或浏览器验证使用 playwright
 ```

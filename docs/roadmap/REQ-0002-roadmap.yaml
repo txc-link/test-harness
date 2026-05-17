@@ -1,34 +1,35 @@
 requirement_id: REQ-0002
-generated_at: '2026-05-16T13:04:40.023145Z'
+generated_at: '2026-05-16T13:04:40.030000Z'
 milestones:
-- M1 Harness Foundation
-- M2 Investment Ledger Core
-- M3 Profitability Evaluation
-- M4 Skill Evolution Loop
-- M5 Shadow Trading and Promotion Gates
+- M1 Harness 基础
+- M2 投资 Ledger 核心
+- M3 盈利评估
+- M4 Skill 进化闭环
+- M5 Shadow 交易和晋升门禁
 tickets:
 - id: T-0001
-  title: Create engineering harness CLI and artifact layout
+  title: 创建工程 Harness CLI 和产物目录
   requirement_id: REQ-0002
-  milestone: M1 Harness Foundation
-  description: Provide commands for requirement intake, planning, validation, and
-    eval generation.
+  milestone: M1 Harness 基础
+  description: 提供需求摄入、计划生成、校验和评估规格生成命令。
   owner: agent
   risk_level: low
   gates:
+  - requirement_review
   - unit_tests
   deliverables:
   - CLI
   - README
   - tests
 - id: T-0002
-  title: Define hypothesis, plan, event, result, and review ledgers
+  title: 定义假设、计划、事件、结果和复盘 ledgers
   requirement_id: REQ-0002
-  milestone: M2 Investment Ledger Core
-  description: Specify the canonical investment ledger schemas for replayable decisions.
+  milestone: M2 投资 Ledger 核心
+  description: 为可回放投资决策定义标准 ledger schema。
   owner: agent
   risk_level: medium
   gates:
+  - requirement_review
   - design_review
   - unit_tests
   deliverables:
@@ -36,26 +37,25 @@ tickets:
   - sample records
   - validation tests
 - id: T-0003
-  title: Build account and agent profitability attribution model
+  title: 构建账户和 Agent 盈利归因模型
   requirement_id: REQ-0002
-  milestone: M3 Profitability Evaluation
-  description: Separate market beta, strategy contribution, agent contribution, and
-    user execution impact.
+  milestone: M3 盈利评估
+  description: 区分市场 beta、策略贡献、Agent 贡献和用户执行影响。
   owner: agent
   risk_level: high
   gates:
   - design_review
   - integration_tests
+  - data_quality
   deliverables:
   - evaluation spec
   - metric definitions
   - fixture portfolio
 - id: T-0004
-  title: Implement versioned skill registry with promotion gates
+  title: 实现带晋升门禁的版本化 skill registry
   requirement_id: REQ-0002
-  milestone: M4 Skill Evolution Loop
-  description: Track candidate/backtested/shadow_live/active/retired skill lifecycle
-    states.
+  milestone: M4 Skill 进化闭环
+  description: 跟踪 candidate、backtested、shadow_live、active、retired 等 skill 生命周期状态。
   owner: agent
   risk_level: high
   gates:
@@ -63,22 +63,24 @@ tickets:
   - backtest
   - shadow_live
   - human_approval
+  - rollback_plan
   deliverables:
   - skill schema
   - promotion policy
   - rollback policy
 - id: T-0005
-  title: Create shadow portfolio evaluation loop
+  title: 创建 shadow portfolio 评估闭环
   requirement_id: REQ-0002
-  milestone: M5 Shadow Trading and Promotion Gates
-  description: Compare actual account, agent-advised portfolio, strategy portfolio,
-    and benchmark.
+  milestone: M5 Shadow 交易和晋升门禁
+  description: 对比真实账户、Agent 建议组合、策略组合和基准。
   owner: agent
   risk_level: critical
   gates:
   - integration_tests
+  - data_quality
   - shadow_live
   - human_approval
+  - rollback_plan
   deliverables:
   - shadow portfolio spec
   - daily review job

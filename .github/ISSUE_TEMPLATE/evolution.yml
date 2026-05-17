@@ -1,24 +1,23 @@
-name: Evolution Proposal
-description: Propose a skill, prompt, workflow, or config evolution
+name: 进化提案
+description: 提出 skill、prompt、工作流或配置进化
 title: "[EVOLVE] "
 labels: ["evolution"]
 body:
   - type: textarea
     id: evidence
     attributes:
-      label: Evidence
-      description: Failed cases, successful trajectories, user corrections, or metrics.
+      label: 证据
+      description: 失败案例、成功轨迹、用户修正或指标。
     validations:
       required: true
   - type: textarea
     id: change
     attributes:
-      label: Candidate change
+      label: 候选变更
     validations:
       required: true
   - type: textarea
     id: gates
     attributes:
-      label: Required gates
-      description: Backtest, shadow live, human approval, rollback.
-
+      label: 必需门禁
+      description: 回测、shadow live、人工审批、回滚。

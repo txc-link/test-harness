@@ -1,26 +1,26 @@
-# Investment Agent Harness
+# 投资 Agent Harness
 
-Engineering harness for building a reviewable, testable, self-evolving investment agent.
+本仓库是用于建设“可复盘、可测试、可审计、可自我进化”的投资 Agent 的工程 Harness。
 
-This repository is intentionally separate from the four reference projects under `D:\stock-agent`. The harness owns the mature delivery workflow:
+它与 `D:\stock-agent` 下的四个参考项目保持分离。参考项目提供 agent、量化、投研和流程灵感；本仓库负责把需求、拆解、开发、测试、CI/CD、评估、发布、复盘和自我进化治理串成一个可执行闭环。
 
 ```text
-idea
-  -> intake
-  -> discovery
+想法
+  -> 需求摄入
+  -> 发现与调研
   -> PRD/RFC/ADR
-  -> roadmap
-  -> sprint plan
-  -> implementation ticket
-  -> tests/evals
+  -> 路线图
+  -> sprint 计划
+  -> 开发任务
+  -> 测试与评估
   -> CI/CD
-  -> release
-  -> monitoring
-  -> review
-  -> controlled evolution proposal
+  -> 发布
+  -> 监控
+  -> 复盘
+  -> 受控进化提案
 ```
 
-## Quick Start
+## 快速开始
 
 ```powershell
 cd D:\stock-agent\investment-agent-harness
@@ -31,45 +31,45 @@ iah validate
 pytest
 ```
 
-## What This Harness Produces
+## 本仓库产出什么
 
-- Structured requirement records in `docs/requirements/`
-- Decomposed milestones in `docs/roadmap/`
-- Sprint-ready tickets in `docs/sprints/`
-- Evolution and profitability evaluation specs in `docs/evals/`
-- Architecture decisions in `docs/adr/`
-- RFCs in `docs/rfc/`
-- Test plans in `docs/test-plans/`
-- Release checklists in `docs/releases/`
-- Runbooks in `docs/runbooks/`
-- Reviews, risks, incidents, and metrics records
+- `docs/requirements/`：结构化需求和 PRD。
+- `docs/roadmap/`：里程碑和任务拆解。
+- `docs/sprints/`：可进入开发的 sprint 计划和任务。
+- `docs/evals/`：盈利评估和自我进化评估规格。
+- `docs/adr/`：架构、安全和策略决策记录。
+- `docs/rfc/`：架构或流程提案。
+- `docs/test-plans/`：测试计划。
+- `docs/releases/`：发布清单。
+- `docs/runbooks/`：可重复执行的运行手册。
+- `docs/reviews/`、`docs/risks/`、`docs/incidents/`、`docs/metrics/`：复盘、风险、事故和指标记录。
 
-## Core Operating Docs
+## 核心文档
 
-- [Harness Operating Model](docs/HARNESS_OPERATING_MODEL.md)
-- [Harness Engine](docs/HARNESS_ENGINE.md)
-- [Harness Maturity Model](docs/HARNESS_MATURITY_MODEL.md)
-- [Agent Roles](docs/AGENT_ROLES.md)
-- [Quality Gates](docs/QUALITY_GATES.md)
-- [Delivery Pipeline](docs/DELIVERY_PIPELINE.md)
-- [Risk Control](docs/RISK_CONTROL.md)
-- [Observability And Metrics](docs/OBSERVABILITY_METRICS.md)
-- [CI/CD Plan](docs/CICD.md)
-- [Development Environment](docs/DEV_ENVIRONMENT.md)
-- [Harness Skill Stack](docs/SKILL_STACK.md)
+- [Harness 运行模型](docs/HARNESS_OPERATING_MODEL.md)
+- [Harness 引擎](docs/HARNESS_ENGINE.md)
+- [Harness 成熟度模型](docs/HARNESS_MATURITY_MODEL.md)
+- [Agent 角色](docs/AGENT_ROLES.md)
+- [质量门禁](docs/QUALITY_GATES.md)
+- [交付流水线](docs/DELIVERY_PIPELINE.md)
+- [风险控制](docs/RISK_CONTROL.md)
+- [可观测性与指标](docs/OBSERVABILITY_METRICS.md)
+- [CI/CD 方案](docs/CICD.md)
+- [开发环境](docs/DEV_ENVIRONMENT.md)
+- [Harness Skill 栈](docs/SKILL_STACK.md)
 
-## Operating Principles
+## 运行原则
 
-1. Every investment recommendation must become a tracked hypothesis.
-2. Every hypothesis must have an expiry, invalidation condition, benchmark, and review path.
-3. Agent improvement is not trusted until it passes evaluation gates.
-4. Live-account changes require human approval by default.
-5. Skills are versioned, evaluated, promoted, and rollback-capable.
+1. 每条投资建议都必须成为可追踪的投资假设。
+2. 每条假设都必须有期限、失效条件、基准和复盘路径。
+3. Agent 改进只有通过评估门禁后才可信。
+4. 影响真实账户的变化默认需要人工确认。
+5. skills 必须版本化、可评估、可晋升、可回滚。
 
-## Local Validation
+## 本地验证
 
 ```powershell
 .\scripts\check.ps1
 ```
 
-This runs harness validation, lint, and tests.
+该命令会运行 Harness 校验、lint 和测试。

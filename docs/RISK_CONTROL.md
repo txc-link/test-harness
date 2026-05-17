@@ -1,22 +1,21 @@
-# Risk Control
+# 风险控制
 
-Investment-agent work has risk beyond normal software defects.
+投资 Agent 的风险不只是普通软件缺陷，还包括账户、数据、模型、策略、运营和合规风险。
 
-## Risk Classes
+## 风险类别
 
-| Class | Example | Minimum Control |
+| 类别 | 示例 | 最低控制 |
 | --- | --- | --- |
-| Account Risk | bad position sizing, unsafe auto-trade | human approval, rollback, risk budget |
-| Data Risk | stale quotes, wrong corporate actions | data validation, source redundancy |
-| Model Risk | hallucinated thesis, overconfident decision | structured evidence, review ledger |
-| Strategy Risk | overfit factor, regime decay | out-of-sample backtest, shadow live |
-| Operational Risk | failed scheduler, broken alerting | runbook, monitoring, retry policy |
-| Compliance Risk | advice wording, user suitability | disclaimer, approval, audit trail |
+| 账户风险 | 错误仓位、危险自动交易 | 人工审批、回滚、风险预算 |
+| 数据风险 | 行情过期、复权错误、公司行为错误 | 数据校验、多源冗余 |
+| 模型风险 | 幻觉研判、过度自信 | 结构化证据、复盘 ledger |
+| 策略风险 | 因子过拟合、市场 regime 衰退 | 样本外回测、shadow live |
+| 运营风险 | 调度失败、告警中断 | runbook、监控、重试策略 |
+| 合规风险 | 建议措辞、用户适当性 | 风险提示、审批、审计轨迹 |
 
-## Required Controls
+## 必需控制
 
-- Every live-impacting change has a risk owner.
-- Every strategy/skill promotion has a rollback rule.
-- Every account metric has a benchmark.
-- Every agent recommendation is replayable from stored evidence.
-
+- 每个影响实盘的变更必须有风险负责人。
+- 每个策略或 skill 晋升必须有回滚规则。
+- 每个账户指标必须有基准。
+- 每条 Agent 推荐都必须能从保存的证据中回放。
